@@ -1,0 +1,194 @@
+.displayNone{
+    display: none;
+}
+/* banner */
+.back-banner{
+    width: 100%;
+    position: relative;
+}
+.banner-text{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff; 
+    font-size: 84px;
+    font-family: 'HYYakuHei';
+    font-weight: normal;
+}
+.back-banner img{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.back-point{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    background: #C9C9C9;
+    opacity: 0.61;
+}
+.back-point div{
+    position: absolute;
+    bottom:-25px;
+    left: 470px;
+    width: 0;
+    height: 0;
+    border-top: 25px solid #C9C9C9;
+    border-right: 25px solid transparent;
+}
+/* list */
+.classification-content{
+    padding: 0 120px;
+    box-sizing: border-box;
+}
+.classification-icon{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    padding: 50px 0;
+    box-sizing: border-box;
+}
+.icon-tabs-btn {
+    width: 120px;
+    /* height: 150px; */
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+.icon-tabs-active{
+    box-shadow: 0px 3px 40px rgba(0, 0, 0, 0.16);
+}
+.icon-tabs-btn img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.icon-tabs-btn span{
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    color:#505050;
+    font-size: 12px;
+}
+.search-article{
+    background: #E9E9E9;
+    padding: 20px 50px;
+    box-sizing: border-box;
+    color: #505050;
+}
+.search-article input{
+    width: 600px;
+    height: 30px;
+    padding-left: 10px;
+    border: 1px solid #BBBBBB;
+}
+.search-article input::placeholder{
+    color: #858585;
+}
+.list-number{
+    padding: 20px 50px;
+    box-sizing: border-box;
+    color:#505050;
+}
+.list-content .list-item{
+    margin-bottom: 20px;
+    padding: 25px;
+    box-sizing: border-box;
+    background: #fff;
+    display: flex;
+    cursor: pointer;
+}
+.list-content .list-item:hover{
+    box-shadow: 0px 10px 99px rgba(0, 0, 0, 0.16);
+}
+.list-content .list-item img{
+    width: 300px;
+    height: 170px;
+}
+.list-item-content{
+    width: 500px;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #505050;
+}
+.list-item-content h2{
+    width: 500px;
+    font-size: 1.3rem;
+    color:#000;
+}
+.list-item-content p,.list-item-content span{
+    font-size: 14px;
+    line-height: 20px;
+    max-height: 60px;
+    overflow: hidden;
+    position: relative;
+}
+.list-item-content p:after{
+    content: "..."; 
+    position: absolute; 
+    bottom: 0; 
+    right: 0; 
+    padding-left: 40px;
+    background: -webkit-linear-gradient(left, transparent, #fff 55%);
+    background: -moz-linear-gradient(left, transparent, #fff 55%);
+    background: -o-linear-gradient(left, transparent, #fff 55%);
+    background: linear-gradient(to right, transparent, #fff 55%);
+}
+.page-item-active{
+    background: #2299FF;
+    color: #fff;
+}
+/* .list-item-active{
+    box-shadow: 0px 10px 99px rgba(0, 0, 0, 0.16);
+} */
+/* 分页 */
+.paging-page{
+    display: flex;
+    justify-content: flex-end;
+    color: #67757C;
+    margin-bottom: 20px;
+}
+.paging-page span{
+    margin-right: 15px;
+}
+button,button:focus {
+    border: 1px solid #BCBCBC;
+    /* border-radius: 3px; */
+    background-color: transparent;
+    outline: none; 
+    color: #67757C;
+    font-size: 14px;
+    display: block;
+    width: 50px;
+    height: 30px;
+    line-height: 26px;
+}
+.paging-page button:nth-of-type(1),.paging-page button:nth-of-type(3){
+    margin-left: 10px;
+    border-radius: 3px 0px 0px 3px;
+}
+.paging-page button:nth-of-type(2),.paging-page button:nth-of-type(4){
+    border-radius: 0px 3px 3px 0px;
+}
+.page-num{
+    display: flex;
+    margin-left: 10px;
+}
+.page-num .page-item,.page-item_right{
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border:1px solid #BCBCBC;
+    cursor: pointer;
+}

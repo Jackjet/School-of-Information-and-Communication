@@ -1,0 +1,113 @@
+html,body{
+    width: 100%;
+    height: 100%;
+    min-width: auto;
+}
+p{
+    margin: 0;
+    padding: 0;
+}
+.section_content{
+    padding: 20px;
+    box-sizing: border-box;
+}
+.option_description_list{
+    list-style-type:disc;
+    list-style-position: inside;
+}
+.option_description_list li{
+    line-height: 30px;
+}
+.option_modle{
+    margin: 40px 0;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+.option_modle h2{
+    color: #0546AE;
+    font-size: 20px;
+    line-height: 40px;
+    border-right: 1px solid #ccc;
+}
+.option_modle_item .option_modle_title{
+    border-top: 1px solid #ccc;
+    display: flex;
+    line-height: 30px;
+}
+.option_modle_title h3{
+    border-right: 1px solid #ccc;
+    text-align: center;
+}
+.option_modle_title div{
+    flex: 1;
+    display: flex;
+}
+.option_modle_title div h3{
+    flex: 1;
+}
+.option_modle_con{
+    display: flex;
+    border-top: 1px solid #ccc;
+    line-height: 30px;
+}
+.modle_two_title{
+    flex: 1;
+}
+.option_modle_con h4,
+.modle_con_one h5,
+.modle_con_two h6{
+    font-weight: normal;
+    width: 100px;
+    border-right: 1px solid #ccc;
+    padding-left: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+.modle_con_one{
+    flex: 1;
+    display: flex;
+    border-top: 1px solid #ccc;
+}
+.modle_con_one:nth-of-type(1){
+    border: none;
+}
+.modle_con_one_item{
+    flex: 1;
+}
+.modle_con_two{
+    display: flex;
+    border-top: 1px solid #ccc;
+}
+.modle_con_one_item .modle_con_two:nth-of-type(1){
+    border: none;
+}
+.modle_con_two h6{
+    width: 300px;
+}
+.modle_con_title{
+    flex: 1;
+    display: flex;
+}
+.modle_con_title li{
+    flex: 1;
+    border-right: 1px solid #ccc;
+    text-align: center;
+}
+.btn_footer{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.btn_footer span{
+    color: #fff;
+    background: #0546AE;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 15px;
+}
+.noneHtml{
+    display: none;
+}

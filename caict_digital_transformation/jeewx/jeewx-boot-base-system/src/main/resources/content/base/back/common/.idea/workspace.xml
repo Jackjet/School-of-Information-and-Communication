@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9c6d3ef3-1e48-48b5-bc58-f8dd2d6af5d4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../../../java/com/jeecg/p3/system/service/AuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../../java/com/jeecg/p3/system/service/impl/AuthServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../static/plug-in/plugin/hplus/js/safe.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../java/com/jeecg/p3/system/interceptors/AccessSignInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../java/com/jeecg/p3/system/interceptors/AccessSignInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../java/com/jeecg/p3/system/interceptors/LoginInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../java/com/jeecg/p3/system/interceptors/LoginInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../java/com/jeecg/p3/system/service/JwSystemRoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../java/com/jeecg/p3/system/service/JwSystemRoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../java/com/jeecg/p3/system/util/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../java/com/jeecg/p3/system/util/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../java/com/jeecg/p3/system/web/SystemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../java/com/jeecg/p3/system/web/SystemController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../java/com/jeecg/p3/system/web/back/JwSystemRoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../java/com/jeecg/p3/system/web/back/JwSystemRoleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../java/com/jeecg/p3/system/web/back/JwSystemUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../java/com/jeecg/p3/system/web/back/JwSystemUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/head.vm" beforeDir="false" afterPath="$PROJECT_DIR$/head.vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.vm" beforeDir="false" afterPath="$PROJECT_DIR$/login.vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login_bak.vm" beforeDir="false" afterPath="$PROJECT_DIR$/login_bak.vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hplus/right.vm" beforeDir="false" afterPath="$PROJECT_DIR$/../hplus/right.vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../jeewx-boot-module-weixin/src/main/java/com/jeecg/p3/weixin/service/impl/WeixinNewstemplateServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../jeewx-boot-module-weixin/src/main/java/com/jeecg/p3/weixin/service/impl/WeixinNewstemplateServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../jeewx-boot-module-weixin/src/main/java/com/jeecg/p3/weixin/util/WeixinUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../jeewx-boot-module-weixin/src/main/java/com/jeecg/p3/weixin/util/WeixinUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../jeewx-boot-module-weixin/src/main/java/com/jeecg/p3/weixin/web/back/WeixinTexttemplateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../jeewx-boot-module-weixin/src/main/java/com/jeecg/p3/weixin/web/back/WeixinTexttemplateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../jeewx-boot-module-weixin/src/main/resources/content/commonweixin/back/myJwWebJwid-list.vm" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../jeewx-boot-module-weixin/src/main/resources/content/commonweixin/back/myJwWebJwid-list.vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../jeewx-boot-start/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../jeewx-boot-start/src/main/resources/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../../../../jeewx-boot-start/src/main/resources/jeewx.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../../../../jeewx-boot-start/src/main/resources/jeewx.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../../../../.." />
+  </component>
+  <component name="ProjectId" id="1i7DITlLXFK5YwnYyv7n7Rtj8vM" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../../../../../../mqtt-client-master" />
+  </component>
+  <component name="SshConsoleOptionsProvider">
+    <option name="myEncoding" value="UTF-8" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9c6d3ef3-1e48-48b5-bc58-f8dd2d6af5d4" name="Default Changelist" comment="" />
+      <created>1601249656485</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601249656485</updated>
+      <workItem from="1601249658015" duration="32000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1601249689269">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1601249689269" />
+  </component>
+</project>

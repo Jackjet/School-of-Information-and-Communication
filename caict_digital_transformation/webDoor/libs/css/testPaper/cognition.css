@@ -1,0 +1,123 @@
+html,body{
+    width: 100%;
+    height: 100%;
+    min-width: auto;
+}
+p{
+    margin: 0;
+    padding: 0;
+}
+.section_content{
+    padding: 20px;
+    box-sizing: border-box;
+}
+.one_title_option h2{
+    font-size: 20px;
+    line-height: 40px;
+    font-weight: bold;
+}
+.option_title{
+    border:1px solid #ccc;
+    border-top: none;
+}
+.title_title{
+    display: flex;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    margin: 0;
+}
+.title_title h3{
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    border-right: 1px solid #ccc;
+    line-height: 30px;
+    margin: 0;
+    padding: 0;
+}
+.title_list{
+    flex: 1;
+    display: flex;
+}
+.title_list h3{
+    flex: 1;
+}
+.option_title .option_title_item{
+    display: flex;
+    border-top: 1px solid #ccc;
+    box-sizing: border-box;
+}
+.option_title_item h3{
+    width: 100px;
+    font-size: 14px;
+    padding: 0 5px;
+    line-height: 22px;
+    font-weight: bold;
+}
+.title_item_h3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.two_options{
+    flex: 1;
+}
+.two_options .option_option{
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+}
+.option_title_item h3 p{
+    font-weight: normal;
+    font-size: 14px;
+    padding: 5px;
+    box-sizing: border-box;
+    line-height: 18px;
+}
+.option_option{
+    flex: 1;
+    display: flex;
+}
+.option_option h3{
+    width: 100px;
+    border-left: 1px solid #ccc;
+    border-top:1px solid #ccc;
+    margin-bottom: 0;
+    padding: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+    padding: 0 5px;
+    line-height: 22px;
+}
+.option_option li{
+    flex: 1;
+    font-size: 14px;
+    padding: 0 5px;
+    line-height: 22px;
+    border-left: 1px solid #ccc;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.two_option{
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid #ccc;
+    padding: 5px 0;
+}
+.btn_footer{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.btn_footer span{
+    color: #fff;
+    background: #0546AE;
+    padding: 3px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 15px;
+}
+.noneHtml{
+    display: none;
+}

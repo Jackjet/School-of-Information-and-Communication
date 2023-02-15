@@ -1,0 +1,172 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-10-23 10:24:00
+ * @LastEditTime: 2020-10-29 10:23:52
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \webDoor\view\admin\myfooter\footer.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../../public/common/css/frameWork.css">
+    <link rel="stylesheet" href="../../../plugin/swiper/swiper.min.css">
+    <script type="text/javascript" src="../../../plugin/jQuery/jQuery.min.js"></script>
+    <script type="text/javascript" src="../../../plugin/jQuery/jquery.pagination.js"></script>
+    <script type="text/javascript" src="../../../plugin/popper/popper.min.js"></script>
+    <script type="text/javascript" src="../../../plugin/temeplate/template-web.js"></script>
+    <script type="text/javascript" src="../../../plugin/jQueryCookie/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../../../plugin/wow/wow.min.js"></script>
+    <script type="text/javascript" src="../../../plugin/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../public/common/js/libs/request.js"></script>
+    <script type="text/javascript" src="../../../public/common/js/libs/global.js"></script>
+    <script type="text/javascript" src="../../../public/common/js/libs/common.js"></script>
+    <script type="text/javascript" src="../../../public/common/js/libs/includ.js"></script>
+    <script type="text/javascript" src='../../../plugin/Md5/md5.js'></script>
+    <script type="text/javascript" src='../../../plugin/swiper/swiper.min.js'></script>
+    <script type="text/javascript" src='../../../libs/js/admin/footer.js'></script>
+    <title>中国通信院</title>
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+            /* min-width: 100%; */
+        }
+
+        .footer_section {
+            width: 80%;
+            height: calc(100% - 70px);
+            min-height: 450px;
+        }
+
+        .main_center {
+            width: 100%;
+            height: 100%;
+            max-height: 760px;
+            overflow-y: auto;
+        }
+
+        .main_center_box {
+            /* margin: 0 auto; */
+            /* width: 80%; */
+            padding: 10px 0;
+            border-bottom: 1px solid #c2c2c2;
+            display: flex;
+        }
+
+        .main_center_left {
+            /* height: 150px; */
+            width: 200px;
+            text-align: right;
+            min-width: 150px;
+            color: #0546AE;
+        }
+
+        .main_center_left h3 {
+            margin-top: 1px;
+            font-size: 20px;
+            height: 35px;
+            line-height: 35px;
+        }
+
+        .main_center_right {
+            margin-left: 15px;
+            /* min-height: 150px; */
+        }
+
+        .main_center_right p {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            /* height: 32px; */
+            /* line-height: 32px; */
+            /* white-space: nowrap; */
+            /*text-overflow: ellipsis;*/
+            max-width: 320px;
+        }
+
+        .main_center a {
+            outline: none;
+            color: black;
+            text-decoration: none;
+        }
+
+        .nodata img {
+            width: 400px;
+            height: 400px;
+            margin-top: 50px;
+        }
+
+        .more {
+            display: none;
+        }
+
+        .more-btn {
+            color: #0546b9;
+            cursor: pointer;
+        }
+
+        .main_center::-webkit-scrollbar {
+            /*滚动条整体样式*/
+            width: 3px;
+            /*高宽分别对应横竖滚动条的尺寸*/
+            height: 1px;
+        }
+
+        .main_center::-webkit-scrollbar-thumb {
+            /*滚动条里面小方块*/
+            border-radius: 10px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            background: #535353;
+        }
+
+        .main_center::-webkit-scrollbar-track {
+            /*滚动条里面轨道*/
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            background: #ededed;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="footer_section">
+        <div class='main_center flexcuml'>
+            <script id="footer-cell" type="text/html">
+                {{each content as value i}}
+                    {{if content.length > 0}}
+                        <div class="flex main_center_box">
+                            <div class="main_center_left">
+                                <h3 class="hidden">{{value.day}}</h3>
+                            </div>
+                            <div class="main_center_right">
+                                {{each value.child as values j}}
+                                    {{if j < 5}}
+                                        <p>{{values.createTime}}:{{values.title}}</p>
+                                    {{else}}
+                                        <p class="more">{{values.createTime}}:{{values.title}}</p>
+                                    {{/if}}
+                                {{/each}}
+                                {{if value.child.length > 5}}
+                                    <div class="more-btn">更多>></div>
+                                {{/if}}
+                            </div>
+                        </div>
+                    {{/if}}
+                {{/each}}
+                {{if content.length === 0}}
+                    <div class="nodata flexc">
+                        <img src="../../../public/images/nodata.png" alt="">
+                    </div>
+                {{/if}}
+            </script>
+        </div>
+        <ul class="pagination"></ul>
+    </section>
+</body>
+
+</html>

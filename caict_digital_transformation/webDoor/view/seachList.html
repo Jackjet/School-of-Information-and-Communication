@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="applicable-device" content="pc">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes" name="viewport">
+    <title>中国信通院</title>
+    <link rel="stylesheet" href="../public/common/css/frameWork.css">
+    <link rel="stylesheet" href="../libs/css/index.css">
+    <link rel="stylesheet" href="../libs/css/information.css">
+    <script type="text/javascript" src="../plugin/jQuery/jQuery.min.js"></script>
+    <script type="text/javascript" src="../libs/js/index.js"></script>
+    <script src="../public/common/js/libs/request.js"></script>
+    <link rel="stylesheet" href="../public/icon_font/font_2146463_rwg5xu2h78/iconfont.css">
+    <link rel="stylesheet" href="../plugin/layui/css/layui.css">
+    <link rel="stylesheet" href="../public/common/js/libs/paging/index.css">
+    <script src="../public/common/js/libs/paging/index.js"></script>
+    <style>
+        .tips-text {
+            width: 400px;
+            height: 40px;
+            background: #f0f9eb;
+            color: #67c23a;
+            border-radius: 5px;
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            margin-left: -200px;
+            z-index: 100;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .tips-text i {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            background: url('../../../public/image/chenggongtubiao.png');
+            background-size: 100% 100%;
+            margin: 0 15px;
+        }
+
+        .paging_page_box {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body style="background: #F2F2F2;">
+    <nav class="nav-top" style="background-color: rgb(0,0,0,0.6);">
+        <div class="page-logo">
+            <div class="logo-back"></div>
+        </div>
+        <ul class="nav-list"></ul>
+        <div class="search-input-style search-input">
+            <input class="input-text" type="text" placeholder="请输入">
+            <span id="input_btn" class="iconfont icon-sousuo"></span>
+        </div>
+        <div class="my cur" onclick="goMy()">
+            <span class="mys">我的空间</span>
+            <span class="layui-icon layui-icon-notice"></span>
+        </div>
+    </nav>
+    <!-- list -->
+    <div class="classification-content ">
+        <div style="height: 84px;"></div>
+        <div class="search-article">
+            搜索：<input class="search-input_title" type="text" placeholder="请输入文章标题查询">
+        </div>
+        <div class="list-number">共 31 条经典信息</div>
+        <ul class="list-content"></ul>
+        <!-- 分页 -->
+        <div class="paging_page_box">
+            <!-- <div class="paging"></div> -->
+        </div>
+    </div>
+    <!-- <include src="../../footer.html"></include> -->
+    <script>
+        function goMy() {
+            if (window.sessionStorage.getItem('token')) {
+                window.location.href = './admin/index.html'
+            } else {
+                window.location.href = './login.html';
+            }
+        }
+
+        let request = new Call_Request();
+        Ajax('/webadmin/column/getAllColumn', null).then(function (res) {
+            let navList = '';
+            $.each(res.data, function (index, item) {
+                if (item.navigation) {
+                    if ("dc3cb4e893e94f64a8d844a5b567a1ff" === item.columnId) {
+                        navList += '<li columnId="' + item.columnId + '" data_url="' + item.pcListUrl + '"><span>' + item.columnName + '</span><i></i></li>';
+                    } else {
+                        navList += '<li columnId="' + item.columnId + '" data_url="' + item.pcListUrl + '"><span>' + item.columnName + '</span></li>';
+                    }
+                }
+            })
+            $('.nav-list').html(navList);
+            $('.nav-list').on('click', 'li', function () {
+                // 控制导航下划线
+                $(this).append('<i></i>').siblings().children().remove('i')
+                window.location.href = request.httpUrl + $(this).attr('data_url') + '?columnId=' + $(this).attr('columnId');
+            })
+            backTitleFun('dc3cb4e893e94f64a8d844a5b567a1ff');
+        })
+        var keyWord = decodeURI(QueryString('keyword'));
+        keyWord = keyWord ? unescape(window.atob(keyWord).replace(/\\/g, "%")) : '';
+        $('.search-input_title').val(keyWord);
+        function QueryString(Param) {
+            var BreakString = new RegExp("(^|&)" + Param + "=([^&]*)(&|$)")
+            var GetUrl = window.location.search.substr(1).match(BreakString)
+            if (GetUrl != null) {
+                return unescape(GetUrl[2])
+            } else {
+                return null
+            }
+        }
+        // 搜索
+        $('.search-input_title').on('keydown', function (e) {
+            if (e.keyCode == 13) {
+                window.location.href = request.httpUrl + 'searchList.html&keyword=' + window.btoa(escape($(this).val()).replace(/%/g, "\\").toLowerCase());
+                // window.location.href = 'http://10.125.22.243:8085/caict_digital_transformation/webDoor/view/seachList.html?keyword=' + window.btoa(escape($(this).val()).replace(/%/g, "\\").toLowerCase());
+            }
+        })
+        dataListFun(1);
+        // 渲染列表函数
+        function dataListFun(page) {
+            $('.paging_page_box').html('<div class="paging"></div>')
+            request.method = 'GET'
+            request.url = request.UrlPublic + '/web/news/search'
+            request.data = { keyword: keyWord, size: 10, page: page }
+            request.redata = function (res) {
+                // totalElements 总条数 totalPages 总页数
+                pageNunFun(res.data.totalElements, res.data.totalPages);
+            }
+            request.run()
+        }
+
+        // 分页
+        function pageNunFun(num, numPage) {
+            $('.list-number').text('共 ' + num + ' 条经典信息');
+            new Paging({
+                total: num,// 总条数
+                callback: function (index) {
+                    pageListFun(index);
+                }
+            });
+        }
+
+        // 点击分页渲染列表
+        function pageListFun(page) {
+            request.method = 'GET'
+            request.url = request.UrlPublic + '/web/news/search'
+            request.data = { size: 10, page: page, keyword: keyWord }
+            request.redata = function (res) {
+                let listCon = ''
+                $.each(res.data.content, function (index, item) {
+                    item.time = item.time ? item.time : '';
+                    if (item.type != 'activity') {
+                        listCon += '<li class="list-item" data-num="" id=' + item.id + '><div class="list-item-content"><h2>' + item.title + '</h2><p>' + item.content + '</p><span>' + item.time + '</span></div></li>';
+                    } else {
+                        console.log(11)
+                        listCon += '<li class="list-item" data-num="&typeIndex=true" id=' + item.id + '><div class="list-item-content"><h2>' + item.title + '</h2><p>' + item.content + '</p><span>' + item.time + '</span></div></li>';
+                    }
+                });
+                $('.list-content').html(listCon);
+                // 点击查看详情
+                $('.list-content').on('click', '.list-item', function () {
+                    window.location.href = request.httpUrl + 'c29ad7fdc3fe4756b4bead9bba3ef1c9/8395b11c46af4c07b888b91822e8b5a4/details.html?id=' + $(this).attr('id') + $(this).data('num') + encodeURI('&pages=资讯中心');
+                })
+            }
+            request.run()
+        }
+        // 提示框
+        function tipsFun(text) {
+            $('body').append('<div class="tips-text"><i>></i>' + text + '</div>');
+            setTimeout(function () {
+                $('body .tips-text').remove();
+                location.reload();
+            }, 2000);
+        }
+    </script>
+    <script type="text/javascript" src="../libs/js/search.js"></script>
+</body>
+
+</html>

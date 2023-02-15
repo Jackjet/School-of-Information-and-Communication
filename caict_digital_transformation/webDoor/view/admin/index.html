@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../public/common/css/frameWork.css">
+    <link rel="stylesheet" href="../../libs/css/admin/index.css">
+    <link rel="stylesheet" href="../../plugin/swiper/swiper.min.css">
+    <script type="text/javascript" src="../../plugin/jQuery/jQuery.min.js"></script>
+    <script type="text/javascript" src="../../plugin/popper/popper.min.js"></script>
+    <script type="text/javascript" src="../../plugin/temeplate/template-web.js"></script>
+    <script type="text/javascript" src="../../plugin/jQueryCookie/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../../plugin/wow/wow.min.js"></script>
+    <script type="text/javascript" src="../../plugin/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../public/common/js/libs/request.js"></script>
+    <script type="text/javascript" src="../../public/common/js/libs/global.js"></script>
+    <script type="text/javascript" src="../../public/common/js/libs/common.js"></script>
+    <script type="text/javascript" src="../../public/common/js/libs/includ.js"></script>
+    <script type="text/javascript" src='../../plugin/Md5/md5.js'></script>
+    <script type="text/javascript" src='../../plugin/swiper/swiper.min.js'></script>
+    <title>中国通信院</title>
+</head>
+
+<body>
+    <div class="main">
+        <nav>
+            <a class="logo"><img width="90%" height="90%" src="../../public/image/logoNew.png"></a>
+            <!-- 头部导航 -->
+            <ul class="nav">
+                <!-- 澶撮儴瀵艰埅 -->
+                <script id="nav-cell" type="text/html">
+                    {{each content as value i}}
+                        {{if value.navigation}}
+                            <li class="nav-item" onclick="go('{{value.pcListUrl}}')">
+                                <a class="nav-link active" href="#">{{value.columnName}}</a>
+                                <span class="hov"></span>
+                            </li>
+                        {{/if}}
+                    {{/each}}
+                </script>
+                <!-- <li class="nav-item">
+                    <a class="nav-link active" href="#">首页</a>
+                    <span class="hov"></span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">产业服务</a>
+                    <span class="hov"></span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">产业监测</a>
+                    <span class="hov"></span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">产业监测</a>
+                    <span class="hov"></span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">创新孵化</a>
+                    <span class="hov"></span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">咨询</a>
+                    <span class="hov"></span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">关于我们</a>
+                    <span class="hov"></span>
+                </li> -->
+                <li class="flexc" style="margin-left: 20px;">
+                    <div class="search">
+                        <input id="myInput" type="text" placeholder="请输入查询项目">
+                        <div class="search_box flexc">
+                            <svg t="1603351705771" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="1165" width="25" height="25">
+                                <path
+                                    d="M441.66 783.66c-44.57 0-88.1-8.23-129.47-24.48-44.12-17.33-83.8-43.06-117.95-76.46-34.14-33.4-60.73-72.51-79.03-116.25-17.66-42.22-26.87-86.93-27.38-132.88s7.73-90.85 24.46-133.45c17.33-44.12 43.06-83.8 76.46-117.95 33.4-34.14 72.51-60.73 116.25-79.03 42.22-17.66 86.93-26.87 132.88-27.38 45.93-0.51 90.85 7.73 133.45 24.46 44.12 17.33 83.8 43.06 117.95 76.46 34.14 33.4 60.73 72.51 79.03 116.24 17.66 42.22 26.87 86.93 27.38 132.88 0.5 45.95-7.73 90.85-24.46 133.45-17.33 44.12-43.06 83.8-76.46 117.95-33.4 34.14-72.51 60.73-116.25 79.03-42.22 17.66-86.93 26.87-132.88 27.38-1.33 0.02-2.65 0.03-3.98 0.03z m0.13-637.83c-73.78 0-147.5 28.49-203.05 85.26-109.52 111.94-107.54 292.12 4.4 401.64 54.23 53.05 125.88 81.8 201.73 80.98 75.86-0.83 146.85-31.15 199.91-85.38 53.05-54.23 81.81-125.87 80.98-201.73s-31.16-146.85-85.38-199.9c-55.17-53.97-126.91-80.87-198.59-80.87z"
+                                    fill="#ffffff" p-id="1166"></path>
+                                <path
+                                    d="M238.81 529.87c-13.44 0-25.45-9.46-28.18-23.14-9.09-45.46-5.95-93.84 9.07-139.9 14.92-45.74 41.33-88.45 76.38-123.51 11.24-11.24 29.45-11.24 40.69-0.01 11.24 11.23 11.24 29.45 0.01 40.69-58.44 58.46-84.5 137.5-69.72 211.44 3.12 15.58-6.99 30.74-22.57 33.86-1.91 0.39-3.81 0.57-5.68 0.57z"
+                                    fill="#ffffff" p-id="1167"></path>
+                                <path
+                                    d="M860.4 874.25c-8.82 0-17.64-3.32-24.45-9.97l-178.56-174.7c-13.8-13.5-14.04-35.64-0.54-49.44 13.5-13.8 35.64-14.04 49.44-0.54l178.56 174.7c13.8 13.5 14.04 35.64 0.54 49.44a34.9 34.9 0 0 1-24.99 10.51z"
+                                    fill="#ffffff" p-id="1168"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+    <section>
+        <div class='main_center row'>
+            <div class='col-sm-2'>
+                <div class='nav_admin flexcd' id="admin">
+                    <div class="pd10 flexcd">
+                        <img src="../../public/images/admin/avtor.png" class='actor' alt="" />
+                        <span class="mlt5 tc" style="margin-left:5px;vertical-align: bottom;width: 150px;"></span>
+                    </div>
+                    <div>
+                        <button type="button" onclick="tcLogin()" class="btn btn-primary flexc">退出登录</button>
+                    </div>
+                    <ul class="navs flexcd ">
+
+                        <li class="active" data-url='mycollect/collect.html'>
+                            <a href='javascript:void(0)'>
+                                <span>我的收藏</span>
+                            </a>
+                        </li>
+                        <li class="" data-url=''>
+                            <a href='../testPaper/index.html'>
+                                <span>我的问卷</span>
+                            </a>
+                        </li>
+                        <li class="" data-url='myfooter/footer.html'>
+                            <a href='javascript:void(0) '>
+                                <span>我的足迹</span>
+                            </a>
+                        </li>
+                        <li class="" data-url='myorders/order.html'>
+                            <a href='javascript:void(0)'>
+                                <span>我的订阅</span>
+                            </a>
+                        </li>
+                        <li class="" data-url='myactives/actives.html'>
+                            <a href='javascript:void(0)'>
+                                <span>我的活动</span>
+                            </a>
+                        </li>
+                        <li class="" data-url='mymessage/message.html'>
+                            <a href='javascript:void(0)'>
+                                <span>我的消息</span>
+                            </a>
+                        </li>
+                        <li class="li_bottom_one flexcuml" data-url='setting/Information.html'>
+                            <a href='javascript:void(0)'>
+                                <span>企业设置</span>
+                            </a>
+                        </li>
+                        <li class="li_bottom flexcuml" data-url='setting/Information.html'>
+                            <a href='javascript:void(0)'>
+                                <span>企业资料</span>
+                            </a>
+                        </li>
+                        <li class="li_bottom flexcuml" data-url='setting/updatePasswd.html'>
+                            <a href='javascript:void(0)'>
+                                <span>修改密码</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class='col-sm-10'>
+                <div class="ifname_box">
+                    <p class="ifname_text">我的足迹</p>
+                    <p class="hr"></p>
+                </div>
+                <div class='nav_main' id='nav_main'>
+                    <iframe id="iframe" scrolling="no" runat="server" frameborder="0" scrolling="auto"
+                        src='mycollect/collect.html'></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript" src='../../libs/js/admin/index.js'></script>
+</body>
+
+</html>

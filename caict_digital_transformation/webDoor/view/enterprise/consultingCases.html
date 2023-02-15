@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="applicable-device" content="pc">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes" name="viewport">
+    <title>中国信通院</title>
+    <link rel="stylesheet" href="../../public/icon_font/font_2146463_rwg5xu2h78/iconfont.css">
+    <link rel="stylesheet" href="../../public/common/css/libs/style.css">
+    <link rel="stylesheet" href="../../plugin/swiper/swiper.min.css">
+    <link rel="stylesheet" href="../../libs/css/index.css">
+    <link rel="stylesheet" href="../../libs/css/platform.css">
+    <link rel="stylesheet" href="../../plugin/swiper/swiper.min.css">
+    <script type="text/javascript" src="../../plugin/jQuery/jQuery.min.js"></script>
+    <script src="../../libs/js/index.js" type="text/javascript"></script>
+    <script src="../../plugin/swiper/swiper.min.js"></script>
+    <script src="../../public/common/js/libs/request.js"></script>
+    <script type="text/javascript" src="../../public/common/js/libs/includ.js"></script>
+    <link rel="stylesheet" href="../../public/common/css/frameWork.css">
+    <link rel="stylesheet" href="../../plugin/layui/css/layui.css">
+    <link rel="stylesheet" href="../../libs/css/consultingCases.css">
+    <link rel="stylesheet" href="../../public/common/js/libs/paging/index.css">
+    <script src="../../public/common/js/libs/paging/index.js"></script>
+    <style>
+        .paging_page_box {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav-top">
+        <div class="page-logo">
+            <div class="logo-back"></div>
+        </div>
+        <ul class="nav-list"></ul>
+        <div class="search-input search-input-style">
+            <input class="input-text" type="text" placeholder="请输入">
+            <span id="input_btn" class="iconfont icon-sousuo"></span>
+        </div>
+        <div class="my cur" onclick="goMy()">
+            <span class="mys">我的空间</span>
+            <span class="layui-icon layui-icon-notice"></span>
+        </div>
+    </nav>
+    <div class="banner">
+        <img class="back_banner" src="../../public/image/bigData/banner_cyjc.png">
+        <div class="banner-box ab-c">
+            <h3 class="back_title">赋 能 与 赋 智</h3>
+            <p class="back_text">第四届工业大数据创新竞赛构建工业大数据应用生态</p>
+        </div>
+    </div>
+    <div class="list-box">
+        <ul class="list-content"></ul>
+        <div class="paging_page_box">
+            <div class="paging"></div>
+        </div>
+    </div>
+    <!-- <include src="../../footer.html"></include> -->
+    <script>
+        function goMy() {
+            if (window.sessionStorage.getItem('token')) {
+                window.location.href = '../../admin/index.html';
+            } else {
+                window.location.href = '../../login.html';
+            }
+        }
+        $(function () {
+            let navList = '';
+            Ajax('/webadmin/column/getAllColumn', null).then(function (res) {
+                let columnIdHref = location.search.substr(1).split('=')[1];
+                $.each(res.data, function (index, item) {
+                    if (item.navigation) {
+                        if ("ea3d4e60bc9e448a8b790554284be88d" == item.columnId) {
+                            let select = '<ul class="select_nav htmlNone">';
+                            $.each(item.children, function (index, items) {
+                                if (index === 2) {
+                                    select += '<li style="background: #112A5A;" columnId="' + items.columnId + '"' + ' data_url="' + items.pcListUrl + '"' + '>' + items.columnName + '</li>';
+                                } else {
+                                    select += '<li columnId="' + items.columnId + '"' + ' data_url="' + items.pcListUrl + '"' + '>' + items.columnName + '</li>';
+                                }
+                            })
+                            select += '</ul>';
+                            navList += '<li class="hove_list" columnId="' + item.columnId + '" data_url="' + item.pcListUrl + '"><span>' + item.columnName + '</span><i></i>' + select + '</li>';
+                        } else {
+                            navList += '<li columnId="' + item.columnId + '" data_url="' + item.pcListUrl + '"><span>' + item.columnName + '</span></li>';
+                        }
+                    }
+                });
+                $('.nav-list').html(navList);
+                $('.nav-list').on('click', 'li', function (e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    // 控制导航下划线
+                    $(this).append('<i></i>').siblings().children().remove('i');
+                    window.location.href = request.httpUrl + $(this).attr('data_url') + '?columnId=' + $(this).attr('columnId');
+                })
+                $('.hove_list').hover(function () {
+                    $('.select_nav').removeClass('htmlNone');
+                }, function () {
+                    $('.select_nav').addClass('htmlNone');
+                })
+                $('.select_nav').on('click', 'li', function (e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    window.location.href = request.httpUrl + $(this).attr('data_url') + '?columnId=' + $(this).attr('columnId');
+                })
+                backBigFun("ecb8efe8a20b4fcead01dbcd27c6541b");
+                dataListFun("e3fb7c0698514b5799f1c0d640f40693");
+            })
+        })
+        // 大背景图片文字按钮链接
+        function backBigFun(columnId) {
+            Ajax('/webadmin/content/getAllContentByColumnId', { 'columnId': columnId }).then(function (res) {
+                let data = JSON.parse(res.data.content[0].content).values;
+                $('.back_banner').attr('src', data.back[0].fileDownloadUri);
+                $('.back_title').text(data.back_title);
+                $('.back_text').text(data.back_text);
+            })
+        }
+        // 列表
+        function dataListFun(columnId) {
+            Ajax('/webadmin/content/getAllContentByColumnId', { 'columnId': columnId, size: 5, page: 1 }).then(function (res) {
+                let listCon = '';
+                $.each(res.data.content, function (index, item) {
+                    let itemData = JSON.parse(item.listContent).values;
+                    listCon += '<li class="list-item" id=' + item.id + '>' +
+                        '<img src="' + itemData.imgUrl[0].fileDownloadUri + '" alt="">' +
+                        '<div class="list-item-content">' +
+                        '<h2>' + item.title + '</h2>' +
+                        '<p>' + itemData.content + '</p>' +
+                        '<span>' + itemData.time + '</span>' +
+                        '</div>' +
+                        '</li>';
+                });
+                $('.list-content').html(listCon);
+                // // 点击查看详情
+                $('.list-content').on('click', '.list-item', function () {
+                    window.location.href = request.httpUrl + 'c29ad7fdc3fe4756b4bead9bba3ef1c9/8395b11c46af4c07b888b91822e8b5a4/details.html?id=' + $(this).attr('id') + '&pages=咨询案例';
+                })
+                new Paging({
+                    total: res.data.totalElements,// 总条数
+                    PageSize: 5,
+                    callback: function (index) {
+                        pageDataListFun(columnId, index);
+                    }
+                });
+            })
+        }
+        // 分页列表
+        function pageDataListFun(columnId, page) {
+            Ajax('/webadmin/content/getAllContentByColumnId', { 'columnId': columnId, 'size': 5, 'page': page }).then(function (res) {
+                let listCon = '';
+                $.each(res.data.content, function (index, item) {
+                    let itemData = JSON.parse(item.listContent).values;
+                    listCon += '<li class="list-item" id=' + item.id + '>' +
+                        '<img src="' + itemData.imgUrl[0].fileDownloadUri + '" alt="">' +
+                        '<div class="list-item-content">' +
+                        '<h2>' + item.title + '</h2>' +
+                        '<p>' + itemData.content + '</p>' +
+                        '<span>' + itemData.time + '</span>' +
+                        '</div>' +
+                        '</li>';
+                });
+                $('.list-content').html(listCon);
+                // // 点击查看详情
+                $('.list-content').on('click', '.list-item', function () {
+                    window.location.href = request.httpUrl + 'c29ad7fdc3fe4756b4bead9bba3ef1c9/8395b11c46af4c07b888b91822e8b5a4/details.html?id=' + $(this).attr('id') + '&pages=咨询案例';
+                })
+            })
+        }
+    </script>
+    <script type="text/javascript" src="../../libs/js/search.js"></script>
+</body>
+
+</html>

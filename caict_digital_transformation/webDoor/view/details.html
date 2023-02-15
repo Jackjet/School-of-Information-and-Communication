@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="applicable-device" content="pc">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes" name="viewport">
+    <title>中国信通院</title>
+    <link rel="stylesheet" href="../public/common/css/frameWork.css">
+    <link rel="stylesheet" href="../libs/css/details.css">
+    <link rel="stylesheet" href="../libs/css/index.css">
+    <script type="text/javascript" src="../plugin/jQuery/jQuery.min.js"></script>
+    <script type="text/javascript" src="../libs/js/index.js"></script>
+    <script src="../public/common/js/libs/request.js"></script>
+    <script type="text/javascript" src="../public/common/js/libs/includ.js"></script>
+    <link rel="stylesheet" href="../public/common/css/frameWork.css">
+    <link rel="stylesheet" href="../public/icon_font/font_2146463_rwg5xu2h78/iconfont.css">
+    <style>
+        .tips-text {
+            width: 400px;
+            height: 40px;
+            background: #f0f9eb;
+            color: #67c23a;
+            border-radius: 5px;
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            margin-left: -200px;
+            z-index: 100;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .tips-text i {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            background: url('../../../public/image/chenggongtubiao.png');
+            background-size: 100% 100%;
+            margin: 0 15px;
+        }
+    </style>
+</head>
+
+<body style="background: #F2F2F2;">
+    <nav class="nav-top" style="background-color: #0546AE;">
+        <div class="page-logo">
+            <div class="logo-back"></div>
+        </div>
+        <ul class="nav-list"></ul>
+        <div class="search-input search-input-style" style="background-color: #0546AE;">
+            <input class="input-text" type="text" placeholder="请输入">
+            <span id="input_btn" class="iconfont icon-sousuo"></span>
+        </div>
+        <div class="my cur" onclick="goMy()">
+            <span class="mys">我的空间</span>
+            <span class="layui-icon layui-icon-notice"></span>
+        </div>
+    </nav>
+    <div class="details-content">
+        <div class="details-location">当前位置：<span class="details_return"></span> > 资讯详情</div>
+        <div class="details-title-content ">
+            <div class="details-title">
+                <h2>活动详情</h2>
+            </div>
+            <div class="activity-details">
+                <span class="partake-btn">我要参与</span>
+                <img class="activity-img" src="../public/images/111.png" alt="">
+                <ul class="activity-details-list">
+                    <li>主办单位：<span class="organizer">北湖区中小企业公共服务平台</span></li>
+                    <li>承办单位：<span class="sponsor">湖南深南智汇创业指导服务有限公司</span></li>
+                    <li>活动时间：<span class="time">2019-05-24 至 2019-07-22</span></li>
+                    <li>联系人：<span class="userName">曹振华</span></li>
+                    <li>联系电话：<span class="linkmanPhone">138***0 (请登录后查看）</span></li>
+                    <li>活动地址：<span class="address">湖南省郴州市北湖区香花南路19号夏生实业大楼5楼会议室</span></li>
+                </ul>
+            </div>
+            <div class="details-title">
+                <h2>活动内容</h2>
+            </div>
+            <div class="activity-content"></div>
+            <div class="details-title">
+                <h2>活动地址</h2>
+            </div>
+            <div class="map-html">
+                <iframe id="iframe" src="../view/map.html" scrolling="no" width="100%" height="400px"></iframe>
+            </div>
+        </div>
+        <div class="details-title-article htmlNone">
+            <span class="collection-btn">收藏</span>
+        </div>
+    </div>
+    <include src="../../footer.html"></include>
+</body>
+<script>
+    function goMy() {
+        if (window.sessionStorage.getItem('token')) {
+            window.location.href = '../../admin/index.html'
+        } else {
+            window.location.href = '../../login.html';
+        }
+    }
+    let request = new Call_Request();
+    // 最新活动详情
+    function activityLisyFun(id) {
+        request.method = 'GET';
+        request.url = request.UrlPublic + 'web/activities/find';
+        request.data = { 'id': id };
+        request.redata = function (res) {
+            isActivityLisyFun(res.data.id);
+            $('.activity-img').attr('src', request.UrlPublic + res.data.pic);
+            $('.organizer').text(res.data.organizer);
+            $('.sponsor').text(res.data.sponsor);
+            $('.linkmanPhone').text(res.data.linkmanPhone);
+            $('.time').text(res.data.createTime + ' - ' + res.data.endTime);
+            $('.userName').text(res.data.linkmanName);
+            $('.address').text(res.data.address);
+            $('.activity-content').text(res.data.content);
+            var dizhi = window.btoa(escape(res.data.address).replace(/%/g, "\\").toLowerCase());
+            $('#iframe').attr('src', '../../../view/map.html?address=' + dizhi);
+            // 参与活动
+            $('.partake-btn').on('click', function () {
+                if (sessionStorage.getItem('token')) {
+                    if ($('.partake-btn').text() === '我要参与') {
+                        participateActivityLisyFun({ userId: sessionStorage.getItem('id'), activityId: res.data.id });
+                        footprintAddFun({ userId: sessionStorage.getItem('id'), title: '你参与了' + res.data.title + '活动' });
+                    } else if ($('.partake-btn').text() === '取消活动') {
+                        cancelActivityLisyFun($('.partake-btn').attr('id'));
+                        footprintAddFun({ userId: sessionStorage.getItem('id'), title: '你取消了' + res.data.title + '活动' });
+                    }
+                } else {
+                    window.location.href = '../../login.html' + '?url=/c29ad7fdc3fe4756b4bead9bba3ef1c9/8395b11c46af4c07b888b91822e8b5a4/details.html&' + location.search.substr(1);
+                }
+            })
+        };
+        request.run();
+    }
+    // 我的足迹
+    function footprintAddFun(data) {
+        request.method = 'POST';
+        request.url = request.UrlPublic + 'web/my/footprint/insert';
+        request.data = JSON.stringify(data);
+        request.redata = function (res) { };
+        request.run();
+    }
+    // 参与活动
+    function participateActivityLisyFun(data) {
+        request.method = 'POST';
+        request.url = request.UrlPublic + 'web/my/activity/insert';
+        request.data = JSON.stringify(data);
+        request.redata = function (res) {
+            tipsFun('你参与了报名活动');
+            $('.partake-btn').text('取消活动');
+        };
+        request.run();
+    }
+    // 是否参与活动
+    function isActivityLisyFun(activityId) {
+        request.method = 'get';
+        request.url = request.UrlPublic + 'web/my/activity/find';
+        request.data = { 'activityId': activityId };
+        request.redata = function (res) {
+            if (res.data) {
+                $('.partake-btn').text('取消活动');
+                $('.partake-btn').attr('id', res.data.id);
+            }
+        };
+        request.run();
+    }
+    // 取消活动
+    function cancelActivityLisyFun(id) {
+        request.method = 'delete';
+        request.url = request.UrlPublic + 'web/my/activity/delete?id=' + id;
+        request.redata = function (res) {
+            tipsFun('你取消参与了报名活动');
+            $('.partake-btn').text('我要参与');
+        };
+        request.run();
+    }
+    // 收藏
+    function collectionFun(data) {
+        request.method = 'POST';
+        request.url = request.UrlPublic + 'web/my/collect/insert';
+        request.data = JSON.stringify(data);
+        request.redata = function (res) {
+            $('.collection-btn').text('取消收藏');
+            tipsFun('收藏成功');
+        };
+        request.run();
+    }
+    // 获取收藏
+    function obtainCollectionFun(cmsContentId) {
+        request.method = 'get';
+        request.url = request.UrlPublic + 'web/my/collect/find';
+        request.data = { 'cmsContentId': cmsContentId };
+        request.redata = function (res) {
+            if (res.data) {
+                $('.collection-btn').text('取消收藏');
+            } else {
+                $('.collection-btn').text('收藏');
+            }
+        };
+        request.run();
+    }
+    // 取消收藏
+    function cancelCollectionFun(id) {
+        request.method = 'delete';
+        request.url = request.UrlPublic + 'web/my/collect/delete?cmsContentId=' + id;
+        request.redata = function (res) {
+            $('.collection-btn').text('收藏');
+            tipsFun('取消收藏成功');
+        };
+        request.run();
+    }
+    let navList = '';
+    Ajax('/webadmin/column/getAllColumn', null).then(function (res) {
+        $.each(res.data, function (index, item) {
+            if (item.navigation) {
+                if ("dc3cb4e893e94f64a8d844a5b567a1ff" === item.columnId) {
+                    navList += '<li columnId="' + item.columnId + '" data_url="' + item.pcListUrl + '"><span>' + item.columnName + '</span><i></i></li>';
+                } else {
+                    navList += '<li columnId="' + item.columnId + '" data_url="' + item.pcListUrl + '"><span>' + item.columnName + '</span></li>';
+                }
+            }
+        })
+        $('.nav-list').html(navList);
+        $('.nav-list').on('click', 'li', function () {
+            window.location.href = request.httpUrl + $(this).attr('data_url');
+        });
+    })
+    let obj = {};
+    location.search.substr(1).split('&').map(function (item) {
+        obj[item.split('=')[0]] = item.split('=')[1];
+    });
+    $('.details_return').text(decodeURI(obj.pages));
+    // 详情
+    if (!obj.typeIndex) {
+        $('.details-title-article').removeClass('htmlNone');
+        $('.details-title-content').addClass('htmlNone');
+        Ajax('/webadmin/content/getContentById', { id: obj.id }).then(function (res) {
+            obtainCollectionFun(res.data.id);
+            let details = JSON.parse(res.data.content).values.details;
+            console.log(details)
+            $('.details-title-article').append(details);
+            // 收藏
+            $('.collection-btn').on('click', function () {
+                if (sessionStorage.getItem('token')) {
+                    let picUrl = JSON.parse(res.data.listContent).values.imgUrl[0].fileDownloadUri;
+                    if ($('.collection-btn').text() === '收藏') {
+                        collectionFun({ userId: sessionStorage.getItem('id'), cmsContentId: res.data.id, type: 1, title: res.data.title, pic: picUrl, url: location.href });
+                    } else if ($('.collection-btn').text() === '取消收藏') {
+                        cancelCollectionFun(res.data.id);
+                    }
+                    obtainCollectionFun(res.data.id);
+                } else {
+                    window.location.href = '../../login.html' + '?url=/c29ad7fdc3fe4756b4bead9bba3ef1c9/8395b11c46af4c07b888b91822e8b5a4/details.html&' + location.search.substr(1);
+                }
+            })
+        })
+    } else {
+        $('.details-title-article').addClass('htmlNone');
+        $('.details-title-content').removeClass('htmlNone');
+        activityLisyFun(obj.id);
+    }
+    $('.details-location').on('click', function () {
+        if (decodeURI(obj.pages) === '资讯中心') {
+            window.location.href = request.httpUrl + 'dc3cb4e893e94f64a8d844a5b567a1ff/6b5c0376e98f4e03b3691c4a304f2a39/information.html';
+        } else if (decodeURI(obj.pages) === '咨询案例') {
+            window.location.href = request.httpUrl + 'ecb8efe8a20b4fcead01dbcd27c6541b/5b3c13a0baf345838c9381cb69959c1e/consultingCases.html'
+        } else if (decodeURI(obj.pages) === '我的订阅') {
+            window.location.href = request.httpUrl + 'admin/index.html';
+        }
+    })
+    // 提示框
+    function tipsFun(text) {
+        $('body').append('<div class="tips-text"><i>></i>' + text + '</div>');
+        setTimeout(function () {
+            $('body .tips-text').remove();
+        }, 2000);
+    }
+</script>
+<script type="text/javascript" src="../libs/js/detaileSearch.js"></script>
+
+</html>

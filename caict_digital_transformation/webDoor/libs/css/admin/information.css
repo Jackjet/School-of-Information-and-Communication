@@ -1,0 +1,28 @@
+body{
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+
+}
+.inforation_box{
+    padding: 30px 8%  5px 8%;
+}
+.inforation_box span{
+    color: red;
+}
+.inforation_box .col-form-label{
+    text-align: right;
+}
+.inforation_box
+.col-sm-5,
+.col-sm-10,
+.col-sm-3,
+.col-sm-7{
+   padding-left: 1px;
+}
+
+#yl{
+    display: none;
+    width: 60px;
+    height: 60px;
+}

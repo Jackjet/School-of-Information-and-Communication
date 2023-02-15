@@ -1,0 +1,32 @@
+.section_section,.section_content{
+    width: 100%;
+    height: 100%;
+}
+.section_content{
+    padding-top: 64px;
+    box-sizing: border-box;
+    display: flex;
+}
+.left_tabs{
+    width: 200px;
+    background: cornflowerblue;
+}
+.page_title{
+    line-height: 50px;
+    text-align: center;
+    color:#fff;
+    font-size: 18px;
+}
+.left_tabs ul li{
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    line-height: 44px;
+    cursor: pointer;
+}
+.left_tabs_active{
+    background-color: #0546AE;
+}
+.right_content{
+    flex: 1;
+}

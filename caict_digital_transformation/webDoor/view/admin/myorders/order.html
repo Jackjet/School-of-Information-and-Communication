@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="applicable-device" content="pc">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes" name="viewport">
+    <title>中国信通院</title>
+    <link rel="stylesheet" href="../../../public/common/css/frameWork.css">
+    <link rel="stylesheet" href="../../../libs/css/index.css">
+    <link rel="stylesheet" href="../../../libs/css/admin/order.css">
+    <script type="text/javascript" src="../../../plugin/jQuery/jQuery.min.js"></script>
+    <script type="text/javascript" src="../../../libs/js/index.js"></script>
+    <script src="../../../public/common/js/libs/request.js"></script>
+    <link rel="stylesheet" href="../../../public/common/js/libs/paging/index.css">
+    <script src="../../../public/common/js/libs/paging/index.js"></script>
+    <style>
+        .paging_page_box {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- list -->
+    <div class="classification-content ">
+        <div class="classification-icon">
+            <div class="icon-tabs-btn icon-tabs-active" data-id="0">
+                <img class="infor-c" src="../../../public/images/icon/1046.png">
+                <img class="infor-n" src="../../../public/images/icon/1050.png">
+            </div>
+            <div class="icon-tabs-btn" data-id="1">
+                <img class="infor-c" src="../../../public/images/icon/1047.png">
+                <img class="infor-n" src="../../../public/images/icon/1051.png">
+            </div>
+            <div class="icon-tabs-btn" data-id="2">
+                <img class="infor-c" src="../../../public/images/icon/1048.png">
+                <img class="infor-n" src="../../../public/images/icon/1052.png">
+            </div>
+            <div class="icon-tabs-btn" data-id="3">
+                <img class="infor-c" src="../../../public/images/icon/1049.png">
+                <img class="infor-n" src="../../../public/images/icon/1053.png">
+            </div>
+            <div class="nodata">
+                <img src="../../../public/images/nodata.png" alt="">
+            </div>
+        </div>
+        <div class="list-number"></div>
+        <ul class="list-content"></ul>
+        <!-- 分页 -->
+        <div class="paging_page_box">
+            <!-- <div class="paging"></div> -->
+        </div>
+    </div>
+</body>
+<script>
+    let request = new Call_Request();
+    findSubscribe();
+    function findSubscribe() {
+        request.method = 'GET';
+        request.url = request.UrlPublic + request.subscribe;
+        request.data = {};
+        request.redata = function (data) {
+            let arr = [];
+            $.each(data.data.content, function (index, item) {
+                if (item.cmsContentId) {
+                    arr.push(item);
+                }
+            })
+            var numb = 4;
+            if (arr.length < 1) {
+                $('.nodata').show();
+                return false;
+            }
+            arr.forEach(function (item) {
+                if (numb > item.type) {
+                    numb = item.type;
+                }
+                $('.icon-tabs-btn').eq(Number(item.type)).show().data('num', item.cmsContentId);
+            })
+            setTimeout(function () {
+                $('.icon-tabs-btn :visible').eq(0).click();
+            }, 300);
+
+            $('.icon-tabs-btn').on('click', function () {
+                $('.icon-tabs-active').removeClass('icon-tabs-active');
+                $(this).addClass('icon-tabs-active');
+                var columnId_S = $('.icon-tabs-btn').eq(Number($(this).data('id'))).data('num');
+                if ($(this).index() < 3) {
+                    dataListFun('http://47.93.42.226/cmsV2/webadmin/content/findAllExt', columnId_S, title = null, page = 1)
+                } else {
+                    dataListFun(request.UrlPublic + 'web/activities/findAll', columnId_S, title = null, page = 1)
+                }
+            })
+        };
+        request.run();
+    }
+
+    // 渲染列表函数
+    function dataListFun(url, columnId, title, page) {
+        request.method = 'GET';
+        request.url = url;
+        request.data = { 'columnId': columnId, 'title': title, size: 10, 'page': page };
+        request.redata = function (res) {
+            $('.paging_page_box').html('<div class="paging"></div>');
+            let listCon = '';
+            let str = '';
+            $.each(res.data.content, function (index, item) {
+                if (item.columnId) {
+                    str = '';
+                    let itemData = JSON.parse(item.content).values;
+                    let imgUrl = itemData.imgUrl[0].fileDownloadUri ? itemData.imgUrl[0].fileDownloadUri : '../../../public/image/fail.png';
+                    listCon += '<li class="list-item" id=' + item.id + '>' +
+                        '<img src="' + imgUrl + '" alt="">' +
+                        '<div class="list-item-content">' +
+                        '<h2>' + item.title + '</h2>' +
+                        '<p>' + itemData.content + '</p>' +
+                        '<span>' + itemData.time + '</span>' +
+                        '</div>' +
+                        '</li>';
+                } else {
+                    str = '&typeIndex=true';
+                    let strURL = request.UrlPublic + item.pic;
+                    let imgUrl = strURL ? strURL : '../../../public/image/fail.png';
+                    listCon += '<li class="list-item" id=' + item.id + '>' +
+                        '<img src="' + imgUrl + '">' +
+                        '<div class="list-item-content">' +
+                        '<h2>' + item.title + '</h2>' +
+                        '<p>' + item.content + '</p>' +
+                        '<span>' + item.startTime + '</span>' +
+                        '</div>' +
+                        '</li>';
+                }
+            });
+            $('.list-content').html(listCon);
+            // // 点击查看详情
+            $('.list-content').on('click', '.list-item', function () {
+                top.location.href = request.httpUrl + 'c29ad7fdc3fe4756b4bead9bba3ef1c9/8395b11c46af4c07b888b91822e8b5a4/details.html?id=' + $(this).attr('id') + str + '&pages=我的订阅';
+            })
+            // totalElements 总条数 totalPages 总页数
+            pageNunFun(res.data.totalElements, res.data.totalPages, columnId, title, page);
+        }
+        request.run();
+    }
+    // 分页
+    function pageNunFun(num, numPage, columnId, title, page) {
+        $('.list-number').text('共 ' + num + ' 条信息');
+        new Paging({
+            total: num,// 总条数
+            callback: function (index) {
+                if (columnId !== 'zuixinghuodon') {
+                    pageListFun(columnId, index, title, 'http://47.93.42.226/cmsV2/webadmin/content/findAllExt');
+                } else {
+                    pageListFun(null, index, null, request.UrlPublic + 'web/activities/findAll');
+                }
+            }
+        });
+    }
+    // 点击分页渲染列表
+    function pageListFun(columnId, page, title, url) {
+        request.method = 'GET';
+        request.url = url;
+        request.data = { 'columnId': columnId, size: 10, 'page': page, 'title': title };
+        request.redata = function (res) {
+            let listCon = '';
+            let str = '';
+            $.each(res.data.content, function (index, item) {
+                if (item.columnId) {
+                    str = '';
+                    let itemData = JSON.parse(item.content).values;
+                    let imgUrl = itemData.imgUrl[0].fileDownloadUri ? itemData.imgUrl[0].fileDownloadUri : '../../../public/image/fail.png';
+                    listCon += '<li class="list-item" id=' + item.id + '>' +
+                        '<img src="' + imgUrl + '" alt="">' +
+                        '<div class="list-item-content">' +
+                        '<h2>' + item.title + '</h2>' +
+                        '<p>' + itemData.content + '</p>' +
+                        '<span>' + itemData.time + '</span>' +
+                        '</div>' +
+                        '</li>';
+                } else {
+                    str = '&typeIndex=true';
+                    let strURL = request.UrlPublic + item.pic;
+                    let imgUrl = strURL ? strURL : '../../../public/image/fail.png';
+                    listCon += '<li class="list-item" id=' + item.id + '>' +
+                        '<img src="' + imgUrl + '">' +
+                        '<div class="list-item-content">' +
+                        '<h2>' + item.title + '</h2>' +
+                        '<p>' + item.content + '</p>' +
+                        '<span>' + item.startTime + '</span>' +
+                        '</div>' +
+                        '</li>';
+                }
+            });
+            $('.list-content').html(listCon);
+            // 点击查看详情
+            $('.list-content').on('click', '.list-item', function () {
+                top.location.href = request.httpUrl + 'c29ad7fdc3fe4756b4bead9bba3ef1c9/8395b11c46af4c07b888b91822e8b5a4/details.html?id=' + $(this).attr('id') + str + '&pages=我的订阅';
+            })
+        };
+        request.run();
+    }
+</script>
+
+</html>

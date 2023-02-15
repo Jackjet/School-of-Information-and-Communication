@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="applicable-device" content="pc">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes" name="viewport">
+    <title>中国信通院</title>
+    <link rel="stylesheet" href="../../../plugin/layui/css/layui.css">
+    <script type="text/javascript" src="../../../plugin/layui/layui.all.js"></script>
+    <link rel="stylesheet" href="../../../public/common/css/frameWork.css">
+    <link rel="stylesheet" href="../../../libs/css/testPaper/cognition.css">
+    <script type="text/javascript" src="../../../plugin/jQuery/jQuery.min.js"></script>
+    <script src="../../../public/common/js/libs/request.js"></script>
+    <style>
+        .layui-layer-btn .layui-layer-btn1 {
+            color: #000 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div class="section_content"></div>
+        <div class="btn_footer">
+            <span id="submit_btn" onclick="submit()">提交</span>
+            <span id="submit_btn_1">查看结果</span>
+        </div>
+    </section>
+</body>
+
+<script type="text/javascript" src="./cognition.js"></script>
+<script>
+    // 选中事件
+    let submitData = null;
+    function selectFun(list) {
+        submitData = list;
+        $("input:radio").change(function () {
+            let classification_id = $(this).attr('classification_id');
+            let title_id = $(this).attr('title_id');
+            let title_ids = $(this).attr('title_ids');
+            let ind = $(this).attr('ind');
+            let val = $(this).val();
+            $.each(submitData, function (index, item) {
+                if (item.classification_id === classification_id) {
+                    $.each(item.list, function (indexs, items) {
+                        if (items.title_id === title_id) {
+                            if (items.options) {
+                                $.each(items.options, function (i, k) {
+                                    if (i == ind) {
+                                        k.realization[0].fraction = val;
+                                    } else {
+                                        k.realization[0].fraction = null;
+                                    }
+                                })
+                            } else {
+                                $.each(items.options_2, function (i, k) {
+                                    if (k.title_id === title_ids) {
+                                        $.each(k.options, function (inds, key) {
+                                            if (ind == inds) {
+                                                key.realization[0].fraction = val;
+                                            } else {
+                                                key.realization[0].fraction = null;
+                                            }
+                                        })
+                                    }
+                                })
+                            }
+                        }
+                    })
+                }
+            })
+        })
+    }
+    // 渲染模板函数
+    function htmlFun(listData) {
+        $.each(listData, function (index, item) {
+            $('.section_content').append('<div class="one_title_option"><h2>' + item.classification + '</h2>' +
+                '<ul class="title_title"><h3 style="width:100px">指标</h3><h3 style="width:100px">指标说明</h3><div class="title_list"><h3>一级标题</h3><h3>二级标题</h3><h3>三级标题</h3><h3>四级标题</h3><h3>五级标题</h3></div></ul>' +
+                '<ul class="option_title"></ul></div>');
+            $.each(item.list, function (indexs, items) {
+                if (items.options) {
+                    let htmlCon = '';
+                    $.each(items.options, function (i, k) {
+                        htmlCon += '<li><span>' +
+                            k.options_name +
+                            '</span><div class="two_option"><p><input type="radio" ind="' + i + '"' +
+                            (k.realization[0].fraction === k.realization[0].A ? ' checked' : '') +
+                            ' classification_id="' + item.classification_id +
+                            '" title_id="' + items.title_id +
+                            '" value="' + k.realization[0].A +
+                            '" name="' + k.realization[0].radio +
+                            '">' + (k.realization[0].radio === "4_1_1" ? "无" : "部分实现") + '</p><p><input type="radio" ind="' + i + '"' +
+                            (k.realization[0].fraction === k.realization[0].B ? ' checked' : '') +
+                            ' classification_id="' + item.classification_id +
+                            '" title_id="' + items.title_id +
+                            '" value="' + k.realization[0].B +
+                            '" name="' + k.realization[0].radio +
+                            '">' + (k.realization[0].radio === "4_1_1" ? "有" : "全部实现") + '</p></div></li>';
+                    })
+                    $($('.option_title')[index]).append('<li class="option_title_item"><h3>' + items.title + '</h3><h3 style="border-left:1px solid #ccc;font-weight: normal;">' + items.instructions + '</h3><ul class="option_option">' + htmlCon + '</ul></li>');
+                } else {
+                    $($('.option_title')[index]).append('<li class="option_title_item"><h3 class="title_item_h3">' + items.title + '</h3><div class="two_options"></div></li>');
+                    $.each(items.options_2, function (i, k) {
+                        let htmlCon = '';
+                        $.each(k.options, function (ind, key) {
+                            htmlCon += '<li><span>' +
+                                key.options_name +
+                                '</span><div class="two_option"><p><input type="radio" ind="' + ind + '"' +
+                                (key.realization[0].fraction === key.realization[0].A ? ' checked' : '') +
+                                ' classification_id="' + item.classification_id +
+                                '" title_id="' + items.title_id +
+                                '" title_ids="' + k.title_id +
+                                '" value="' + key.realization[0].A +
+                                '" name="' + key.realization[0].radio +
+                                '">部分实现</p><p><input type="radio" ind="' + ind + '"' +
+                                (key.realization[0].fraction === key.realization[0].B ? ' checked' : '') +
+                                ' classification_id="' + item.classification_id +
+                                '" title_id="' + items.title_id +
+                                '" title_ids="' + k.title_id +
+                                '" value="' + key.realization[0].B +
+                                '" name="' + key.realization[0].radio +
+                                '">全部实现</p></div></li>';
+                        })
+                        let html = $($($('.option_title')[index]).children()[indexs]).children()[1];
+                        $(html).append('<ul class="option_option"><h3 style="font-weight: normal;">' + k.title + '</h3>' + htmlCon + '</ul>')
+                    })
+                }
+            })
+        })
+    }
+    let request = new Call_Request();
+    // 获取问卷调列表
+    function leftNavFun() {
+        request.method = 'get';
+        request.url = request.UrlPublic + 'web/questionnaires/findAll';
+        request.data = {
+            userId: sessionStorage.getItem("id"),
+            name: sessionStorage.getItem("name"),
+            type: '2',
+        };
+        request.redata = function (res) {
+            if (res.code === 1) {
+                if (res.data.content.length > 0) {
+                    detailsQuestionnaire({ id: res.data.content[0].id });
+                } else {
+                    htmlFun(data);
+                    selectFun(data);
+                }
+            }
+        };
+        request.run();
+    }
+    // htmlFun(data);
+    // selectFun(data);
+    leftNavFun();
+    // 添加问卷调
+    function addQuestionnaire(body) {
+        request.method = 'POST';
+        request.url = request.UrlPublic + 'web/questionnaires/insert';
+        request.data = JSON.stringify(body);
+        request.redata = function (res) {
+            if (res.code === 1) {
+                layer.msg("提交成功");
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1000);
+            }
+        };
+        request.run();
+    }
+    // 获取问卷调详情
+    function detailsQuestionnaire(body) {
+        request.method = 'get';
+        request.url = request.UrlPublic + 'web/questionnaires/find';
+        request.data = body;
+        request.redata = function (res) {
+            if (res.code === 1) {
+                if (res.data.result) {
+                    $('#submit_btn_1').attr("data_id", res.data.id);
+                    htmlFun(JSON.parse(res.data.result));
+                    selectFun(JSON.parse(res.data.result));
+                } else {
+                    htmlFun(data);
+                    selectFun(data);
+                }
+            }
+        };
+        request.run();
+    }
+    // 修改问卷
+    function editQuestionnaire(body) {
+        request.method = 'put';
+        request.url = request.UrlPublic + 'web/questionnaires/update';
+        request.data = body;
+        request.redata = function (res) {
+            if (res.code === 1) {
+                layer.msg("修改成功");
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1000);
+            }
+        };
+        request.run();
+    }
+
+    // 提交
+    function submit() {
+        let id = $('#submit_btn_1').attr("data_id");
+        if (!id) {
+            addQuestionnaire({
+                userId: sessionStorage.getItem("id"),
+                name: sessionStorage.getItem("name"),
+                type: '2',
+                result: JSON.stringify(submitData)
+            });
+        } else {
+            editQuestionnaire(JSON.stringify({
+                id: id,
+                result: JSON.stringify(submitData)
+            }))
+        }
+    }
+    var layer = '';
+    layui.use('layer', function () {
+        layer = layui.layer;
+    });
+    var parameter = {};
+    $('#submit_btn_1').on('click', function () {
+        layer.msg('请确认是否已经提交，以避免数据丢失！！', {
+            time: 20000, //20s后自动关闭
+            btn: ['确认', '取消'],
+            btn1: function () {
+                layer.closeAll();
+                window.location.href = './TotalScore.html';
+            },
+            btn2: function () {
+                layer.closeAll();
+            }
+        });
+    });
+</script>
+
+</html>

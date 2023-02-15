@@ -1,0 +1,325 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-04 15:16:05
+ * @LastEditTime: 2020-10-28 17:13:32
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \web\view\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="applicable-device" content="pc">
+	<meta name=renderer content=webkit>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes" name="viewport">
+	<link rel="stylesheet" href="../public/common/css/frameWork.css">
+	<link rel="stylesheet" href="../libs/css/index.css">
+	<link rel="stylesheet" href="../libs/css/experiment.css">
+	<link rel="stylesheet" href="../libs/css/common.css">
+	<script type="text/javascript" src="../plugin/jQuery/jQuery.min.js"></script>
+	<script type="text/javascript" src="../plugin/popper/popper.min.js"></script>
+	<script type="text/javascript" src="../plugin/temeplate/template-web.js"></script>
+	<script type="text/javascript" src="../plugin/jQueryCookie/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../plugin/wow/wow.min.js"></script>
+	<script type="text/javascript" src="../plugin/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../public/common/js/libs/request.js"></script>
+	<script type="text/javascript" src="../public/common/js/libs/global.js"></script>
+	<script type="text/javascript" src="../public/common/js/libs/common.js"></script>
+	<script type="text/javascript" src="../public/common/js/libs/includ.js"></script>
+	<script type="text/javascript" src='../plugin/Md5/md5.js'></script>
+	<script src="https://cdn.jsdelivr.net/parallax.js/1.4.2/parallax.min.js"></script>
+	<title>中国信通院</title>
+</head>
+
+<body>
+	<div class="main">
+		<div class="header">
+			<nav>
+				<a class="logo"><img src="../public/images/index/logo.png"></a>
+				<!-- 头部导航 -->
+				<ul class="nav"></ul>
+			</nav>
+		</div>
+		<!--  -->
+		<div class="experiment displayNone">
+			<!-- banner 图 -->
+			<div class="experiment-banner">
+				<div class="nav-back"></div>
+				<img src="../public/images/experiment/banner .png" alt="">
+				<div class="back-top-text">
+					<h2>物联网安全创新实验室</h2>
+					<p>由中国信息通信研究院、中国移动研究院、中国移动江苏公司、中移物联网有限公司组成，集合“产研用”各方力量，全面推进物联网安全相关工作，打造物联网全生命周期安全生产链，提升物联网体系安全防护能力。
+					</p>
+				</div>
+			</div>
+			<!-- tabs -->
+			<div class="experiment-content">
+				<!-- left nav -->
+				<ul class="experiment-list"></ul>
+				<div class="experiment-list-content"></div>
+			</div>
+		</div>
+		<!-- 首页 -->
+		<div class="page-layout banner">
+			<div class="banner_img">
+				<video class="page-banner-video j_video" autoplay="" muted="" loop="loop"
+					style="opacity: 1;transition: opacity 0.5s linear 0s;height: auto; "
+					src="https://upfiles.heclouds.com/other_files/smart_light.mp4">
+					<source src="https://upfiles.heclouds.com/other_files/smart_light.mp4" type="video/mp4">
+				</video>
+			</div>
+			<!-- <div class="banner_switch">
+				<div class="banner_switch_one flexc cur">
+					<span>实验室介绍</span>
+					<img src="" alt="">
+				</div>
+				<div class="banner_switch_two flexc cur">
+					<div class="banner_switch_two_img flexc">
+						<span>科研成果</span>
+						<img src="" alt="">
+					</div>
+				</div>
+			</div> -->
+		</div>
+	</div>
+	<div class="page-layout lantu">
+		<div class="lantu_top flexe">
+			<h2 class="lantu_top_title">实验室蓝图</h2>
+			<p class="content mlt10 lantu_top_content"></p>
+		</div>
+		<div class="lantu_bottow flexs">
+			<div class="lantu_image">
+			</div>
+		</div>
+	</div>
+	<!-- 首页 -->
+	<div class="page-layout xunshu">
+		<div class="xunshu_center flex">
+			<div class="xunshu_center_top">
+				<div class="xunshu_center_top_one flexcs colorf">
+					<div>融&nbsp;&nbsp;|&nbsp;&nbsp;合&nbsp;&nbsp;|&nbsp;&nbsp;构&nbsp;&nbsp;|&nbsp;&nbsp;建</div>
+					<div>数字世界的代表实验室</div>
+				</div>
+				<div id='tabOne' onclick="isActive()" class=" xunshu_center_top_two cur flexcs colorWhite">
+					<div class="fs34">学术交流 》</div>
+					<div class="fs14">数据全流程AI生产能力</div>
+				</div>
+				<div id='tabTwo' onclick="isActived()" class="tab xunshu_center_top_three cur flexcs colorf">
+					<div class="fs34">开放课题 》</div>
+					<div class="fs14">数据全流程AI生产能力</div>
+				</div>
+			</div>
+			<div class="xunshu_center_bottom">
+				<div class="xunshu_center_bottom_one flex">
+					<div class="box xunshu_center_bottom_one_left wow fadeInLeftBig ">
+						<img id="xunshu_center_bottom_oneImg" src="../public/images/index/one.png" alt="">
+						<!-- <img id="xunshu_center_bottom_oneHoverImg" class="kt sels disnone" src="../public/images/index/tone.png" alt=""> -->
+						<p class="xunshu_center_bottom_one_title bottom_top_title title rotateIn wid90"></p>
+						<div class="kt pdtt40 flexw rotateIn cur">
+							<p class="xunshu_center_bottom_one_title" style="width: 300px;"></p>
+							<span class="xunshu_center_bottom_one_content pdt10" style="width: 300px;"></span>
+							<div class="flexc hrefOne" data-id='' id="xunshu_center_bottom_one_detail"> 查看详情 </div>
+						</div>
+					</div>
+					<div class="boxTwo xunshu_center_bottom_one_right wow fadeInRightBig ">
+						<img id="xunshu_center_bottom_twoImg" src="../public/images/index/two.png" alt="">
+						<!-- <img id="xunshu_center_bottom_twoHoverImg" class="sel rotateIn" src="../public/images/index/tfour.png" alt=""> -->
+						<p class="xunshu_center_bottom_two_title bottom_top_title title rotateIn wid90"></p>
+						<div class="kt pdtt40 flexw rotateIn cur">
+							<p class="xunshu_center_bottom_two_title" style="width: 300px;"></p>
+							<span class="xunshu_center_bottom_two_content pdt10" style="width: 300px;">.</span>
+							<div data-id='' class="flexc hrefOne" id="xunshu_center_bottom_two_detail"> 查看详情 </div>
+						</div>
+					</div>
+				</div>
+				<div class="xunshu_center_bottom_two flex">
+					<div class="boxThree xunshu_center_bottom_two_left wow fadeInLeftBig">
+						<img id="xunshu_center_bottom_threeImg" src="../public/images/index/three.png" alt="">
+						<!-- <img id="xunshu_center_bottom_threeHoverImg" class="kt tthree rotateIn disnone" src="../public/images/index/tthree.png" alt=""> -->
+						<p class="xunshu_center_bottom_three_title bottom_top_title title rotateIn wid90"></p>
+						<div class="kt pdtt40 flexw rotateIn cur">
+							<p class="xunshu_center_bottom_three_title" style="width: 300px;"></p>
+							<span class=" xunshu_center_bottom_three_content pdt10" style="width: 300px;">.</span>
+							<div id="xunshu_center_bottom_three_detail" class="flexc hrefOne" id="btn"> 查看详情 </div>
+						</div>
+					</div>
+					<div class="boxFour xunshu_center_bottom_two_right wow fadeInRightBig">
+						<img id="xunshu_center_bottom_fourImg" src="../public/images/index/four.png" alt="">
+						<!-- <img id="xunshu_center_bottom_fourHoverImg" class="kt tfour rotateIn disnone" src="../public/images/index/ttwo.png" alt=""> -->
+						<p class="xunshu_center_bottom_four_title title bottom_top_title rotateIn wid90"></p>
+						<div class="kt pdtt40 flexw rotateIn cur">
+							<p class="xunshu_center_bottom_four_title" style="width: 300px;"></p>
+							<span class=" xunshu_center_bottom_four_content pdt10" style="width: 300px;">.</span>
+							<div id="xunshu_center_bottom_four_detail" class="flexc hrefOne" id="btn"> 查看详情 </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="page-layout peixun">
+		<div class="peixun">
+			<div class="peixun_top flexa">
+				<h2 class="peixun_top_title"></h2>
+				<p class="peixun_top_content content mlt10"></p>
+			</div>
+			<div class="peixun_center ">
+				<div class="peixun_centerr flexc">
+					<div id="peixun_centerr_ones" data-id='' class="peixun_box pd15 flexcc wow cur">
+						<img id="peixun_centerr_one" src="../public/images/index/two.png" alt="">
+						<p id="peixun_centerr_one_title" class="pdtb5 hiden250"></p>
+						<span id="peixun_centerr_one_time"></span>
+					</div>
+					<div id="peixun_centerr_twos" data-id='' class="peixun_box pd15 mltbt20 flexcc wow cur">
+						<img id="peixun_centerr_two" src="../public/images/index/four.png" alt="">
+						<p id="peixun_centerr_two_title" class="pdtb5 hiden250"></p>
+						<span id="peixun_centerr_two_time"></span>
+					</div>
+					<div id="peixun_centerr_threes" data-id='' class="peixun_box pd15 flexcc wow cur">
+						<img id="peixun_centerr_three" src="../public/images/index/four.png" alt="">
+						<p id="peixun_centerr_three_title" class="pdtb5 hiden250"></p>
+						<span id="peixun_centerr_three_time"></span>
+					</div>
+				</div>
+			</div>
+			<div class="peixun_bottom">
+				<img class="peixun_bottom_left fl" src="../public/images/index/left.png">
+				<img class="peixun_bottom_right rl" src="../public/images/index/right.png">
+				<div onclick="goMore()" class="btnMore flexc cur">查看更多</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer_box">
+		<div class="footer_relation">
+			<div class="footer_relation_abox">
+				<a href="http://www.caict.ac.cn/">中国信息通信研究院</a>|
+				<a href="http://www.aii-alliance.org/">工业互联网产业联盟</a>
+			</div>
+		</div>
+		<div class="footer_bottom">
+			<div class="footer_bottom_left">
+				<img src="../public/images/footer/wexin.jpg" alt="">
+				<div class="weixin">
+					<span>微信扫一扫</span>
+					<span>添加信通院公众号</span>
+				</div>
+			</div>
+			<div class="bottom_center_box">
+				<p>Copyright © 2018-2023 中国信息通信研究院 版权所有</p>
+				<img src="../public/images/footer/gh.png" alt="">
+				<a href="http://beian.miit.gov.cn/">京ICP备09013372号</a>
+				<a
+					href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802027721">京公网安备11010802027721号</a>
+			</div>
+		</div>
+	</div>
+	<div class="pop-up displayNone">
+		<div class="pop-up-content">
+			<div class="pop-up-title">
+				<div class="pop-up-title-log">
+					<img src="../public/images/achievements/Unknown.png" alt="">
+					<span class="pop-up-title-text">数字孪生</span>
+				</div>
+				<span class="close-btn"><img src="../public/images/achievements/guanbi.png" alt=""></span>
+			</div>
+			<div class="pop-up-video-dateils pop-up-dateils">
+				<!-- <video id="video" loop preload controls muted autoplay>
+					<source src="https://upfiles.heclouds.com/other_files/smart_light.mp4" type='video/mp4'>
+					<source src="https://upfiles.heclouds.com/other_files/smart_light.ogg" type='video/ogg'>
+				</video> -->
+			</div>
+		</div>
+	</div>
+	<div class="loading displayNone">
+		<div class="loading-img">
+			<img src="../public/images/achievements/5-121204193R0-50.gif" alt="">
+			加载中...
+		</div>
+	</div>
+	<script>
+		window.onload = function () {
+			CalenderPlugin('start_time', {
+				width: 298,
+				height: 200
+			});
+			CalenderPlugin('end_time', {
+				width: 298,
+				height: 200
+			});
+		}
+		new WOW().init();
+		$(function () {
+			$('.title').css('display', 'flex')
+			$('.xunshu_center_top_two').addClass('tans40')
+		})
+		function isActive() {
+			// $('.kt').fadeOut()
+			// $('.title').fadeIn()
+			// $('.title').css('display', 'flex')
+			$('.xunshu_center_top_two').removeClass('colorf')
+			$('.xunshu_center_top_two').addClass('colorWhite')
+			$('.xunshu_center_top_three').removeClass('colorWhite')
+			$('.xunshu_center_top_three').addClass('colorf')
+			// $('.sel').attr("src", '../public/images/index/tfour.png');
+			$('.xunshu_center_top_two').removeClass('tans0')
+			$('.xunshu_center_top_two').addClass('tans40')
+			$('.xunshu_center_top_three').removeClass('tans40')
+			$('.xunshu_center_top_three').addClass('tans0')
+			getContentByColumnId('e62fe90299c545aab6c17a6463d06f54', 1)
+
+		}
+		function isActived() {
+			// $('.kt').fadeIn()
+			// $('.title').fadeOut()
+			// $('.kt').css('display', 'flex')
+			$('.xunshu_center_top_three').removeClass('colorf')
+			$('.xunshu_center_top_three').addClass('colorWhite')
+			$('.xunshu_center_top_two').removeClass('colorWhite')
+			$('.xunshu_center_top_two').addClass('colorf')
+			// $('.sel').attr("src", '../public/images/index/sel.png');
+			$('.xunshu_center_top_two').removeClass('tans40')
+			$('.xunshu_center_top_two').addClass('tans0')
+			$('.xunshu_center_top_three').addClass('tans40')
+			$('.xunshu_center_top_three').removeClass('tans0')
+			getContentByColumnId('3bdd46bf47974ac2bc293c7ecf345d3d', 1)
+		}
+
+		$('.peixun_box').on('click', function (e) {
+			$('.page-layout').addClass('displayNone');
+			$('.experiment').removeClass('displayNone');
+			$('.experiment-banner img').attr('src', '../public/images/experiment/banner .png');
+			$('.back-top-text h2').text('物联网安全创新实验室');
+			$('.back-top-text p').text('由中国信息通信研究院、中国移动研究院、中国移动江苏公司、中移物联网有限公司组成，集合“产研用”各方力量，全面推进物联网安全相关工作，打造物联网全生命周期安全生产链，提升物联网体系安全防护能力。');
+			menu($(this).attr('data-id'), 2)
+		})
+		$('.hrefOne').on('click', function (e) {
+			$('.page-layout').addClass('displayNone');
+			$('.experiment').removeClass('displayNone');
+			$('.experiment-banner img').attr('src', '../public/images/experiment/banner .png');
+			$('.back-top-text h2').text('物联网安全创新实验室');
+			$('.back-top-text p').text('由中国信息通信研究院、中国移动研究院、中国移动江苏公司、中移物联网有限公司组成，集合“产研用”各方力量，全面推进物联网安全相关工作，打造物联网全生命周期安全生产链，提升物联网体系安全防护能力。');
+			if ($('#tabOne').hasClass('colorWhite')) {
+				menu($(this).attr('data-id'), 1)
+			} else {
+				menu($(this).attr('data-id'), 3)
+			}
+		})
+		function goMore() {
+			$('.page-layout').addClass('displayNone');
+			$('.experiment').removeClass('displayNone');
+			$('.experiment-banner img').attr('src', '../public/images/experiment/banner .png');
+			$('.back-top-text h2').text('物联网安全创新实验室');
+			$('.back-top-text p').text('由中国信息通信研究院、中国移动研究院、中国移动江苏公司、中移物联网有限公司组成，集合“产研用”各方力量，全面推进物联网安全相关工作，打造物联网全生命周期安全生产链，提升物联网体系安全防护能力。');
+			menu('', 4)
+		}
+	</script>
+	<script src="../libs/js/home.js"></script>
+	<script src="../libs/js/index.js"></script>
+	<script src="./../libs/js/calendar.js"></script>
+</body>
+
+</html>

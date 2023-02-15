@@ -1,0 +1,12 @@
+.displayNone{
+    display: none;
+}
+.time-active{
+    border-color: #4e6ef2;
+}
+.hiden250{
+    width: 250px;
+    overflow:hidden; 
+    text-overflow: ellipsis;
+    white-space: nowrap; 
+}

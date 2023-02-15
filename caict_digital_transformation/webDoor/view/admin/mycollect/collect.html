@@ -1,0 +1,98 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-10-23 10:24:00
+ * @LastEditTime: 2020-11-04 21:37:45
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \webDoor\view\admin\myfooter\footer.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../../public/common/css/frameWork.css">
+    <link rel="stylesheet" href="../../../libs/css/admin/collect.css">
+    <link rel="stylesheet" href="../../../plugin/swiper/swiper.min.css">
+    <script type="text/javascript" src="../../../plugin/jQuery/jQuery.min.js"></script>
+    <script type="text/javascript" src="../../../plugin/jQuery/jquery.pagination.js"></script>
+	<script type="text/javascript" src="../../../plugin/popper/popper.min.js"></script>
+	<script type="text/javascript" src="../../../plugin/temeplate/template-web.js"></script>
+	<script type="text/javascript" src="../../../plugin/jQueryCookie/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../../../plugin/wow/wow.min.js"></script>
+	<script type="text/javascript" src="../../../plugin/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../../public/common/js/libs/request.js"></script>
+	<script type="text/javascript" src="../../../public/common/js/libs/global.js"></script>
+	<script type="text/javascript" src="../../../public/common/js/libs/common.js"></script>
+	<script type="text/javascript" src="../../../public/common/js/libs/includ.js"></script>
+    <script type="text/javascript" src='../../../plugin/Md5/md5.js'></script>
+    <script type="text/javascript" src='../../../plugin/swiper/swiper.min.js'></script>
+  
+    <title>中国通信院</title>
+</head>
+<body>
+   <div class="collect_box">
+       <div class="box">
+            <div class="collect_box_top flex">
+                <div onclick="showList()" class="cur collect_box_left">
+                    <img src="../../../public/images/admin/order/cydt.png" alt="">
+                    <h6 class="fw active">服务</h6>
+                </div>
+               <div onclick="listContent()" class="cur collect_box_right">
+                    <img src="../../../public/images/admin/order/hyzx.png" alt="">
+                    <h6 class="wz">文章</h6>
+               </div>
+              
+            </div>
+       </div>
+       <div class="list flex">
+            <script id="collect-cell" type="text/html">
+                {{each content as value i}}
+                    {{if content.length > 0}}
+                        <div class="list_item flexcuml">
+                            <h6>{{value.title}}</h6>
+                            <p>
+                              {{value.synopsis}} 
+                            </p>
+                            <button onclick="calCollect('{{value.cmsContentId}}')" class="btn">取消收藏</button>
+                        </div> 
+                    {{/if}}
+                {{/each}}
+                {{if content.length === 0}}
+                    <div class="nodata flexc" style="margin: 0 auto;">
+                        <img src="../../../public/images/nodata.png" alt="">
+                    </div>
+                {{/if}}
+            </script>
+       </div>
+       <div class="list-content">
+            <ul class="listArc">
+                <script id="collectArc-cell" type="text/html">
+                    {{each content as value i}}
+                        {{if content.length > 0}}
+                            <li class="list-item list-item-active">
+                                <img src="{{value.pic}}" alt="">
+                                <div class="list-item-content">
+                                    <h3>{{value.title}}</h3>
+                                    <p>
+                                        {{value.synopsis}}
+                                    </p>
+                                    <span>{{value.createTime}}</span>
+                                </div>
+                            </li>
+                        {{/if}}
+                    {{/each}}
+                    {{if content.length === 0}}
+                        <div class="nodata flexc" style="margin: 0 auto;">
+                            <img src="../../../public/images/nodata.png" alt="">
+                        </div>
+                    {{/if}}
+                </script>
+            </ul>
+       </div>
+       <ul class="pagination"></ul>
+   </div>
+   <script type="text/javascript" src='../../../libs/js/admin/collect.js'></script>
+</body>
+</html>

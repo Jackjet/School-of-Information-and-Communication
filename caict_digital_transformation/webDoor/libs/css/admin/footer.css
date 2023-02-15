@@ -1,0 +1,85 @@
+body{
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+}
+.footer_section{
+    width: 100%;
+    height: calc(100% - 70px);
+    min-height: 450px;
+}
+.main_center{
+    width: 100%;
+    height: 100%;
+    max-height: 760px;
+    overflow-y: auto;
+}
+.main_center_box{
+    margin: 0 auto;
+    width: 80%;
+    padding: 10px 0;
+    border-bottom: 1px solid #c2c2c2;
+}
+.main_center_left{
+    height: 150px;
+    width: 200px;
+    text-align: right;
+    min-width: 150px;
+    color: #0546AE;
+}
+.main_center_left h3{
+    margin-top: 1px;
+    font-size: 20px;
+    height: 35px;
+    line-height: 35px;
+}
+.main_center_right p{
+    font-size: 14px;
+}
+.main_center_right{
+    margin-left: 15px;
+    min-height: 130px;
+}
+.main_center_right p{
+    margin: 0;
+    padding: 0;
+    height: 32px;
+    line-height: 32px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis；
+}
+.main_center a{
+    outline: none;
+    color: black;
+    text-decoration:none;
+}
+.nodata img{
+    width: 400px;
+    height: 400px;
+    margin-top: 50px;
+}
+.more {
+    display: none;
+}
+.more-btn {
+    color: #0546b9;
+    cursor: pointer;
+}
+.main_center::-webkit-scrollbar {
+    /*滚动条整体样式*/
+    width : 3px;  /*高宽分别对应横竖滚动条的尺寸*/
+    height: 1px;
+}
+.main_center::-webkit-scrollbar-thumb {
+    /*滚动条里面小方块*/
+    border-radius: 10px;
+    box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background   : #535353;
+}
+.main_center::-webkit-scrollbar-track {
+    /*滚动条里面轨道*/
+    box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background   : #ededed;
+}

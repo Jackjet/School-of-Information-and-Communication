@@ -1,0 +1,17 @@
+/** 项目整体通用 CSS 样式 **/
+@import "../../../plugin/layui/css/layui.css";
+@import "./libs/style.css";
+@import "./libs/loaders.min.css";
+@import "./libs/animate.min.css";
+@import "./libs/bootstrap.min.css";
+@import "./libs/carpagination.css";
+/* @import "./libs/header.css";
+@import "./libs/nav.css"; */
+@import "./libs/footer.css";
+.serve_text,.serve_advantage{
+    text-align: left !important;
+    margin-bottom: 20px;
+    text-indent: 2rem;
+    line-height: 35px;
+    font-size:1.15rem;
+}

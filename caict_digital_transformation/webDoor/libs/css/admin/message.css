@@ -1,0 +1,121 @@
+body{
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    overflow-y: scroll;
+}
+.collect_box{
+    width: 100%;
+    height: 100%;
+}
+.collect_box .box{
+    padding: 20px 10%  5px 10%;
+}
+.collect_box_top{
+    display: flex;
+    text-align: center;
+    justify-content:space-around;
+}
+.collect_box_top img{
+    width: 65px;
+    height: 65px;
+    margin: 0 auto;
+    display: inline-block;
+}
+.collect_box_top h6{
+    text-align: center;
+    padding-top: 5px;
+}
+.collect_box_top .active{
+    color: #0546AE;
+}
+.collect_box .list{
+    padding: 0px;
+}
+.list{
+    flex-wrap: wrap;
+    
+}
+.list-content .list-item {
+    border-bottom: 1px solid #d8d6d6;
+}
+.list_item{
+  position: relative;
+  width: calc(25% - 10px);
+  background: url('../../../public/images/admin/item_bg.png');
+  background-size: 100% 100%;
+  padding: 20px 8px 8px 12px;
+  margin-left: 10px;
+  margin-top: 20px;
+  height: 160px;
+}
+.list_item h6{
+    font-family: NSimSun;
+    font-weight: bold;
+}
+.list_item p{
+    font-size: 13px;
+    height: 40px;
+    overflow: hidden;
+}
+.list_item .btn{
+    position: absolute;
+    bottom: 15px;
+    background: #FFA400;
+    border-radius: 20px;
+    width: 100px;
+    height: 28px;
+    padding: 0;
+    color: #fff;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+.list-content .list-item{
+    margin-bottom: 20px;
+    padding: 5px;
+    box-sizing: border-box;
+    background: #fff;
+}
+.list-content .list-item p{
+    margin-bottom: 0.5rem
+}
+
+.list-content .list-item img{
+    width: 290px;
+    height: 150px;
+}
+.list-item-content{
+    width: 500px;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #505050;
+}
+
+.nodata img{
+    width: 400px;
+    height: 400px;
+}
+.active{
+    color: #0546AE;
+}
+.neirong {
+    width: 100%;
+    height: auto;
+    padding-left: 50px;
+    padding-right: 10px;
+    position: relative;
+    display: none;
+    font-size: 12px;
+    color: #000;
+}
+.neirong .neirong-time {
+    width: 100%;
+    text-align: right;
+    color: #b3b3b3;
+}
+.doRead {
+    color: #b3b3b3 !important;
+}

@@ -1,0 +1,251 @@
+/* banner */
+.back-banner{
+    width: 100%;
+    position: relative;
+}
+.back-banner img{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.banner-text{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.banner-content{
+    color: #fff;
+    font-size: 48px;
+    line-height: 64px;
+    position: relative;
+}
+.triangle-color{
+    position: absolute;
+    top: -16px;
+    left: -19px;
+    width: 25px;
+    height: 25px;
+    border-top: 4px solid #fff;
+    border-left: 4px solid #fff;
+}
+.banner-content p:nth-child(2) span{
+    height: 68px;
+    line-height: 63px;
+    background: #fff;
+    font-size: 57px;
+    font-weight: normal;
+    color: #FF0000;
+    padding: 0 14px;
+    margin-right: 80px;
+    display: inline-block;
+}
+.banner-content p:nth-child(3){
+    margin-left: 80px;
+}
+.back-point{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    background: #C9C9C9;
+    opacity: 0.61;
+}
+.back-point div{
+    position: absolute;
+    bottom:-25px;
+    left: 470px;
+    width: 0;
+    height: 0;
+    border-top: 25px solid #C9C9C9;
+    border-right: 25px solid transparent;
+}
+/* 四大服务提供全方面支撑 */
+.government-content-title{
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #303A4A;
+    padding-top: 30px;
+    padding-bottom: 34px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.government-content-service{
+    display: flex;
+    justify-content: space-between;  
+    background: linear-gradient(44deg, #FFFFFF 0%, #D6E2FB 100%);
+    padding-top:40px;
+    padding-bottom: 52px;
+}
+.government-service-list{
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.government-service-inquiry{
+    padding-left: 73px;
+    box-sizing: border-box;
+}
+.government-service-inquiry img{
+    display: block;
+    width: 55px;
+}
+.government-service-inquiry dl dt{
+    margin-top: 20px;
+    font-weight: bold;
+    color: #505050;
+    font-size: 20px;
+    line-height: 26px;
+}
+.government-service-inquiry dl dt p{
+    margin: 0;
+}
+.government-service-inquiry dl dd{
+    width: 468px;
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    color: #505050;
+}
+.government-service-classification{
+    margin-top: 25px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.government-service-classification li{
+    display: flex;
+    margin-right: 20px;
+    cursor: pointer;
+}
+.government-service-classification li:nth-child(1),.government-service-classification li:nth-child(4){
+    position: relative;
+    right: -40px;
+}
+.government-service-classification li p{
+    margin-left: 10px;
+}
+.government-service-img{
+    width: 428px;
+    height: 291px;
+}
+.government-service-img img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.government-case{
+    margin-bottom: 30px;
+}
+/*  客户案例*/
+.government-case-title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 155px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.government-case-title h2{
+    font-size: 28px;
+    font-weight: bold;
+    color: #303A4A;
+}
+.government-case-title p{
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #505050;
+}
+.swiper-case-list{
+    padding:0 60px;
+    box-sizing: border-box;
+    position: relative;
+}
+.swiper-case-list .swiper-button-prev{
+    left: 20px;
+    width: 28px;
+    height: 60px;
+    background: linear-gradient(180deg, #7DA6E3 0%, #6D49D1 100%) !important;
+    border-radius: 10px 0px 0px 10px;
+    color: #fff;
+    line-height: 60px !important;
+    text-align: center;
+    
+}
+.swiper-case-list .swiper-button-next{
+    right: 20px;
+    width: 28px;
+    height: 60px;
+    background: linear-gradient(180deg, #7DA6E3 0%, #6D49D1 100%) !important;
+    border-radius: 0px 10px 10px 0px;
+    color: #fff;
+    line-height: 60px !important;
+    text-align: center;
+}
+.swiper-button-prev .iconfont,.swiper-button-next .iconfont{
+    font-size: 26px;
+}
+.swiper-slide{
+    position: relative;
+}
+.case-list-item{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    color:#fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding:0 40px;
+    box-sizing: border-box;
+}
+.swiper-slide .back_color:hover{
+    cursor: pointer;
+}
+.case-list-item .swiper-title{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 60px;
+    box-sizing: border-box;
+    font-size: 18px;
+    line-height: 30px;
+}
+.content-slide{
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    height: 100%;
+    background:rgba(0, 0, 0, 0.5);
+    padding: 50px;
+    line-height: 30px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* .case-list-item h2{
+    font-size: 22px;
+    line-height: 36px;
+} */
+/* .case-list-item p{
+    font-size: 14px;
+    line-height: 26px;
+} */

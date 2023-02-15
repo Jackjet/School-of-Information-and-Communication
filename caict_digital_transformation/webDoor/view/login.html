@@ -1,0 +1,90 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-04 15:16:05
+ * @LastEditTime: 2020-11-01 12:51:02
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \web\view\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="applicable-device" content="pc">
+	<meta name=renderer content=webkit>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes" name="viewport">
+	<link rel="stylesheet" href="../public/common/css/frameWork.css">
+	<link rel="stylesheet" href="../libs/css/index.css">
+	<link rel="stylesheet" href="../libs/css/login.css">
+	<script type="text/javascript" src='../public/common/js/public.js'></script>
+	<script src="https://cdn.jsdelivr.net/parallax.js/1.4.2/parallax.min.js"></script>
+	<title>中国信通院</title>
+</head>
+
+<body>
+	<section>
+		<div class="main">
+			<div class="main_left tc">
+				<p class="main_left_top">数字化转型创新公共服务平台</p>
+				<p class="main_left_center">让企业数据产生价值</p>
+				<p class="main_left_bottom">优化企业、产业、政府三者关系</p>
+			</div>
+			<div class="main_right flexc">
+				<div class="main_right_center">
+					<div class="main_right_center_box">
+						<div class="main_right_center_box_top flex">
+							<div onclick="pwLogin()" class="passwd tc cur flexcd">
+								密码登录
+								<span class="box_right_span"></span>
+							</div>
+							<div onclick="dxLogin()" class="info tc cur flexcd">
+								注册登录
+								<span class="box_left_span active"></span>
+							</div>
+						</div>
+						<div id="one" class="main_right_center_box_top_center">
+							<input type="email" class="form-control" id="userphone" placeholder="请输入手机号"
+								aria-describedby="emailHelp">
+							<div class="in-group mlt20 flex">
+								<input type="password" id="code" class="form-control" placeholder="请输入密码">
+							</div>
+							<div class="in-group mlt20 flex">
+								<input type="password" id="okcode" class="form-control" placeholder="请输入确认密码">
+							</div>
+							<!-- <input type="email" class="form-control" id="userphone" placeholder="请输入手机号"
+								aria-describedby="emailHelp">
+							<div class="in-group mlt20 flex">
+								<input id="code" type="text" class="form-control gro-input" placeholder="请输入验证码">
+								<div class="flexc"><span class="center"></span></div>
+								<div class="g-append flexc">
+									<button onclick="btnsend()" id="sendbtn" class="btnn flexc cur">获取验证码</button>
+								</div>
+							</div> -->
+							<button type="button" onclick="loginPhone()" class="btn_bottom btn btn-primary ">确
+								定</button>
+						</div>
+						<div id="two" class="main_right_center_box_top_center">
+							<input type="email" class="form-control" id="username" placeholder="请输入手机号/用户名"
+								aria-describedby="emailHelp">
+							<div class="in-group mlt20 flex">
+								<input type="password" id="passwd" class="form-control gro-input" placeholder="请输入密码">
+							</div>
+							<button type="button" onclick="login()" class="btn_bottom btn btn-primary ">确 定</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script>
+		new WOW().init();
+		$(function () {
+		})
+	</script>
+	<script src="../libs/js/login.js"></script>
+</body>
+
+</html>

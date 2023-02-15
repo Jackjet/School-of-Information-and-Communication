@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="applicable-device" content="pc">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes" name="viewport">
+    <title>中国信通院</title>
+    <link rel="stylesheet" href="../../../plugin/layui/css/layui.css">
+    <script type="text/javascript" src="../../../plugin/layui/layui.all.js"></script>
+    <link rel="stylesheet" href="../../../public/common/css/frameWork.css">
+    <link rel="stylesheet" href="../../../libs/css/testPaper/BasicInformation.css">
+    <script type="text/javascript" src="../../../plugin/jQuery/jQuery.min.js"></script>
+    <script src="../../../public/common/js/libs/request.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+    <link href="../../../plugin/editor/css/froala_editor.min.css" rel="stylesheet" type="text/css">
+</head>
+<style>
+    #edit {
+        width: 80%;
+        margin: auto;
+    }
+</style>
+
+<body>
+    <section>
+        <div class="section_content">
+            <div class="scale_content">
+                <h2>一、企业基本情况</h2>
+                <ul id="data_list_one" class="one_box">
+                    <!-- <li class="one_box_item item_width">
+                        <h3>企业全称</h3><input class="text_input_width" type="text" name="" id="">
+                    </li>
+                    <li class="one_box_item">
+                        <h3>所属行业</h3>
+                        <ul class="two_box">
+                            <li class="two_box_item"><input class="radio_input" type="radio">电子信息制造业</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">汽车及零部件制造业</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">新能源制造业</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">中高端装备制造业</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">新材料业</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">其它<input class="text_input"
+                                    type="text"></li>
+                        </ul>
+                    </li>
+                    <li class="one_box_item">
+                        <h3>单位性质</h3>
+                        <ul class="two_box">
+                            <li class="two_box_item"><input class="radio_input" type="radio">国有企业</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">集体企业</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">民营企业</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">三资企业</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">其它<input class="text_input"
+                                    type="text"></li>
+                        </ul>
+                    </li>
+                    <li class="one_box_item">
+                        <h3>企业规模</h3>
+                        <ul class="two_box">
+                            <li class="two_box_item"><input class="radio_input" type="radio">100人以下</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">100-249人</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">250-499人</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">500-999人</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">1000-4999人</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">5000人以上</li>
+                        </ul>
+                    </li>
+                    <li class="one_box_item">
+                        <h3>人员结构</h3>
+                        <ul class="two_box">
+                            <li class="two_box_item"><input class="radio_input" type="radio">企业员工总人数<input
+                                    class="text_input" type="text"></li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">生产岗位从业人数<input
+                                    class="text_input" type="text"></li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">研发工作从业人数<input
+                                    class="text_input" type="text"></li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">销售岗位从业人数<input
+                                    class="text_input" type="text"></li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">管理岗位从业人数<input
+                                    class="text_input" type="text"></li>
+                        </ul>
+                    </li>
+                    <li class="one_box_item">
+                        <h3>员工学历结构</h3>
+                        <ul class="two_box">
+                            <li class="two_box_item"><input class="radio_input" type="radio">硕士及以上人数<input
+                                    class="text_input" type="text"></li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">本专科人数<input
+                                    class="text_input" type="text"></li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">中专学历人数<input
+                                    class="text_input" type="text"></li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">其他人数<input
+                                    class="text_input" type="text"></li>
+                        </ul>
+                    </li>
+                    <li class="one_box_item">
+                        <h3>主营业务（主要产品和服务）</h3><input class="text_input" type="text">
+                    </li>
+                    <li class="one_box_item">
+                        <h3>主营业务收入规模</h3>
+                        <ul class="two_box">
+                            <li class="two_box_item"><input class="radio_input" type="radio">A、百万级</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">B、千万级</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">C、亿级</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">D、十亿级</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">E、百亿级</li>
+                        </ul>
+                    </li>
+                    <li class="one_box_item">
+                        <h3>主营业务收入位于全国同行业（排名情况）</h3>
+                        <ul class="two_box">
+                            <li class="two_box_item"><input class="radio_input" type="radio">前3名</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">前5名</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">前10名</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">10名以外</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">暂不清楚排名</li>
+                        </ul>
+                    </li>
+                    <li class="one_box_item">
+                        <h3>主营业务收入位于全国同行业（排名情况）</h3>
+                        <ul class="two_box">
+                            <li class="two_box_item"><input class="radio_input" type="radio">前3名</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">前5名</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">前10名</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">10名以外</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">暂不清楚排名</li>
+                        </ul>
+                    </li>
+                    <li class="one_box_item item_width">
+                        <h3>企业组织架构</h3><input class="text_input_width" type="text" name="" id="">
+                    </li> -->
+                </ul>
+            </div>
+            <div class="scale_content">
+                <h2>二、产品类型及复杂度</h2>
+                <ul id="data_list_two" class="one_box">
+                    <!-- <li class="one_box_item">
+                        <h3>主要产品的生产过程类型</h3>
+                        <ul class="two_box">
+                            <li class="two_box_item"><input class="radio_input" type="radio">离散型流水线生产</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">离散型脉动式生产</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">流程型生产</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">混合型</li>
+                        </ul>
+                    </li>
+                    <li class="one_box_item">
+                        <h3>企业响应订单的方式</h3>
+                        <ul class="two_box">
+                            <li class="two_box_item"><input class="radio_input" type="radio">面向库存生产</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">面向订单生产</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">面向订单设计并生产</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">面向库存生产并按订单改制</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">其它<input class="text_input"
+                                    type="text"></li>
+                        </ul>
+                    </li>
+                    <li class="one_box_item">
+                        <h3>产品的组成零部件的数量级为</h3>
+                        <ul class="two_box">
+                            <li class="two_box_item"><input class="radio_input" type="radio">10</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">100</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">1000</li>
+                            <li class="two_box_item"><input class="radio_input" type="radio">1000以上</li>
+                        </ul>
+                    </li>
+                    <li class="one_box_item">
+                        <h3>每月订单量</h3><input class="text_input" type="text">
+                    </li>
+                    <li class="one_box_item">
+                        <h3>供货周期</h3><input class="text_input" type="text">
+                    </li>
+                    <li class="one_box_item">
+                        <h3>供货频次</h3><input class="text_input" type="text">
+                    </li> -->
+                </ul>
+            </div>
+            <div class="scale_content">
+                <h2>三、信息化现状</h2>
+                <ul id="data_list_three" class="three_box">
+                    <li></li>
+                </ul>
+                <div class="options_three">
+                    <ul class="options_three_title radio_box">
+                        <li>全部实现</li>
+                        <li>部分实现</li>
+                        <li>正在建设</li>
+                        <li>已经计划</li>
+                        <li>未计划</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="scale_content">
+                <h2>四、信息化工程需求及满意度</h2>
+                <div class="four_content">
+                    <!-- <div class="four_one">
+                    <h3>1哪些技术切实解决了贵企业发展过程当中所遇到的问题(可多选)：<span>A</span></h3>
+                    <ul>
+                        <li><input type="checkbox"> A.CAD（二维）</li>
+                        <li><input type="checkbox"> B.CAD（三维）</li>
+                        <li><input type="checkbox"> C.CAM/CAE/CAPP </li>
+                        <li><input type="checkbox"> D.MES（制造执行管理系统）</li>
+                        <li><input type="checkbox"> E.ERP（企业资源计划）</li>
+                        <li><input type="checkbox"> F.快速原型制造技术 </li>
+                        <li><input type="checkbox"> I. PDM（产品数据管理）</li>
+                        <li><input type="checkbox"> J. CRM（客户关系管理）</li>
+                        <li><input type="checkbox"> K.其他（请描述）<input type="text"></li>
+                    </ul>
+                </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="btn_footer"><span id="submit_btn" onclick="submit()">提交</span></div>
+    </section>
+    <script src="./BasicInformation.js"></script>
+    <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script src="../../../plugin/editor/js/froala_editor.min.js"></script>
+    <script src="../../../plugin/editor/js/plugins/tables.min.js"></script>
+    <script src="../../../plugin/editor/js/plugins/lists.min.js"></script>
+    <script src="../../../plugin/editor/js/plugins/colors.min.js"></script>
+    <script src="../../../plugin/editor/js/plugins/media_manager.min.js"></script>
+    <script src="../../../plugin/editor/js/plugins/font_family.min.js"></script>
+    <script src="../../../plugin/editor/js/plugins/font_size.min.js"></script>
+    <script src="../../../plugin/editor/js/plugins/block_styles.min.js"></script>
+    <script src="../../../plugin/editor/js/plugins/video.min.js"></script>
+    <script>
+        function wangEditorFun(text) {
+            $('#edit').editable({
+                height: '200px',
+                inlineMode: false,
+                alwaysBlank: true
+            })
+            $('#edit')[0].childNodes[1].innerHTML = text;
+        }
+        let request = new Call_Request();
+        // 渲染模板
+        let submitData = null;
+        function TemplateHtml(data) {
+            submitData = data;
+            // 一、企业基本情况
+            $.each(submitData[0].list, function (index, item) {
+                if (item.children) {
+                    let htmlStr = '';
+                    $.each(item.children, function (indexs, items) {
+                        let itemInput = items.isInput ? '<input class="text_input" type="text" data_val="' + indexs + '" value="' + items.inputText + '" option_title_id="' + item.option_title_id + '">' : '';
+                        if (item.isRadio) {
+                            htmlStr += '<li class="two_box_item"><input class="radio_input" type="radio" ' + (items.checked ? 'checked' : '') + ' option_title_id="' + item.option_title_id + '" name="' + item.option_title_id + '" value="' + indexs + '">' + items.options + itemInput + '</li>';
+                        } else {
+                            htmlStr += '<li class="two_box_item">' + items.options + itemInput + '</li>';
+                        }
+                    })
+                    $('#data_list_one').append('<li class="one_box_item"><h3>' + item.option_title + '</h3><ul class="two_box">' + htmlStr + '</ul></li>');
+                } else {
+
+                    let textarea = '<textarea name="" id="textareaName" cols="24" rows="3" >' + item.inputText + '</textarea>';
+                    let Class = item.width === '100%' ? 'item_width' : '';
+                    let inputClass = item.width === '100%' ? 'text_input_width' : 'text_input';
+                    let inputHtml = '<input class="' + inputClass + '" type="text" value="' + item.inputText + '" option_title_id="' + item.option_title_id + '">';
+                    let isTextareaInput = item.isInput === 'wangEditor' ? '<div id="edit"></div>' : item.option_title_id === 'option_title_id_1_7' ? textarea : inputHtml;
+                    $('#data_list_one').append('<li class="one_box_item ' + Class + '"><h3>' + item.option_title + '</h3>' + isTextareaInput + '</li>');
+                }
+            })
+            wangEditorFun(submitData[0].list[10].inputText);
+            // 二、产品类型及复杂度
+            $.each(submitData[1].list, function (index, item) {
+                if (item.children) {
+                    let htmlStr = '';
+                    $.each(item.children, function (indexs, items) {
+                        let itemInput = items.isInput ? '<input class="text_input" type="text" option_title_id="' + item.option_title_id + '" value="' + items.inputText + '">' : '';
+                        htmlStr += '<li class="two_box_item"><input class="radio_input" type="radio"' + (items.checked ? 'checked' : '') + ' option_title_id="' + item.option_title_id + '" name="' + item.option_title_id + '" value="' + indexs + '">' + items.options + itemInput + '</li>';
+                    })
+                    $('#data_list_two').append('<li class="one_box_item"><h3>' + item.option_title + '</h3><ul class="two_box">' + htmlStr + '</ul></li>');
+                } else {
+                    let Class = item.width === '100%' ? 'item_width' : '';
+                    let inputClass = item.width === '100%' ? 'text_input_width' : 'text_input';
+                    $('#data_list_two').append('<li class="one_box_item ' + Class + '"><h3>' + item.option_title + '</h3><input class="' + inputClass + '" type="text" value="' + item.inputText + '" option_title_id="' + item.option_title_id + '"></li>');
+                }
+            })
+            // 三、信息化现状
+            $.each(submitData[2].options, function (index, item) {
+                $('#data_list_three').append('<li>' + item.name + '</li>');
+                let htmlStr = '';
+                $.each(data[2].list, function (indexs, items) {
+                    htmlStr += '<li><input type="radio"' + (items.answer === item.answer ? 'checked' : '') + ' name="' + index + '" value="' + indexs + '" option_title_id="' + item.option_title_id + '"></li>';
+                })
+                $('.options_three').append('<ul class="radio_box">' + htmlStr + '</ul>');
+            })
+            // 四、信息化工程需求及满意度
+            $.each(submitData[3].list, function (index, item) {
+                let htmlStr = '';
+                // let select = item.check_class === 'checkbox' ? '<input type="checkbox" name="' + index + '" option_title_id="' + item.option_title_id + '" value="' + index + '">' : '<input type="radio" name="' + index + '" option_title_id="' + item.option_title_id + '" value="' + index + '">';
+                $.each(item.options, function (indexs, items) {
+                    let select = item.check_class === 'checkbox' ? '<input type="checkbox"' + (items.checked ? 'checked' : '') + ' name="' + index + '" option_title_id="' + item.option_title_id + '" value="' + items.option_name + '">' : '<input type="radio"' + (items.checked ? 'checked' : '') + ' name="' + index + '" option_title_id="' + item.option_title_id + '" value="' + items.option_name + '">';
+                    let strInput = items.isInput ? '<input type="text"  data_val="' + indexs + '" value="' + items.inputValue + '" option_title_id="' + item.option_title_id + '">' : '';
+                    htmlStr += '<li>' + select + items.select_name + strInput + '</li>';
+                })
+                $('.four_content').append('<div class="four_one"><h3>' + item.name + '<span>' + item.answer + '</span></h3><ul>' + htmlStr + '</ul></div>');
+            })
+        }
+
+        // 选中事件
+        function selectFun_1(list) {
+            submitData = list;
+            $("input:radio").change(function () {
+                let option_title_id = $(this).attr('option_title_id');
+                let val = $(this).val();
+                $.each(submitData[0].list, function (index, item) {
+                    if (item.option_title_id === option_title_id) {
+                        $.each(item.children, function (indexs, items) {
+                            if (indexs == val) {
+                                items.checked = true;
+                            } else {
+                                items.checked = false;
+                            }
+                        })
+                    }
+                })
+            })
+            $('input:text').blur(function () {
+                let option_title_id = $(this).attr('option_title_id');
+                let index_n = $(this).attr('data_val');
+                let val = $(this).val();
+                $.each(submitData[0].list, function (index, item) {
+                    if (item.option_title_id === option_title_id) {
+                        if (item.children) {
+                            item.children[index_n].inputText = val;
+                        } else {
+                            item.inputText = val;
+                        }
+                    }
+                })
+            })
+            $('#textareaName').keyup(function () {
+                let val = $(this).val();
+                submitData[0].list[6].inputText = val;
+            })
+        }
+        function selectFun_2(list) {
+            submitData = list;
+            $("input:radio").change(function () {
+                let option_title_id = $(this).attr('option_title_id');
+                let val = $(this).val();
+                $.each(submitData[1].list, function (index, item) {
+                    if (item.option_title_id === option_title_id) {
+                        $.each(item.children, function (indexs, items) {
+                            if (indexs == val) {
+                                items.checked = true;
+                            } else {
+                                items.checked = false;
+                            }
+                        })
+                    }
+                })
+            })
+            $('input:text').blur(function () {
+                let option_title_id = $(this).attr('option_title_id');
+                let val = $(this).val();
+                $.each(submitData[1].list, function (index, item) {
+                    if (item.option_title_id === option_title_id) {
+                        if (item.children) {
+                            $.each(item.children, function (indexs, items) {
+                                if (items.checked) {
+                                    items.inputText = val;
+                                }
+                            })
+                        } else {
+                            item.inputText = val;
+                        }
+                    }
+                })
+            })
+        }
+        function selectFun_3(list) {
+            submitData = list;
+            $("input:radio").change(function () {
+                let option_title_id = $(this).attr('option_title_id');
+                let val = $(this).val();
+                // console.log(val)
+                $.each(submitData[2].options, function (index, item) {
+                    if (item.option_title_id === option_title_id) {
+                        item.answer = val;
+                    }
+                })
+            })
+        }
+        function selectFun_4(list) {
+            submitData = list;
+            $("input:radio").change(function () {
+                let option_title_id = $(this).attr('option_title_id');
+                let val = $(this).val();
+                $.each(submitData[3].list, function (index, item) {
+                    if (item.option_title_id === option_title_id) {
+                        $.each(item.options, function (i, k) {
+                            if (k.option_name === val) {
+                                k.checked = !k.checked;
+                                item.answer = k.option_name;
+                            }
+                            $($('.four_one span')[index]).text(item.answer);
+                        })
+                    }
+                })
+            })
+            $("input:checkbox").change(function () {
+                let option_title_id = $(this).attr('option_title_id');
+                let val = $(this).val();
+                $.each(submitData[3].list, function (index, item) {
+                    if (item.option_title_id === option_title_id) {
+                        $.each(item.options, function (i, k) {
+                            if (k.option_name === val) {
+                                if (!k.checked) {
+                                    k.checked = true;
+                                    item.answer += k.option_name;
+                                } else {
+                                    k.checked = false;
+                                    let arr = item.answer.split(k.option_name);
+                                    item.answer = arr[0] + arr[1];
+                                }
+                                $($('.four_one span')[index]).text(item.answer);
+                            }
+                        })
+                    }
+                })
+            })
+            $('input:text').blur(function () {
+                let option_title_id = $(this).attr('option_title_id');
+                let index_n = $(this).attr('data_val');
+                let val = $(this).val();
+                $.each(submitData[3].list, function (index, item) {
+                    if (item.option_title_id === option_title_id) {
+                        if (item.options) {
+                            item.options[index_n].inputValue = val;
+                        }
+                    }
+                })
+            })
+        }
+
+
+        // 获取问卷调列表
+        function leftNavFun() {
+            request.method = 'get';
+            request.url = request.UrlPublic + 'web/questionnaires/findAll';
+            request.data = {
+                userId: sessionStorage.getItem("id"),
+                name: sessionStorage.getItem("name"),
+                type: '0',
+            };
+            request.redata = function (res) {
+                if (res.code === 1) {
+                    if (res.data.content.length > 0) {
+                        detailsQuestionnaire({ id: res.data.content[0].id });
+                    } else {
+                        TemplateHtml(data);
+                        selectFun_1(data);
+                        selectFun_2(data);
+                        selectFun_3(data);
+                        selectFun_4(data);
+                    }
+                }
+            };
+            request.run();
+        }
+        leftNavFun();
+        // 添加问卷调
+        function addQuestionnaire(body) {
+            request.method = 'POST';
+            request.url = request.UrlPublic + 'web/questionnaires/insert';
+            request.data = JSON.stringify(body);
+            request.redata = function (res) {
+                if (res.code === 1) {
+                    layer.msg("提交成功");
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                }
+            };
+            request.run();
+        }
+        // 修改问卷
+        function editQuestionnaire(body) {
+            request.method = 'put';
+            request.url = request.UrlPublic + 'web/questionnaires/update';
+            request.data = body;
+            request.redata = function (res) {
+                if (res.code === 1) {
+                    layer.msg("修改成功");
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                }
+            };
+            request.run();
+        }
+        // 获取问卷调详情
+        function detailsQuestionnaire(body) {
+            request.method = 'get';
+            request.url = request.UrlPublic + 'web/questionnaires/find';
+            request.data = body;
+            request.redata = function (res) {
+                if (res.code === 1) {
+                    if (res.data.result !== 'null') {
+                        $('#submit_btn').attr("data_id", res.data.id);
+                        TemplateHtml(JSON.parse(res.data.result));
+                        selectFun_1(JSON.parse(res.data.result));
+                        selectFun_2(JSON.parse(res.data.result));
+                        selectFun_3(JSON.parse(res.data.result));
+                        selectFun_4(JSON.parse(res.data.result));
+                    } else {
+                        TemplateHtml(data);
+                        selectFun_1(data);
+                        selectFun_2(data);
+                        selectFun_3(data);
+                        selectFun_4(data);
+                    }
+                }
+            };
+            request.run();
+        }
+
+        // 提交
+        function submit() {
+            submitData[0].list[10].inputText = $('#edit')[0].childNodes[1].innerHTML;
+            let id = $('#submit_btn').attr("data_id");
+            if (!id) {
+                addQuestionnaire({
+                    userId: sessionStorage.getItem("id"),
+                    name: sessionStorage.getItem("name"),
+                    type: '0',
+                    result: JSON.stringify(submitData)
+                });
+            } else {
+                editQuestionnaire(JSON.stringify({
+                    id: id,
+                    result: JSON.stringify(submitData)
+                }))
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="applicable-device" content="pc">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes" name="viewport">
+    <title>中国信通院</title>
+    <link rel="stylesheet" href="../public/common/css/frameWork.css">
+    <link rel="stylesheet" href="../libs/css/index.css">
+    <link rel="stylesheet" href="../libs/css/we.css">
+    <script type="text/javascript" src="../plugin/jQuery/jQuery.min.js"></script>
+    <script type="text/javascript" src="../libs/js/index.js"></script>
+    <script type="text/javascript" src="../public/common/js/libs/includ.js"></script>
+    <link rel="stylesheet" href="../public/icon_font/font_2146463_rwg5xu2h78/iconfont.css">
+    <link rel="stylesheet" href="../plugin/layui/css/layui.css">
+</head>
+
+<body>
+    <nav class="nav-top">
+        <div class="page-logo">
+            <div class="logo-back"></div>
+        </div>
+        <ul class="nav-list"></ul>
+        <div class="search-input search-input-style">
+            <input class="input-text" type="text" placeholder="请输入">
+            <span id="input_btn" class="iconfont icon-sousuo"></span>
+        </div>
+        <div class="my cur" onclick="goMy()">
+            <span class="mys">我的空间</span>
+            <span class="layui-icon layui-icon-notice"></span>
+        </div>
+    </nav>
+    <!-- 背景图 -->
+    <div class="back-banner">
+        <div class="banner-text">
+            <div class="banner-content">
+                <div class="triangle-color"></div>
+                <p>国家高端专业智库</p>
+                <p>产业创新发展平台</p>
+            </div>
+        </div>
+        <img src="../public/image/顶部图/关于我们.jpg" alt="">
+        <div class="back-point">
+            <div></div>
+        </div>
+    </div>
+    <!-- 内容列表 -->
+    <div class="content-list">
+        <div class="left-list-nav">
+            <ul class="list-nav"></ul>
+        </div>
+        <div class="content-right">
+            <div class="content-title"><span class="title-text">院所介绍</span></div>
+            <div class="content-content"></div>
+        </div>
+    </div>
+    <!-- <include src="../../footer.html"></include> -->
+    <script>
+        function goMy() {
+            if (window.sessionStorage.getItem('token')) {
+                window.location.href = '../../admin/index.html'
+            } else {
+                window.location.href = '../../login.html';
+            }
+        }
+        $(function () {
+            let navList = '';
+            Ajax('/webadmin/column/getAllColumn', null).then(function (res) {
+                $.each(res.data, function (index, item) {
+                    if (item.navigation) {
+                        let pageColumnId = location.search.substr(1).split('=')[1]
+                        if (pageColumnId === item.columnId) {
+                            rightNavListFun(item.children);
+                            navList += '<li columnId="' + item.columnId + '" data_url="' + item.pcListUrl + '"><span>' + item.columnName + '</span><i></i></li>';
+                        } else {
+                            navList += '<li columnId="' + item.columnId + '" data_url="' + item.pcListUrl + '"><span>' + item.columnName + '</span></li>';
+                        }
+                    }
+                })
+                $('.nav-list').html(navList);
+                $('.nav-list').on('click', 'li', function () {
+                    window.location.href = request.httpUrl + $(this).attr('data_url') + '?columnId=' + $(this).attr('columnId');
+                })
+            })
+            function rightNavListFun(list) {
+                let leftNav = '';
+                $.each(list, function (index, item) {
+                    if (index === 0) {
+                        leftNav += '<li class="left-nav-active">' + item.columnName + '</li>';
+                    } else {
+                        leftNav += '<li>' + item.columnName + '</li>';
+                    }
+                })
+                $('.list-nav').html(leftNav);
+                $('.title-text').text(list[0].columnName);
+                detailsFun(list[0].columnId);
+                $('.list-nav').on('click', 'li', function () {
+                    $('.title-text').text(list[$(this).index()].columnName)
+                    $(this).addClass('left-nav-active').siblings().removeClass('left-nav-active');
+                    let columnId = list[$(this).index()].columnId;
+                    detailsFun(columnId);
+                })
+            }
+            function detailsFun(columnId) {
+                Ajax('/webadmin/content/getContentByColumnId', { columnId: columnId }).then(function (res) {
+                    let details = JSON.parse(res.data.content[0].content).values.details;
+                    $('.content-content').html(details)
+                })
+            }
+        })
+    </script>
+    <script type="text/javascript" src="../libs/js/search.js"></script>
+</body>
+
+</html>

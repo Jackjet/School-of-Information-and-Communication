@@ -1,0 +1,122 @@
+body{
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    /* overflow: hidden; */
+}
+.collect_box{
+    width: 100%;
+    height: 100%;
+}
+.collect_box .box{
+    padding: 20px 25%  5px 25%;
+}
+.collect_box_top{
+    display: flex;
+    justify-content:space-around;
+}
+.collect_box_top img{
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+}
+.collect_box .list{
+    padding: 0px;
+}
+.list{
+    flex-wrap: wrap;
+    
+}
+.list_item{
+  position: relative;
+  width: calc(25% - 10px);
+  background: url('../../../public/images/admin/item_bg.png');
+  background-size: 100% 100%;
+  padding: 20px 8px 8px 12px;
+  margin-left: 10px;
+  margin-top: 20px;
+  height: 160px;
+}
+.list_item h6{
+    font-family: NSimSun;
+    font-weight: bold;
+}
+.list_item p{
+    font-size: 13px;
+    height: 40px;
+    overflow: hidden;
+}
+.list_item .btn{
+    position: absolute;
+    bottom: 15px;
+    background: #FFA400;
+    border-radius: 20px;
+    width: 100px;
+    height: 28px;
+    padding: 0;
+    color: #fff;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+.list-content .list-item{
+    margin-bottom: 20px;
+    padding: 25px;
+    box-sizing: border-box;
+    background: #fff;
+    display: flex;
+    border-bottom: 1px dashed #c2c2c2;
+}
+.list-content .list-item img{
+    width: 290px;
+    height: 150px;
+}
+.list-item-content{
+    width: 500px;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #505050;
+}
+.list-item-content h3 {
+    font-size: 1.3rem;
+}
+.list-item-content p,
+.list-item-content span {
+    line-height: 20px;
+    font-size: 12px;
+    max-height: 60px;
+    overflow: hidden;
+    position: relative;
+}
+.list-item-content p:after{
+    content: "..."; 
+    position: absolute; 
+    bottom: 0; 
+    right: 0; 
+    padding-left: 40px;
+    background: -webkit-linear-gradient(left, transparent, #fff 55%);
+    background: -moz-linear-gradient(left, transparent, #fff 55%);
+    background: -o-linear-gradient(left, transparent, #fff 55%);
+    background: linear-gradient(to right, transparent, #fff 55%);
+}
+.list-content{
+    display: none;
+}
+
+.collect_box_top img{
+    width: 60px;
+    height: 60px;
+}
+.collect_box_top h6{
+    text-align: center;
+}
+.nodata img{
+    width: 400px;
+    height: 400px;
+    margin-top: 50px;
+}
+.active{
+    color: #0546AE;
+}

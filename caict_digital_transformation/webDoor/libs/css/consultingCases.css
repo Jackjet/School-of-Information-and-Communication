@@ -1,0 +1,120 @@
+.banner {
+    position: relative;
+    overflow: hidden;
+}
+.list-box {
+    padding: 20px 120px;
+    box-sizing: border-box;
+    width: 100%;
+    position: relative;
+}
+
+.list-content .list-item {
+    margin-bottom: 20px;
+    padding: 25px;
+    box-sizing: border-box;
+    background: #fff;
+    display: flex;
+    cursor: pointer;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.list-content .list-item:hover {
+    box-shadow: 0px 10px 99px rgba(0, 0, 0, 0.16);
+}
+
+.list-content .list-item img {
+    width: 300px;
+    height: 170px;
+}
+
+.list-item-content {
+    width: 500px;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #505050;
+}
+
+.list-item-content h2 {
+    font-size: 1.3rem;
+    color: #000;
+}
+
+.list-item-content p,
+.list-item-content span {
+    font-size: 14px;
+    width: 600px;
+    line-height: 20px;
+    font-size: 12px;
+    max-height: 60px;
+    overflow: hidden;
+    position: relative;
+}
+.list-item-content p:after{
+    content: "..."; 
+    position: absolute; 
+    bottom: 0; 
+    right: 0; 
+    padding-left: 40px;
+    background: -webkit-linear-gradient(left, transparent, #fff 55%);
+    background: -moz-linear-gradient(left, transparent, #fff 55%);
+    background: -o-linear-gradient(left, transparent, #fff 55%);
+    background: linear-gradient(to right, transparent, #fff 55%);
+}
+.page-item-active {
+    background: #2299FF;
+    color: #fff;
+}
+
+/* 分页 */
+.paging-page {
+    display: flex;
+    justify-content: flex-end;
+    color: #67757C;
+}
+
+.paging-page span {
+    margin-right: 15px;
+}
+
+button,
+button:focus {
+    border: 1px solid #BCBCBC;
+    /* border-radius: 3px; */
+    background-color: transparent;
+    outline: none;
+    color: #67757C;
+    font-size: 14px;
+    display: block;
+    width: 50px;
+    height: 30px;
+    line-height: 26px;
+}
+
+.paging-page button:nth-of-type(1),
+.paging-page button:nth-of-type(3) {
+    border-radius: 3px 0px 0px 3px;
+}
+
+.paging-page button:nth-of-type(2),
+.paging-page button:nth-of-type(4) {
+    border-radius: 0px 3px 3px 0px;
+}
+
+.page-num {
+    display: flex;
+    margin: 0 10px;
+}
+
+.page-num .page-item {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border: 1px solid #BCBCBC;
+    cursor: pointer;
+}

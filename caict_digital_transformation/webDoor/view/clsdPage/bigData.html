@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="applicable-device" content="pc">
+  <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes" name="viewport">
+  <title>中国信通院</title>
+  <link rel="stylesheet" href="../../public/icon_font/font_2146463_rwg5xu2h78/iconfont.css">
+  <link rel="stylesheet" href="../../public/common/css/libs/style.css">
+  <link rel="stylesheet" href="../../plugin/swiper/swiper.min.css">
+  <link rel="stylesheet" href="../../libs/css/index.css">
+  <link rel="stylesheet" href="../../libs/css/bigData.css">
+  <script type="text/javascript" src="../../plugin/jQuery/jQuery.min.js"></script>
+  <script src="../../plugin/swiper/swiper.min.js"></script>
+  <script src="../../plugin/temeplate/template-web.js" type="text/javascript"></script>
+  <script src="../../libs/js/index.js" type="text/javascript"></script>
+  <script src="../../public/common/js/libs/request.js"></script>
+  <script type="text/javascript" src="../../public/common/js/libs/includ.js"></script>
+  <link rel="stylesheet" href="../../public/common/css/frameWork.css">
+  <link rel="stylesheet" href="../../plugin/layui/css/layui.css">
+  <style>
+    .tips-text {
+      width: 400px;
+      height: 40px;
+      background: #f0f9eb;
+      color: #67c23a;
+      border-radius: 5px;
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      margin-left: -200px;
+      z-index: 100;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+    }
+
+    .tips-text i {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      background: url('../../../public/image/chenggongtubiao.png');
+      background-size: 100% 100%;
+      margin: 0 15px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="nav-top">
+    <div class="page-logo">
+      <div class="logo-back"></div>
+    </div>
+    <ul class="nav-list"></ul>
+    <div class="search-input search-input-style">
+      <input class="input-text" type="text" placeholder="请输入">
+      <span id="input_btn" class="iconfont icon-sousuo"></span>
+    </div>
+    <div class="my cur" onclick="goMy()">
+      <span class="mys">我的空间</span>
+      <span class="layui-icon layui-icon-notice"></span>
+    </div>
+  </nav>
+  <div class="banner">
+    <img class="back_banner" src="../../public/image/顶部图/工业大数据平台.jpg">
+    <div class="banner-box ab-c">
+      <h3 class="back_title"></h3>
+      <p class="back_text"></p>
+      <span class="platform_btn"></span>
+      <span class="collection_serve">收 藏 服 务</span>
+    </div>
+  </div>
+  <div class="zhuti">
+    <ul class="content-tab"></ul>
+  </div>
+  <div class="zhuti content-box">
+    <ul>
+      <li class="content1">
+        <h3 class="serve_class">服务介绍</h3>
+        <div class="serve_text"></div>
+      </li>
+      <li class="content2 htmlNone">
+        <h3>服务优势</h3>
+        <div class="content2-box"></div>
+      </li>
+      <li class="content3">
+        <h3 class="footer_title">竞赛流程</h3>
+        <img class="footer_img" src="">
+      </li>
+    </ul>
+  </div>
+  <div class="help">
+    <div class="head-portrait">
+      <img src="../../public/image/bigData/touxiang.png">
+    </div>
+    <div class="help-main">
+      <img src="../../public/image/bigData/touxiang.png">
+      <h3>电话咨询</h3>
+      <p>功能性能测评：400-607-6657（张女士）</p>
+      <p>边缘网关测评：400-619-2176（张先生）</p>
+      <p>工业APP测评：400-603-1123（李女士）</p>
+      <h3>联系邮箱</h3>
+      <p>功能性能测评：cloud@insper.com</p>
+      <p>边缘网关测评：cloud@insper.com</p>
+      <p>工业APP测评：cloud@insper.com</p>
+    </div>
+  </div>
+  <div class="pop_up_box">
+    <div class="list_data">
+      <img class="close_btn" src="../../public/image/guanbi.png" alt="">
+      <h2>数据下载列表</h2>
+      <ul class="list_data_con"></ul>
+    </div>
+  </div>
+  <!-- <include src="../../footer.html"></include> -->
+  <script>
+    $('.pop_up_box').hide();
+    $('.close_btn').on('click', function () {
+      $('.pop_up_box').hide();
+      $('.list_data_con').children().remove()
+    })
+    function goMy() {
+      if (window.sessionStorage.getItem('token')) {
+        window.location.href = '../../admin/index.html'
+      } else {
+        window.location.href = '../../login.html';
+      }
+    }
+    let request = new Call_Request()
+    // 我的足迹
+    function footprintAddFun(data) {
+      request.method = 'POST';
+      request.url = request.UrlPublic + 'web/my/footprint/insert';
+      request.data = JSON.stringify(data);
+      request.redata = function (res) {
+      };
+      request.run();
+    }
+    // 收藏服务
+    function collectionFun(data) {
+      request.method = 'POST';
+      request.url = request.UrlPublic + 'web/my/collect/insert';
+      request.data = JSON.stringify(data);
+      request.redata = function (res) {
+        $('.collection_serve').text('取 消 收 藏');
+        tipsFun('你收藏了工业大数据平台服务');
+      }
+      request.run();
+    }
+    // 取消收藏
+    function cancelCollectionFun(id) {
+      request.method = 'delete';
+      request.url = request.UrlPublic + 'web/my/collect/delete?cmsContentId=' + id;
+      request.redata = function (res) {
+        $('.collection_serve').text('收 藏 服 务');
+        tipsFun('你取消收藏了工业大数据平台服务');
+      }
+      request.run();
+    }
+    // 获取收藏
+    function obtainCollectionFun(cmsContentId) {
+      request.method = 'get';
+      request.url = request.UrlPublic + 'web/my/collect/find';
+      request.data = { 'cmsContentId': cmsContentId };
+      request.redata = function (res) {
+        if (res.data) {
+          $('.collection_serve').text('取 消 收 藏');
+          $('.collection_serve').attr('id', res.data.cmsContentId);
+        } else {
+          $('.collection_serve').text('收 藏 服 务');
+        }
+      };
+      request.run();
+    }
+    $(function () {
+      let navList = '';
+      Ajax('/webadmin/column/getAllColumn', null).then(function (res) {
+        // let columnIdHref=location.search.substr(1).split('=')[1];
+        $.each(res.data, function (index, item) {
+          if (item.navigation) {
+            if ("46f8600f55de46be9d4132f69edf22f5" === item.columnId) {
+              obtainCollectionFun(item.columnId);
+              $('.collection_serve').on('click', function () {
+                if (sessionStorage.getItem('token')) {
+                  if ($(this).text() === '收 藏 服 务') {
+                    collectionFun({ userId: sessionStorage.getItem('id'), cmsContentId: item.columnId, type: 0, title: item.columnName })
+                    footprintAddFun({ userId: sessionStorage.getItem('id'), title: '你收藏了' + item.columnName + '服务' })
+                  } else {
+                    cancelCollectionFun($('.collection_serve').attr('id'))
+                    footprintAddFun({ userId: sessionStorage.getItem('id'), title: '你取消了' + item.columnName + '服务' })
+                  }
+                  obtainCollectionFun(item.columnId);
+                } else {
+                  window.location.href = '../../login.html?url=/' + item.pcListUrl + '&columnId=' + item.columnId;
+                }
+              })
+              let select = '<ul class="select_nav htmlNone">';
+              $.each(item.children, function (index, items) {
+                if (index === 0) {
+                  select += '<li style="background: #112A5A;" columnId="' + items.columnId + '"' + ' data_url="' + items.pcListUrl + '"' + '>' + items.columnName + '</li>';
+                } else {
+                  select += '<li columnId="' + items.columnId + '"' + ' data_url="' + items.pcListUrl + '"' + '>' + items.columnName + '</li>';
+                }
+              })
+              select += '<li data_url="http://47.93.42.226/cms/web/view/index.html">创新实验室</li></ul>'
+              navList += '<li class="hove_list" columnId="' + item.columnId + '" data_url="' + item.pcListUrl + '"><span>' + item.columnName + '</span><i></i>' + select + '</li>';
+            } else {
+              navList += '<li columnId="' + item.columnId + '" data_url="' + item.pcListUrl + '"><span>' + item.columnName + '</span></li>';
+            }
+          }
+          if ('cf3ad04efbae4fb293ccca7c1cb626d7' === item.columnId) {
+            backBigFun("46f8600f55de46be9d4132f69edf22f5");
+            childrenListFun(item.children);
+          }
+        })
+        $('.nav-list').html(navList);
+        $('.nav-list').on('click', 'li', function (e) {
+          e.stopPropagation()
+          e.preventDefault()
+          // 控制导航下划线
+          $(this).append('<i></i>').siblings().children().remove('i')
+          window.location.href = request.httpUrl + $(this).attr('data_url') + '?columnId=' + $(this).attr('columnId');
+        })
+        $('.hove_list').hover(function () {
+          $('.select_nav').removeClass('htmlNone');
+        }, function () {
+          $('.select_nav').addClass('htmlNone')
+        })
+        $('.select_nav').on('click', 'li', function (e) {
+          e.stopPropagation()
+          e.preventDefault()
+          if ($(this).attr('columnId')) {
+            window.location.href = request.httpUrl + $(this).attr('data_url') + '?columnId=' + $(this).attr('columnId');
+          } else {
+            window.location.href = $(this).attr('data_url');
+          }
+        })
+      })
+    })
+    // 大背景图片文字按钮链接
+    function backBigFun(columnId) {
+      Ajax('/webadmin/content/getAllContentByColumnId', { columnId: columnId }).then(function (res) {
+        let data = JSON.parse(res.data.content[0].content).values;
+        $('.back_banner').attr('src', data.back_url[0].fileDownloadUri);
+        $('.back_title').text(data.back_title);
+        $('.back_text').text(data.back_text);
+        $('.platform_btn').text(data.platform_btn);
+        $('.platform_btn').on('click', function () {
+          window.open(data.platform_url)
+        })
+      })
+    }
+    // 子栏目列表
+    function childrenListFun(list) {
+      $.each(list, function (index, item) {
+        $('.content-tab').append('<li class="tab_item">' +
+          '<img class="img-n" src="../../public/image/bigData/cydt.png">' +
+          '<img class="img-h" src="../../public/image/bigData/cydtl.png">' +
+          item.columnName +
+          '</li>');
+        if (item.columnName === '服务介绍') {
+          serveIntroduceFun(item.columnId);
+        } else if (item.columnName === '服务优势') {
+          $('.content2').removeClass('htmlNone');
+          serveAdvantageFun(item.columnId);
+        } else if (item.columnName === '竞赛流程') {
+          footerImgFun(item.columnId);
+        }
+      })
+    }
+    // 服务介绍
+    function serveIntroduceFun(columnId) {
+      Ajax('/webadmin/content/getAllContentByColumnId', { columnId: columnId }).then(function (res) {
+        let data = JSON.parse(res.data.content[0].listContent).values;
+        $('.serve_class').text(data.title_class);
+        $('.serve_text').text(data.content_text)
+      })
+    }
+    // 服务优势
+    function serveAdvantageFun(columnId) {
+      Ajax('/webadmin/content/getAllContentByColumnId', { columnId: columnId }).then(function (res) {
+        $.each(res.data.content, function (index, item) {
+          let data = JSON.parse(item.listContent).values;
+          if (data.content_2) {
+            $('.content2-box').append('<span>' +
+              '<img class="content2-img1" src="../../public/image/bigData/bg_n.png">' +
+              '<img class="content2-img2" src="../../public/image/bigData/bg_h.png">' +
+              '<h4>' + item.title + '</h4>' +
+              '<p>' + data.content_1 + '</p>' +
+              '<p>' + data.content_2 + '</p>' +
+              '<span class="JumpBtn" data_url=' + data.platform_url + '>进入平台>></span>' +
+              '</span>')
+          } else {
+            $('.content2-box').append('<span>' +
+              '<img class="content2-img1" src="../../public/image/bigData/bg_n.png">' +
+              '<img class="content2-img2" src="../../public/image/bigData/bg_h.png">' +
+              '<h4>' + item.title + '</h4>' +
+              '<p>' + data.content_1 + '</p>' +
+              '<span class="JumpBtn" data_url=' + data.platform_url + '>进入平台>></span>' +
+              '<strong class="download_data">下载数据</strong>' +
+              '<strong class="download_list">数据列表</strong>' +
+              '</span>')
+          }
+        })
+        $('.JumpBtn').on('click', function () {
+          window.open($(this).attr('data_url'))
+        })
+        $('.download_data').on('click', function () {
+          let url = location.href.split('view')[1].split('?')[0];
+          let str = location.search.substr(1);
+          if (sessionStorage.getItem('token')) {
+            $('.pop_up_box').show()
+            downloadFun();
+          } else {
+            window.location.href = '../../login.html?url=' + url + '&' + str;
+          }
+        })
+        $('.download_list').on('click', function () {
+          let url = location.href.split('view')[1].split('?')[0];
+          let str = location.search.substr(1);
+          if (sessionStorage.getItem('token')) {
+            window.location.href = '../../dataList.html';
+          } else {
+            window.location.href = '../../login.html?url=' + url + '&' + str;
+          }
+        })
+      })
+    }
+    // 下载数据
+    function downloadFun() {
+      request.method = 'get'
+      request.url = request.UrlPublic + 'web/resource/findAllTableWithDbName'
+      request.data = { dbName: 'caict_algorithm_model' }
+      request.redata = function (res) {
+        downloadFun1();
+      }
+      request.run()
+    }
+    function downloadFun1() {
+      request.method = 'get'
+      request.url = request.UrlPublic + 'web/resource/findAllDataWithDbNameAndTableName'
+      request.data = { dbName: 'caict_algorithm_model', tableName: 'algorithm_model' }
+      request.redata = function (res) {
+        $.each(res.data.content, function (index, item) {
+          $('.list_data_con').append('<li url=' + item.file_url + '>' + item.file_name + '</li>');
+        })
+        $('.list_data_con').on('click', 'li', function () {
+          window.location.href = $(this).attr('url');
+        })
+      }
+      request.run()
+    }
+    // 底部图片
+    function footerImgFun(columnId) {
+      Ajax('/webadmin/content/getAllContentByColumnId', { columnId: columnId }).then(function (res) {
+        let data = JSON.parse(res.data.content[0].listContent).values;
+        $('.footer_title').text(data.title_class);
+        $('.footer_img').attr('src', data.img_url[0].fileDownloadUri)
+      })
+    }
+    // 提示框
+    function tipsFun(text) {
+      $('body').append('<div class="tips-text"><i>></i>' + text + '</div>');
+      setTimeout(function () {
+        $('body .tips-text').remove()
+      }, 2000)
+    }
+  </script>
+  <script type="text/javascript" src="../../libs/js/search.js"></script>
+</body>
+
+</html>

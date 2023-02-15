@@ -1,0 +1,42 @@
+.select_box{
+    padding: 60px 120px;
+    box-sizing: border-box;
+}
+.box_title{
+    text-align: center;
+    line-height: 140px;
+}
+.selet_item {
+    margin-bottom: 30px;
+}
+.selet_item h3{
+    font-size: 20px;
+}
+.selet_item h3 span{
+    margin-left: 10px;
+}
+.selet_item ul{
+    margin-left: 78px;
+    margin-top: 15px;
+}
+.selet_item ul li{
+    font-size: 16px;
+    line-height: 30px;
+}
+.selet_item ul li input{
+    margin-right: 15px;
+}
+.aubmit_box{
+    display: flex;
+    justify-content: center;
+}
+.aubmit_box span{
+    width: 120px;
+    background-color: #0546AE;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 4px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+}

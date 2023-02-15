@@ -1,0 +1,43 @@
+.data-tabs{
+  .item,.button-new-tag{
+      position: relative;
+      margin-top: 5px;
+      padding: 0;
+      height: 40px;
+      width: 140px;
+      border-radius: 6px;
+      box-sizing: border-box;
+      overflow: hidden;
+      color: #000000;
+      background-color: #409eff;
+    }
+  .item-body {
+    & > p{
+      cursor: pointer;
+      margin: 0;
+      font-size: 16px;
+      line-height: 40px;
+      text-align: center;
+      color: #ffffff;
+    }
+  }
+  .button-new-tag{
+    padding-bottom: 5px;
+    font-size: 30px;
+    text-align: center;
+    vertical-align:middle;
+    color: #ffffff;
+  }
+  .button-checkbox{
+      vertical-align: center;
+      text-align: center;
+      height: 50px;
+      width: 50px;
+      margin-top: 20px;
+      border-radius: 6px;
+  }
+  .item02{
+    height: 500px;
+    width: 230px;
+  }
+}

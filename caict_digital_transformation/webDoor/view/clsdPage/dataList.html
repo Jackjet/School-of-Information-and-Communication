@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../public/common/css/libs/style.css">
+    <link rel="stylesheet" href="../../public/icon_font/font_2146463_rwg5xu2h78/iconfont.css">
+    <link rel="stylesheet" href="../../libs/css/index.css">
+    <script type="text/javascript" src="../../libs/js/index.js"></script>
+    <script type="text/javascript" src="../../plugin/jQuery/jQuery.min.js"></script>
+    <script type="text/javascript" src="../../public/common/js/libs/includ.js"></script>
+    <link rel="stylesheet" href="../../plugin/layui/css/layui.css">
+    <script src="../../public/common/js/libs/request.js"></script>
+    <style>
+        .list_content {
+            margin-top: 80px;
+            padding: 0 120px;
+            box-sizing: border-box;
+        }
+
+        .list_content ul {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .list_content ul li {
+            width: 48%;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            line-height: 40px;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            box-sizing: border-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .list_content ul li:hover {
+            background: #1dade9;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .load_img {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .load_img .load_text {
+            display: flex;
+            align-items: center;
+        }
+
+        .load_text img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav-top" style="background-color: #0546AE;">
+        <div class="page-logo">
+            <div class="logo-back"></div>
+        </div>
+        <ul class="nav-list"></ul>
+        <div class="search-input search-input-style" style="background-color: #0546AE;">
+            <input class="input-text" type="text" placeholder="请输入">
+            <span id="input_btn" class="iconfont icon-sousuo"></span>
+        </div>
+        <div class="my cur" onclick="goMy()">
+            <span class="mys">我的空间</span>
+            <span class="layui-icon layui-icon-notice"></span>
+        </div>
+    </nav>
+    <div class="list_content">
+        <ul id="list_con"></ul>
+    </div>
+    <div class="load_img">
+        <div class="load_text">
+            <img src="../../public/image/load.gif" alt="">
+            加载中...
+        </div>
+    </div>
+    <script>
+        let request = new Call_Request();
+        function goMy() {
+            if (window.sessionStorage.getItem('token')) {
+                window.location.href = '../../admin/index.html'
+            } else {
+                window.location.href = '../../login.html';
+            }
+        }
+        let navList = '';
+        Ajax('/webadmin/column/getAllColumn', null).then(function (res) {
+            let columnIdHref = location.search.substr(1).split('=')[1];
+            $.each(res.data, function (index, item) {
+                if (item.navigation) {
+                    if ("46f8600f55de46be9d4132f69edf22f5" === item.columnId) {
+                        let select = '<ul class="select_nav htmlNone">';
+                        $.each(item.children, function (index, items) {
+                            select += '<li columnId="' + items.columnId + '"' + ' data_url="' + items.pcListUrl + '"' + '>' + items.columnName + '</li>';
+                        })
+                        select += '<li data_url="http://47.105.140.86/caict/web/view/index.html">创新实验室</li></ul>'
+                        navList += '<li class="select_prent hove_list" columnId="' + item.columnId + '" data_url="' + item.pcListUrl + '"><span>' + item.columnName + '</span><i></i>' + select + '</li>';
+                    } else {
+                        navList += '<li class="select_prent" columnId="' + item.columnId + '" data_url="' + item.pcListUrl + '"><span>' + item.columnName + '</span></li>';
+                    }
+                }
+            })
+            $('.nav-list').html(navList);
+            $('.nav-list').on('click', '.select_prent', function (e) {
+                e.stopPropagation()
+                e.preventDefault()
+                // 控制导航下划线
+                $(this).append('<i></i>').siblings().children().remove('i')
+                window.location.href = request.httpUrl + $(this).attr('data_url') + '?columnId=' + $(this).attr('columnId');
+            })
+            $('.hove_list').hover(function () {
+                $('.select_nav').removeClass('htmlNone');
+            }, function () {
+                $('.select_nav').addClass('htmlNone')
+            })
+            $('.select_nav').on('click', 'li', function (e) {
+                e.stopPropagation()
+                e.preventDefault()
+                if ($(this).attr('columnId')) {
+                    window.location.href = request.httpUrl + $(this).attr('data_url') + '?columnId=' + $(this).attr('columnId');
+                } else {
+                    window.location.href = $(this).attr('data_url');
+                }
+            })
+
+        })
+        listDataFun();
+        function listDataFun() {
+            request.method = 'GET'
+            request.url = request.UrlPublic + 'web/resource/findAllTableWithDbName'
+            request.data = { dbName: 'caict_standard_dataset' }
+            request.redata = function (res) {
+                listDataFun1()
+            }
+            request.run()
+        }
+        function listDataFun1() {
+            request.method = 'GET'
+            request.url = request.UrlPublic + 'web/resource/findAllDataWithDbNameAndTableName'
+            request.data = { size: 40, dbName: 'caict_standard_dataset', tableName: 'standard_dataset' }
+            request.redata = function (res) {
+                $('.load_img').hide()
+                let strCon = '';
+                $.each(res.data.content, function (index, item) {
+                    strCon += '<li id="' + item.id + '"><span>' + (index + 1) + '、</span>' + item.name + ':' + item.keyword + '</li>'
+                })
+                $('#list_con').html(strCon);
+                window.sessionStorage.setItem('data', JSON.stringify(res.data.content))
+                $('#list_con').on('click', 'li', function () {
+                    window.open('dataListDateils.html?id=' + $(this).attr('id'));
+                })
+            }
+            request.run()
+        }
+    </script>
+    <script type="text/javascript" src="../../libs/js/detaileSearch.js"></script>
+</body>
+
+</html>

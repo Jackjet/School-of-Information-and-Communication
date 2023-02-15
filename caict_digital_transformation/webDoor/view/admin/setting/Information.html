@@ -1,0 +1,138 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-10-23 10:34:59
+ * @LastEditTime: 2020-11-02 23:18:30
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \webDoor\view\admin\setting\Information.html
+-->
+<!--
+ * @Author: your name
+ * @Date: 2020-10-23 10:24:00
+ * @LastEditTime: 2020-10-23 16:58:01
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \webDoor\view\admin\myfooter\footer.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../../public/common/css/frameWork.css">
+    <link rel="stylesheet" href="../../../libs/css/admin/information.css">
+    <link rel="stylesheet" href="../../../plugin/swiper/swiper.min.css">
+    <script type="text/javascript" src="../../../plugin/jQuery/jQuery.min.js"></script>
+    <script type="text/javascript" src="../../../plugin/jQuery/jquery.pagination.js"></script>
+    <script type="text/javascript" src="../../../plugin/jQuery/jquery.form.js"></script>
+    <script type="text/javascript" src="../../../plugin/popper/popper.min.js"></script>
+    <script type="text/javascript" src="../../../plugin/temeplate/template-web.js"></script>
+    <script type="text/javascript" src="../../../plugin/jQueryCookie/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../../../plugin/wow/wow.min.js"></script>
+    <script type="text/javascript" src="../../../plugin/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../public/common/js/libs/request.js"></script>
+    <script type="text/javascript" src="../../../public/common/js/libs/global.js"></script>
+    <script type="text/javascript" src="../../../public/common/js/libs/common.js"></script>
+    <script type="text/javascript" src="../../../public/common/js/libs/includ.js"></script>
+    <script type="text/javascript" src='../../../plugin/Md5/md5.js'></script>
+    <script type="text/javascript" src='../../../plugin/swiper/swiper.min.js'></script>
+    <script type="text/javascript" src="../../../plugin/layui/layui.all.js"></script>
+    <script type="text/javascript" src="../../../libs/js/area.js"></script>
+    <script type="text/javascript" src="../../../libs/js/upload2.js"></script>
+    <title>中国通信院</title>
+</head>
+
+<body>
+    <div class="inforation_box">
+        <form class="needs-validation" novalidate>
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label"><span>*</span>企业名称:</label>
+                <div class="col-sm-10">
+                    <input type="text" placeholder="请输入企业名称" class="form-control" id="name">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label"><span>*</span>联系人:</label>
+                <div class="col-sm-10">
+                    <input type="text" placeholder="请输入联系人名称" class="form-control" id="linkmanName">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label"><span>*</span>联系电话:</label>
+                <div class="col-sm-10">
+                    <input type="text" placeholder="请输入联系电话" class="form-control" id="linkmanPhone">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label"><span>*</span>所属地区:</label>
+                <div class="col-sm-10 flex">
+                    <div class="col-sm-3">
+                        <select class="form-control province" onchange="selectCity(this)">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                    <div style="margin-left: 15px;" class="col-sm-3">
+                        <select class="form-control city" onchange="selectarea(this)">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                    <div style="margin-left: 15px;" class="col-sm-3">
+                        <select class="form-control area">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">详细地址:</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" id="address" placeholder="请输入详细地址"></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label"><span>*</span>所属行业:</label>
+                <div class="col-sm-10 infor flexait">
+                    <!-- <input type="checkbox" id="1" value="1"> -->
+                    <script id="infor-cell" type="text/html">
+                        {{each content as value i}}
+                            {{if content.length > 0}}
+                                <div class="col-sm-2">
+                                    <input type="checkbox" class="check_box" id="{{value.id}}" value="{{value.id}}" name="checkName">
+                                    <label>{{value.name}}</label>
+                                </div>
+                            {{/if}}
+                        {{/each}}
+                        {{if content.length === 0}}
+                            <div class="nodata flexc">
+                               暂无数据！
+                            </div>
+                        {{/if}}
+                    </script>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label"><span>*</span>企业Logo:</label>
+                <div class="col-sm-7">
+                    <div class="form-group">
+                        <button type="button" onclick="selectUploadFile('picture')" class="btn btn-primary"
+                            name="button" value="浏览">文件上传</button>
+                        <img id="yl" src="">
+                    </div>
+                </div>
+            </div>
+            <div class="flexc">
+                <button class="btn btn-primary" onclick="updateInfo()" type="button">保 存</button>
+            </div>
+        </form>
+        <div style="display:none">
+            <form id="uploadForm1" enctype="multipart/form-data" method="post">
+                <input id="file" type="file" name="file" onchange="upload1(this)" />
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src='../../../libs/js/admin/information.js'></script>
+</body>
+
+</html>

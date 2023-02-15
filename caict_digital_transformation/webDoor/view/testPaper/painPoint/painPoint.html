@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="applicable-device" content="pc">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes" name="viewport">
+    <title>中国信通院</title>
+    <link rel="stylesheet" href="../../../plugin/layui/css/layui.css">
+    <script type="text/javascript" src="../../../plugin/layui/layui.all.js"></script>
+    <link rel="stylesheet" href="../../../public/common/css/libs/style.css">
+    <link rel="stylesheet" href="../../../libs/css/testPaper/painPoint.css">
+    <script type="text/javascript" src="../../../plugin/jQuery/jQuery.min.js"></script>
+    <script src="../../../public/common/js/libs/request.js"></script>
+</head>
+
+<body>
+    <section>
+        <div class="section_content">
+            <div class="painPoint_content"></div>
+        </div>
+        <div class="btn_footer">
+            <span id="submit_btn" onclick="submit()">提交</span>
+        </div>
+    </section>
+    <script src="./painPoint.js"></script>
+    <script>
+        // 渲染模板
+        function TemplateHtml(list) {
+            $.each(list, function (index, item) {
+                let liHtml = '';
+                $.each(item.title_options, function (indexs, items) {
+                    let radioHtml = '';
+                    $.each(items.options_item, function (i, k) {
+                        radioHtml += '<li><input type="radio" ' + (k.checked ? 'checked' : '') + ' title_name_id="' + item.title_name_id + '" title_item_id="' + items.title_item_id + '" name="' + items.title_item_id + '" value="' + i + '"><span>' + k.name + '</span></li>';
+                    })
+                    liHtml += '<li class="title_item"><h4>' + items.title_item + '</h4><ul class="option_item">' + radioHtml + '</ul></li>';
+                })
+                $('.painPoint_content').append('<div class="painPoint_title"><h3>' + item.title_name + '</h3><ul class="title_name">' + liHtml + '</ul></div>');
+            })
+        }
+        let submitData = null;
+        // 选中事件
+        function selectFun(list) {
+            submitData = list;
+            $("input:radio").change(function () {
+                let title_name_id = $(this).attr('title_name_id');
+                let title_item_id = $(this).attr('title_item_id');
+                let val = $(this).val();
+                $.each(submitData, function (index, item) {
+                    if (item.title_name_id === title_name_id) {
+                        $.each(item.title_options, function (index, items) {
+                            if (items.title_item_id === title_item_id) {
+                                $.each(items.options_item, function (i, k) {
+                                    if (i == val) {
+                                        k.checked = true;
+                                    } else {
+                                        k.checked = false;
+                                    }
+                                })
+                            }
+                        })
+                    }
+                })
+            })
+        }
+        let request = new Call_Request();
+        // 获取问卷调列表
+        function leftNavFun() {
+            request.method = 'get';
+            request.url = request.UrlPublic + 'web/questionnaires/findAll';
+            request.data = {
+                userId: sessionStorage.getItem("id"),
+                name: sessionStorage.getItem("name"),
+                type: '1',
+            };
+            request.redata = function (res) {
+                if (res.code === 1) {
+                    if (res.data.content.length > 0) {
+                        detailsQuestionnaire({ id: res.data.content[0].id });
+                    } else {
+                        TemplateHtml(data);
+                        selectFun(data);
+                    }
+                }
+            };
+            request.run();
+        }
+        leftNavFun();
+        // 添加问卷调
+        function addQuestionnaire(body) {
+            request.method = 'POST';
+            request.url = request.UrlPublic + 'web/questionnaires/insert';
+            request.data = JSON.stringify(body);
+            request.redata = function (res) {
+                if (res.code === 1) {
+                    layer.msg("提交成功");
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                }
+            };
+            request.run();
+        }
+        // 修改问卷
+        function editQuestionnaire(body) {
+            request.method = 'put';
+            request.url = request.UrlPublic + 'web/questionnaires/update';
+            request.data = body;
+            request.redata = function (res) {
+                if (res.code === 1) {
+                    layer.msg("修改成功");
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                }
+            };
+            request.run();
+        }
+        // 获取问卷调详情
+        function detailsQuestionnaire(body) {
+            request.method = 'get';
+            request.url = request.UrlPublic + 'web/questionnaires/find';
+            request.data = body;
+            request.redata = function (res) {
+                if (res.code === 1) {
+                    if (res.data.result !== 'null') {
+                        $('#submit_btn').attr("data_id", res.data.id);
+                        TemplateHtml(JSON.parse(res.data.result));
+                        selectFun(JSON.parse(res.data.result));
+                    } else {
+                        TemplateHtml(data);
+                        selectFun(data);
+                    }
+                }
+            };
+            request.run();
+        }
+
+        // 提交
+        function submit() {
+            let id = $('#submit_btn').attr("data_id");
+            if (!id) {
+                addQuestionnaire({
+                    userId: sessionStorage.getItem("id"),
+                    name: sessionStorage.getItem("name"),
+                    type: '1',
+                    result: JSON.stringify(submitData)
+                });
+            } else {
+                editQuestionnaire(JSON.stringify({
+                    id: id,
+                    result: JSON.stringify(submitData)
+                }))
+            }
+        }
+    </script>
+</body>
+
+</html>

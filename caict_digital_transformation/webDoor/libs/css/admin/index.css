@@ -1,0 +1,161 @@
+
+body{
+	background: #FFFFFF;
+	height: 100%;
+}
+.main{
+	min-width: 1200px;
+	margin: 0 auto;
+	position: relative;  
+	height: 66px;
+	background: rgba(0,0,0,0.78);
+	opacity: 1;
+}
+.main nav{
+	display: flex;
+	width: 1200px;
+	margin: 0 auto;
+}
+section{
+    width: 1200px;
+	margin: 20px auto;
+	background: #fff;
+	min-height: 600px;
+	height: 100%;
+
+}
+#iframe{
+	height: 100%;
+	min-height: 850px;
+}
+.main img{
+  padding: 3px 0px 7px 0px;
+}
+
+p{
+	margin: 0;
+}
+.nav,
+.nav-item {
+	height:66px;
+	line-height: 66px;
+}
+.nav{
+   padding-left: 25px;
+}
+.nav-item
+.nav-link{
+	font-size: 14px;
+	font-weight: 400;
+	padding: 0 0.8rem;
+	cursor: pointer;
+	color:#fff; 
+}
+.header{
+	width: 100%;
+    height: 64px;
+	z-index: 11;
+	transition: background-color .2s;
+    top: 30px;
+}
+.nav-item  .form-control{
+    width: 180px;
+}
+.nav-item .input-group{
+    padding: 0 1.5rem;
+}
+.main .search{
+  display: flex;
+  height: 38px;
+  line-height: 38px;
+  background: #2C67C5;
+  border-radius: 2px;
+}
+.search_box{
+    display: inline-block;
+}
+
+#myInput{
+	outline: none;
+	border: none;
+	background: #2C67C5;
+	color: #FFFFFF;
+}
+#myInput::-moz-placeholder { color: #fff;  opacity: 0.6; }
+#myInput::-webkit-input-placeholder { color:#fff;  opacity: 0.6; }
+#myInput:-ms-input-placeholder { color:#fff;  opacity: 0.6; }
+.main_center{
+	padding-top: 0px; 
+}
+.main_center .actor{
+	width: 50px;
+	height: 50px;
+}
+.main_center .btn{
+	background: #0546AE;
+	vertical-align: middle;
+	padding: .275rem .75rem
+}
+.main_center ul {
+	width: 100%;
+	margin-top: 30px;
+}
+.main_center ul li{
+	width: 100%;
+	height: 50px;
+	background: #f6f6f6;
+	margin: 2px 0px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+.main_center ul li span{
+	color: #505050;
+}
+.main_center
+.li_bottom_one{
+	margin: 2px 0px 0px 0px;
+}
+.main_center  .li_bottom {
+	height: 35px;
+	display: flex;
+	margin: 0px;
+	padding: 0px 0px 0px 20px;
+	font-size: 0.9em;
+}
+.navs
+.active{
+	background: #0546AE;
+}
+.main_center .navs .active span{
+	color: #fff;
+}
+.main_center .navs .actives span{
+	color: red;
+}
+.navs a{
+	text-decoration: none;
+ }
+ .ifname_box{
+	 height: 40px;
+	 line-height: 40px;
+	 color: #0546AE;
+	 font-weight: bold;
+ }
+ .hr{
+	 background: #0546AE;
+	 height: 2px;
+	 width: 100%;
+ }
+ .nav_main{
+	 margin-top: 5px;
+	 height: 100%;
+	 min-height: 680px;
+
+ }
+ #iframe{
+	 width: 100%;
+	 height: 100%;
+	 overflow-y: scroll;
+ }

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../public/common/css/libs/style.css">
+    <link rel="stylesheet" href="../../public/icon_font/font_2146463_rwg5xu2h78/iconfont.css">
+    <link rel="stylesheet" href="../../libs/css/index.css">
+    <script type="text/javascript" src="../../libs/js/index.js"></script>
+    <script type="text/javascript" src="../../plugin/jQuery/jQuery.min.js"></script>
+    <script type="text/javascript" src="../../public/common/js/libs/includ.js"></script>
+    <link rel="stylesheet" href="../../plugin/layui/css/layui.css">
+    <style>
+        .dateils_content {
+            width: 100%;
+            margin-top: 60px;
+            padding: 30px 120px;
+            box-sizing: border-box;
+            background: #eee;
+        }
+
+        .dateils_box {
+            width: 100%;
+            background: #fff;
+            padding: 30px;
+        }
+
+        .dynamic-content h2 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #323232;
+            margin-bottom: 15px;
+        }
+
+        .keywords span {
+            margin-right: 120px;
+            color: #000;
+            font-size: 14px;
+        }
+
+        .dateils_title {
+            margin: 30px 0 20px;
+            background-color: #eee;
+            font-size: 14px;
+            border-left: 2px solid #14aadb;
+            padding: 10px 20px;
+            font-weight: 700;
+            color: #323232;
+        }
+
+        .dateils_text_download {
+            cursor: pointer;
+            color: #1dade9;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav-top" style="background-color: #0546AE;">
+        <div class="page-logo">
+            <div class="logo-back"></div>
+        </div>
+        <ul class="nav-list"></ul>
+        <div class="search-input search-input-style" style="background-color: #0546AE;">
+            <input class="input-text" type="text" placeholder="请输入">
+            <span id="input_btn" class="iconfont icon-sousuo"></span>
+        </div>
+        <div class="my cur" onclick="goMy()">
+            <span class="mys">我的空间</span>
+            <span class="layui-icon layui-icon-notice"></span>
+        </div>
+    </nav>
+    <div class="dateils_content">
+        <div class="dateils_box">
+            <div class="dynamic-content">
+                <h2 id="title"></h2>
+                <div class="keywords">
+                    <span id="key_word"></span>
+                    <span id="classification"></span>
+                </div>
+            </div>
+            <h2 class="dateils_title">背景介绍</h2>
+            <div class="dateils_text_back"></div>
+            <h2 class="dateils_title">问题描述</h2>
+            <div class="dateils_text_problem"></div>
+            <h2 class="dateils_title">数据描述</h2>
+            <div class="dateils_text_data"></div>
+            <h2 class="dateils_title">文件下载</h2>
+            <div class="dateils_text_download"></div>
+        </div>
+    </div>
+    <script>
+        function goMy() {
+            if (window.sessionStorage.getItem('token')) {
+                window.location.href = '../../admin/index.html'
+            } else {
+                window.location.href = '../../login.html';
+            }
+        }
+        let navList = '';
+        Ajax('/webadmin/column/getAllColumn', null).then(function (res) {
+            $.each(res.data, function (index, item) {
+                if (item.navigation) {
+                    if ("46f8600f55de46be9d4132f69edf22f5" === item.columnId) {
+                        let select = '<ul class="select_nav htmlNone">';
+                        $.each(item.children, function (index, items) {
+                            select += '<li columnId="' + items.columnId + '"' + ' data_url="' + items.pcListUrl + '"' + '>' + items.columnName + '</li>';
+                        })
+                        select += '<li data_url="http://47.105.140.86/caict/web/view/index.html">创新实验室</li></ul>'
+                        navList += '<li class="select_prent hove_list" columnId="' + item.columnId + '" data_url="' + item.pcListUrl + '"><span>' + item.columnName + '</span><i></i>' + select + '</li>';
+                    } else {
+                        navList += '<li class="select_prent" columnId="' + item.columnId + '" data_url="' + item.pcListUrl + '"><span>' + item.columnName + '</span></li>';
+                    }
+                }
+            })
+            $('.nav-list').html(navList);
+            $('.nav-list').on('click', '.select_prent', function (e) {
+                e.stopPropagation()
+                e.preventDefault()
+                // 控制导航下划线
+                $(this).append('<i></i>').siblings().children().remove('i')
+                window.location.href = request.httpUrl + $(this).attr('data_url') + '?columnId=' + $(this).attr('columnId');
+            })
+            $('.hove_list').hover(function () {
+                $('.select_nav').removeClass('htmlNone');
+            }, function () {
+                $('.select_nav').addClass('htmlNone')
+            })
+            $('.select_nav').on('click', 'li', function (e) {
+                e.stopPropagation()
+                e.preventDefault()
+                if ($(this).attr('columnId')) {
+                    window.location.href = request.httpUrl + $(this).attr('data_url') + '?columnId=' + $(this).attr('columnId');
+                } else {
+                    window.location.href = $(this).attr('data_url');
+                }
+            })
+
+        })
+        let urliI = location.search.substr(1).split('=')[1];
+        let datas = JSON.parse(sessionStorage.getItem('data'));
+        $.each(datas, function (index, item) {
+            if (urliI === item.id) {
+                $('#title').text(item.name);
+                $('#key_word').text('关键词：' + item.keyword);
+                $('#classification').text('分类：' + item.catalog);
+                $('.dateils_text_back').html(item.background);
+                $('.dateils_text_problem').html(item.question_desc);
+                $('.dateils_text_data').html(item.data_desc);
+                $('.dateils_text_download').text(item.attachment_name);
+                $('.dateils_text_download').on('click', function () {
+                    window.location.href = item.attachment_url;
+                })
+            }
+        })
+
+    </script>
+    <script type="text/javascript" src="../../libs/js/detaileSearch.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,303 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-04 15:16:05
+ * @LastEditTime: 2020-11-02 21:46:51
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \web\view\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="applicable-device" content="pc">
+    <meta name=renderer content=webkit>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes" name="viewport">
+    <link rel="stylesheet" href="../public/common/css/frameWork.css">
+    <link rel="stylesheet" href="../libs/css/certify.css">
+    <link rel="stylesheet" href="../plugin/swiper/swiper.min.css">
+    <script type="text/javascript" src="../plugin/jQuery/jQuery.min.js"></script>
+    <script type="text/javascript" src="../plugin/popper/popper.min.js"></script>
+    <script type="text/javascript" src="../plugin/temeplate/template-web.js"></script>
+    <script type="text/javascript" src="../plugin/jQueryCookie/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../plugin/wow/wow.min.js"></script>
+    <script type="text/javascript" src="../plugin/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../public/common/js/libs/request.js"></script>
+    <script type="text/javascript" src="../public/common/js/libs/global.js"></script>
+    <script type="text/javascript" src="../public/common/js/libs/common.js"></script>
+    <script type="text/javascript" src="../public/common/js/libs/includ.js"></script>
+    <script type="text/javascript" src="../plugin/layui/layui.all.js"></script>
+    <script type="text/javascript" src='../plugin/Md5/md5.js'></script>
+    <script type="text/javascript" src='../plugin/swiper/swiper.min.js'></script>
+    <script type="text/javascript" src='../libs/js/home.js'></script>
+    <script src="https://cdn.jsdelivr.net/parallax.js/1.4.2/parallax.min.js"></script>
+    <link rel="stylesheet" href="../libs/css/index.css">
+    <script type="text/javascript" src="../libs/js/index.js"></script>
+    <link rel="stylesheet" href="../public/icon_font/font_2146463_rwg5xu2h78/iconfont.css">
+    <link rel="stylesheet" href="../libs/css/home.css">
+    <title>中国通信院</title>
+    <style>
+        .slide_content {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 100;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 50px;
+            box-sizing: border-box;
+            line-height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav-top">
+        <div class="page-logo">
+            <div class="logo-back"></div>
+        </div>
+        <ul class="nav-list"></ul>
+        <div class="search-input search-input-style">
+            <input class="input-text" type="text" placeholder="请输入">
+            <span id="input_btn" class="iconfont icon-sousuo"></span>
+        </div>
+        <div class="my cur" onclick="goMy()">
+            <span class="mys">我的空间</span>
+            <span class="layui-icon layui-icon-notice"></span>
+        </div>
+    </nav>
+    <div class="louti-box">
+        <ul>
+            <li class="nowFlow"><span></span></li>
+            <li><span></span></li>
+            <li><span></span></li>
+        </ul>
+    </div>
+    <div class="main">
+        <!-- <div class="header">
+            <nav>
+                <a class="logo"><img src="../public/image/logo.png"></a>
+                <ul class="nav">
+                    <script id="nav-cell" type="text/html">
+                        {{each content as value i}}
+                            {{if value.navigation}}
+                                <li class="nav-item" onclick="go('{{value.pcListUrl}}')">
+                                    <a class="nav-link active" href="#">{{value.columnName}}</a>
+                                    <span class="hov"></span>
+                                </li>
+                            {{/if}}
+                        {{/each}}
+                    </script>
+                </ul>
+            </nav>
+            <div class="my cur" onclick="goMy()">
+                <span class="mys">我的空间</span>
+                <span class="layui-icon layui-icon-notice"></span>
+            </div>
+        </div> -->
+        <div class="swiper-container louti">
+            <div id="top_swiper" class="swiper-wrapper">
+                <script id="swiper-cell" type="text/html">
+                    {{each content as value index}}
+                        <div class="swiper-slide">
+                            <img src="{{value.image}}">
+                           <div class="swiper_slide_box bounceInDown">
+                                <p class="top_text">{{value.titleOne}}</p> 
+                                <p class="center_text">{{value.titleTwo}}</p>
+                                <p class="bottom_text">{{value.titleThree}}</p> 
+                             </div>
+                        </div>
+                    {{/each}}
+                </script>
+            </div>
+            <!-- Add Pagination -->
+            <div id="pagination" class="swiper-pagination"></div>
+        </div>
+        <div class="main_center louti">
+            <img src="../public/images/center.jpg">
+            <div class="main_center_box">
+                <div class="main_center_cbox">
+                    <div class="main_center_one">
+                        <h2 class="hexin"></h2>
+                        <div class="main_center_img mlt10"></div>
+                        <div class="text mlt20 hexin_contant"></div>
+                    </div>
+                    <div class="main_center_two fadeInLeftBig">
+                        <div class="main_center_two_box">
+                            <img src="../public/images/six.png" alt="">
+                            <div class="main_center_two_top flexcuml">
+                                <div class="main_center_two_top_title flex">
+                                    <img src="../public/images/one.png" alt="">
+                                    <h4 class="pdl5 qiye"></h4>
+                                </div>
+                                <div class="main_center_two_top_text mlt5">
+                                    <p class="qiye_contant"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main_center_three fadeInRightBig">
+                        <div class="main_center_two_box">
+                            <img src="../public/images/six.png" alt="">
+                            <div class="main_center_three_top flexcuml">
+                                <div class="main_center_two_top_title flex">
+                                    <img src="../public/images/two.png" alt="">
+                                    <h4 class="pdl5 pince"></h4>
+                                </div>
+                                <div class="main_center_two_top_text mlt5">
+                                    <p class="pince_contant"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main_center_four fadeInLeftBig">
+                        <div class="main_center_two_box">
+                            <img src="../public/images/six.png" alt="">
+                            <div class="main_center_three_top flexcuml">
+                                <div class="main_center_two_top_title flex">
+                                    <img src="../public/images/three.png" alt="">
+                                    <h4 class="pdl5  chanye"></h4>
+                                </div>
+                                <div class="main_center_two_top_text mlt5">
+                                    <p class="chanye_contant"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main_center_five fadeInRightBig">
+                        <div class="main_center_two_box">
+                            <img src="../public/images/six.png" alt="">
+                            <div class="main_center_three_top flexcuml">
+                                <div class="main_center_two_top_title flex">
+                                    <img src="../public/images/four.png" alt="">
+                                    <h4 class="pdl5 chuangxin"></h4>
+                                </div>
+                                <div class="main_center_two_top_text mlt5">
+                                    <p class="chuangxin_contant"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main_bottom louti">
+            <img src="../public/images/bottom.png">
+            <div class="main_one flexw">
+                <div class="main_bottom_text flexc">
+                    <h1>典型案例</h1>
+                </div>
+                <div id="certify">
+                    <div class="swiper-containers">
+                        <div id="swiper-wrapper" class="swiper-wrapper">
+                            <!-- <div class="swiper-slide"><img id="certify_img_one"
+                                    src="http://47.93.42.226/cmsV2/service/file/content/pictureDownload/1603780319348/certifyFour.jpg" />
+                            </div>
+                            <div class="swiper-slide"><img id="certify_img_two"
+                                    src="http://47.93.42.226/cmsV2/service/file/content/pictureDownload/1604041168066/1.jpeg" />
+                            </div>
+                            <div class="swiper-slide"><img id="certify_img_three"
+                                    src="http://47.93.42.226/cmsV2/service/file/content/pictureDownload/1604041188609/2.jpeg" />
+                            </div>
+                            <div class="swiper-slide"><img id="certify_img_four"
+                                    src="http://47.93.42.226/cmsV2/service/file/content/pictureDownload/1604041201642/5.jpeg" />
+                            </div>
+                            <div class="swiper-slide"><img id="certify_img_five"
+                                    src="http://47.93.42.226/cmsV2/service/file/content/pictureDownload/1603780296886/certifyOne.jpg" />
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </div>
+        </div>
+        <!-- <include src="footer.html"></include> -->
+    </div>
+    <script>
+        let navList = '';
+        Ajax('/webadmin/column/getAllColumn', null).then(function (res) {
+            $.each(res.data, function (index, item) {
+                if (item.navigation) {
+                    if ("e376660b9db940909f0cd813ebf52c5e" === item.columnId) {
+                        navList += '<li columnId="' + item.columnId + '" data_url="' + item.pcListUrl + '"><span>' + item.columnName + '</span><i></i></li>';
+                    } else {
+                        navList += '<li columnId="' + item.columnId + '" data_url="' + item.pcListUrl + '"><span>' + item.columnName + '</span></li>';
+                    }
+                }
+            })
+            $('.nav-list').html(navList);
+            $('.nav-list').on('click', 'li', function () {
+                window.location.href = request.httpUrl + $(this).attr('data_url') + '?columnId=' + $(this).attr('columnId');
+            })
+            bottomSwiperFun("6478d53406b54beabd957b8ef92e3b5b");
+        })
+        function bottomSwiperFun(columnId) {
+            Ajax('/webadmin/content/getAllContentByColumnId', { columnId: columnId }).then(function (res) {
+                let strCon = '';
+                $.each(res.data.content, function (index, item) {
+                    let data = JSON.parse(item.listContent).values;
+                    strCon += '<div class="swiper-slide"><div class="slide_content">' + (data.content ? data.content : '') + '</div><img id="certify_img_' + index + '" src="' + data.img[0].fileDownloadUri + '" /></div>';
+                })
+                $('#swiper-wrapper').html(strCon);
+                new Swiper('#certify .swiper-containers', {
+                    watchSlidesProgress: true,
+                    slidesPerView: 'auto',
+                    centeredSlides: true,
+                    loop: true,
+                    loopedSlides: 4,
+                    autoplay: true,
+                    observer: true,
+                    observeParents: true,
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    pagination: {
+                        el: '#certify .swiper-pagination',
+                        //clickable :true,
+                    },
+                    on: {
+                        progress: function (progress) {
+                            for (i = 0; i < this.slides.length; i++) {
+                                var slide = this.slides.eq(i);
+                                var slideProgress = this.slides[i].progress;
+                                modify = 1;
+                                if (Math.abs(slideProgress) > 1) {
+                                    modify = (Math.abs(slideProgress) - 1) * 0.3 + 1;
+                                }
+                                translate = slideProgress * modify * 260 + 'px';
+                                scale = 1 - Math.abs(slideProgress) / 5;
+                                zIndex = 999 - Math.abs(Math.round(10 * slideProgress));
+                                slide.transform('translateX(' + translate + ') scale(' + scale + ')');
+                                slide.css('zIndex', zIndex);
+                                slide.css('opacity', 1);
+                                if (Math.abs(slideProgress) > 3) {
+                                    slide.css('opacity', 0);
+                                }
+                            }
+                        },
+                        setTransition: function (transition) {
+                            for (var i = 0; i < this.slides.length; i++) {
+                                var slide = this.slides.eq(i);
+                                slide.transition(transition);
+                            }
+                        }
+                    }
+                })
+            })
+        }
+        // new WOW().init();
+    </script>
+    <script type="text/javascript" src="../libs/js/search.js"></script>
+</body>
+
+</html>

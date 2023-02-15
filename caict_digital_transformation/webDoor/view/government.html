@@ -1,0 +1,208 @@
+<!--
+ * @Author: your name
+ * @Date: 3535-09-04 15:16:05
+ * @LastEditTime: 2020-10-15 16:10:06
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \web\view\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="applicable-device" content="pc">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes" name="viewport">
+    <title>中国信通院</title>
+    <script type="text/javascript" src="../plugin/jQuery/jQuery.min.js"></script>
+    <link rel="stylesheet" href="../public/icon_font/font_2146463_rwg5xu2h78/iconfont.css">
+    <link rel="stylesheet" href="../public/common/css/libs/style.css">
+    <link rel="stylesheet" href="../libs/css/government.css">
+    <link rel="stylesheet" href="../libs/css/index.css">
+    <link rel="stylesheet" href="../plugin/swiper/swiper.min.css">
+    <script src="../plugin/swiper/swiper.min.js"></script>
+    <script type="text/javascript" src="../plugin/temeplate/template-web.js"></script>
+    <script type="text/javascript" src="../libs/js/index.js"></script>
+    <link rel="stylesheet" href="../plugin/layui/css/layui.css">
+    <script src="../public/common/js/libs/request.js"></script>
+</head>
+
+<body>
+    <nav class="nav-top">
+        <div class="page-logo">
+            <div class="logo-back"></div>
+        </div>
+        <ul class="nav-list"></ul>
+        <div class="search-input search-input-style">
+            <input class="input-text" type="text" placeholder="请输入">
+            <span id="input_btn" class="iconfont icon-sousuo"></span>
+        </div>
+        <div class="my cur" onclick="goMy()">
+            <span class="mys">我的空间</span>
+            <span class="layui-icon layui-icon-notice"></span>
+        </div>
+    </nav>
+    <div class="back-banner">
+        <div class="banner-text">
+            <div class="banner-content">
+                <div class="triangle-color"></div>
+                <p><span>政府支撑</span> 打造生命健康产业新基建</p>
+                <p>加速中小企业高质量发展</p>
+            </div>
+        </div>
+        <img class="back_url" src="../public/image/zhengfou.jpg" alt="">
+    </div>
+    <div class="government-content">
+        <div class="government-content-title">四大服务提供全方面支撑</div>
+        <div class="government-content-service">
+            <div class="government-service-list">
+                <div class="government-service-inquiry"></div>
+                <ul class="government-service-classification"></ul>
+            </div>
+            <div class="government-service-img">
+                <img src="../public/image/zhengfou1.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="government-case">
+        <div class="government-case-title">
+            <h2>客户案例</h2>
+            <p>全国各地150+政府与产业园合作成功案例</p>
+        </div>
+        <div class="swiper-case-content">
+            <div class="swiper-case-list">
+                <div id="swiper" class="swiper-container">
+                    <div id="swiper-item-content" class="swiper-wrapper">
+                        <script id="swiper-item" type="text/html">
+                            {{each data as value i}}
+                                <div class="swiper-slide">
+                                    <div class="case-list-item back_color">
+                                        <h2 class="swiper-title">{{value.title}}</h2>
+                                        <div class="content-slide">{{value.content}}</div>
+                                    </div>
+                                    <img src="{{value.imgurl}}" alt="">
+                                </div>
+                            {{/each}}
+                        </script>
+                    </div>
+                </div>
+                <div class="swiper-button-prev"><span class="iconfont icon-Left"></span></div>
+                <div class="swiper-button-next"><span class="iconfont icon-right"></span></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function goMy() {
+            if (window.sessionStorage.getItem('token')) {
+                window.location.href = '../../admin/index.html'
+            } else {
+                window.location.href = '../../login.html';
+            }
+        }
+        let request = new Call_Request();
+        let navList = '';
+        Ajax('/webadmin/column/getAllColumn', null).then(function (res) {
+            $.each(res.data, function (index, item) {
+                if (item.navigation) {
+                    if ("0b1d5ec5bc9f497ea77fb4b6e5511dda" === item.columnId) {
+                        navList += '<li columnId="' + item.columnId + '" data_url="' + item.pcListUrl + '"><span>' + item.columnName + '</span><i></i></li>';
+                    } else {
+                        navList += '<li columnId="' + item.columnId + '" data_url="' + item.pcListUrl + '"><span>' + item.columnName + '</span></li>';
+                    }
+                }
+            })
+            $('.nav-list').html(navList);
+            $('.nav-list').on('click', 'li', function () {
+                // 控制导航下划线
+                $(this).append('<i></i>').siblings().children().remove('i')
+                window.location.href = request.httpUrl + $(this).attr('data_url') + '?columnId=' + $(this).attr('columnId');
+            })
+
+            fourServiceFun("0b1d5ec5bc9f497ea77fb4b6e5511dda")
+            swiperListFun("62f2e4a7c1014792bcaa46e9bbedd1be")
+        })
+        // 四大服务提供全方面支撑
+        function fourServiceFun(columnId) {
+            Ajax('/webadmin/content/getAllContentByColumnId', { columnId: columnId }).then(function (res) {
+                let rightNav = '';
+                $.each(res.data.content, function (index, item) {
+                    let items = JSON.parse(item.listContent).values;
+                    rightNav += '<li><span>0' + (index + 1) + '</span><p>' + items.rightNav + '</p></li>';
+                })
+                $('.government-service-classification').html(rightNav)
+                let dateils1 = JSON.parse(res.data.content[0].listContent).values;
+                detailsTemFun(dateils1);
+                $('.government-service-classification').on('click', 'li', function () {
+                    let dateils = JSON.parse(res.data.content[$(this).index()].listContent).values;
+                    detailsTemFun(dateils);
+                })
+            })
+        }
+        function detailsTemFun(dateils) {
+            let leftContent = '<img src="' + dateils.icon[0].fileDownloadUri + '" alt=""><dl><dt><p>' + dateils.title + '</p><p>' + dateils.title2 + '</p></dt><dd>' + dateils.content + '</dd></dl>';
+            $('.government-service-inquiry').html(leftContent);
+        }
+        // 轮播图列表
+        function swiperListFun(columnId) {
+            Ajax('/webadmin/content/getAllContentByColumnId', { columnId: columnId, size: 50 }).then(function (res) {
+                let swiperList = [];
+                $.each(res.data.content, function (index, item) {
+                    let items = JSON.parse(item.listContent).values;
+                    swiperList.push({
+                        title: items.title,
+                        content: items.content,
+                        imgurl: items.back[0].fileDownloadUri
+                    })
+                })
+                const html = template("swiper-item", { data: swiperList });
+                $('#swiper-item-content').html(html);
+                new Swiper('#swiper', {
+                    initialSlide: 1,
+                    loopedSlides: 3,
+                    slidesPerView: 3,
+                    centeredSlides: true,
+                    spaceBetween: 20,
+                    observer: true,
+                    observeParents: true,
+                    loop: true, // 循环模式选项
+                    navigation: {
+                        nextEl: '.swiper-case-list .swiper-button-next',
+                        prevEl: '.swiper-case-list .swiper-button-prev',
+                    },
+                })
+                $('.case-list-item').hover(function () {
+                    $(this).children('.swiper-title').animate({ top: '-100%' })
+                    $(this).children('.content-slide').animate({ top: 0 })
+                }, function () {
+                    $(this).children('.swiper-title').animate({ top: 0 })
+                    $(this).children('.content-slide').animate({ top: '100%' })
+                })
+            })
+        }
+
+    </script>
+    <script type="text/javascript" src="../libs/js/search.js"></script>
+    <script>
+        // 系统埋点统计
+        if (sessionStorage.getItem('id')) {
+            addStatistics({ flag: sessionStorage.getItem('id'), type: "政府支撑" });
+        } else {
+            addStatistics({ flag: sessionStorage.getItem('strId'), type: "政府支撑" });
+        }
+        function addStatistics(body) {
+            request.method = 'POST';
+            request.url = request.UrlPublic + 'web/statistic/insertServiceVisitCount';
+            request.data = JSON.stringify(body);
+            request.redata = function (res) {
+                if (res.code == 1) {
+                    // 统计访服务
+                }
+            };
+            request.run();
+        }
+    </script>
+</body>
+
+</html>

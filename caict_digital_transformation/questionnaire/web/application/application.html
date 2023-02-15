@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../common/style.css">
+  <link rel="stylesheet" href="./application.css">
+  <link rel="stylesheet" href="../common/layui/css/layui.css">
+  <script type="text/javascript" src="../common/jQuery/jQuery.min.js"></script>
+  <script type="text/javascript" src="../common/layui/layui.all.js"></script>
+  <script type="text/javascript" src="../common/request.js"></script>
+  <script type="text/javascript" src="./application.js"></script>
+  <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+  <title>问卷调查</title>
+</head>
+
+<body>
+  <div class="form-box">
+    <div class="main"></div>
+    <div class="btn-box">
+      <!-- <span class="submit">提交</span> -->
+      <span class="toSee">查看结果</span>
+    </div>
+  </div>
+  <div class="charts-box" id="yanfa">
+    <div class="chart-box">
+      <h3>研发域数据统计(共<span></span>条数据)</h3>
+      <div class="chart-table">
+        <div class="table-tit">
+          <div class="table-title">
+            数据管理方式
+          </div>
+        </div>
+        <div class="table-code">
+          <span></span>
+          <span>A</span>
+          <span>B</span>
+          <span>C</span>
+          <span>D</span>
+        </div>
+        <div class="table-main">
+          <div class="table-type">
+            <span>数据产生</span>
+            <span>数据描述</span>
+            <span>集成方式</span>
+            <span>应用深度</span>
+            <span>更新方式</span>
+          </div>
+          <div class="table-num"></div>
+        </div>
+      </div>
+      <div id="a1" class="chart"></div>
+      <div id="a2" style="margin-left: 30px;" class="chart"></div>
+    </div>
+    <div class="chart-box" id="shengcan">
+      <h3>生产域数据统计(共<span></span>条数据)</h3>
+      <div class="chart-table">
+        <div class="table-tit">
+          <div class="table-title">
+            数据管理方式
+          </div>
+        </div>
+        <div class="table-code">
+          <span></span>
+          <span>A</span>
+          <span>B</span>
+          <span>C</span>
+          <span>D</span>
+        </div>
+        <div class="table-main">
+          <div class="table-type">
+            <span>数据产生</span>
+            <span>数据描述</span>
+            <span>集成方式</span>
+            <span>应用深度</span>
+            <span>更新方式</span>
+          </div>
+          <div class="table-num"></div>
+        </div>
+      </div>
+      <div id="b1" class="chart"></div>
+      <div id="b2" style="margin-left: 30px;" class="chart"></div>
+    </div>
+    <div class="chart-box" id="wuliu">
+      <h3>物流域数据统计(共<span></span>条数据)</h3>
+      <div class="chart-table">
+        <div class="table-tit">
+          <div class="table-title">
+            数据管理方式
+          </div>
+        </div>
+        <div class="table-code">
+          <span></span>
+          <span>A</span>
+          <span>B</span>
+          <span>C</span>
+          <span>D</span>
+        </div>
+        <div class="table-main">
+          <div class="table-type">
+            <span>数据产生</span>
+            <span>数据描述</span>
+            <span>集成方式</span>
+            <span>应用深度</span>
+            <span>更新方式</span>
+          </div>
+          <div class="table-num"></div>
+        </div>
+      </div>
+      <div id="c1" class="chart"></div>
+      <div id="c2" style="margin-left: 30px;" class="chart"></div>
+    </div>
+    <div class="chart-box" id="fuwu">
+      <h3>服务域数据统计(共<span></span>条数据)</h3>
+      <div class="chart-table">
+        <div class="table-tit">
+          <div class="table-title">
+            数据管理方式
+          </div>
+        </div>
+        <div class="table-code">
+          <span></span>
+          <span>A</span>
+          <span>B</span>
+          <span>C</span>
+          <span>D</span>
+        </div>
+        <div class="table-main">
+          <div class="table-type">
+            <span>数据产生</span>
+            <span>数据描述</span>
+            <span>集成方式</span>
+            <span>应用深度</span>
+            <span>更新方式</span>
+          </div>
+          <div class="table-num"></div>
+        </div>
+      </div>
+      <div id="d1" class="chart"></div>
+      <div id="d2" style="margin-left: 30px;" class="chart"></div>
+    </div>
+    <div class="chart-box" id="xiaoshou">
+      <h3>市场与销售域数据统计(共<span></span>条数据)</h3>
+      <div class="chart-table">
+        <div class="table-tit">
+          <div class="table-title">
+            数据管理方式
+          </div>
+        </div>
+        <div class="table-code">
+          <span></span>
+          <span>A</span>
+          <span>B</span>
+          <span>C</span>
+          <span>D</span>
+        </div>
+        <div class="table-main">
+          <div class="table-type">
+            <span>数据产生</span>
+            <span>数据描述</span>
+            <span>集成方式</span>
+            <span>应用深度</span>
+            <span>更新方式</span>
+          </div>
+          <div class="table-num"></div>
+        </div>
+      </div>
+      <div id="e1" class="chart"></div>
+      <div id="e2" style="margin-left: 30px;" class="chart"></div>
+    </div>
+    <div class="chart-box" id="assess">
+      <h3>数据应用水平评估</h3>
+      <div class="assess-table">
+        <div class="assess-code">
+          <span></span>
+          <span>研发域</span>
+          <span>生产域</span>
+          <span>物流域</span>
+          <span>服务域</span>
+          <span>市场与销售域</span>
+        </div>
+        <div class="assess-main">
+          <div class="assess-type">
+            <span>完整性(20分)</span>
+            <span>准确度(20分)</span>
+            <span>可应用性(30分)</span>
+            <span>集成度(30分)</span>
+          </div>
+          <div class="assess-num">
+          </div>
+        </div>
+      </div>
+      <div id="allShow" class="chart-all"></div>
+    </div>
+    <div class="btn-box">
+      <span class="toBack">返回</span>
+    </div>
+  </div>
+  <script>
+    var request = new Call_Request();
+    var isFirst = false;
+    var chooseList = {};
+    var theId = '';
+    var allDataArr = {
+      'y': [],
+      's': [],
+      'w': [],
+      'f': [],
+      'x': [],
+    }
+    leftNavFun();
+    function leftNavFun() {
+      request.method = 'get';
+      request.url = request.UrlPublic + 'webadmin/questionnaires/findAll';
+      request.data = {
+        userId: sessionStorage.getItem("id"),
+        // name: sessionStorage.getItem("name"),
+        type: '3',
+      };
+      request.redata = function (res) {
+        if (res.code === 1) {
+          if (res.data.content.length > 0) {
+            chooseList = JSON.parse(res.data.content[0].result);
+            theId = res.data.content[0].id;
+            isFirst = false;
+          } else {
+            isFirst = true;
+          }
+          initTable();
+        }
+      };
+      request.run();
+    }
+    function initTable() {
+      var htmlc = '';
+      var num = 0;
+      data.project.forEach(function (value, index) {
+        htmlc += '<div class="yuAll"><h3 style="padding-left: 20px;">' + (index + 1) + '、<span>' + value.name + '</span></h3>';
+        value.childs.forEach(function (items) {
+          htmlc += '<div class="tableOne">' +
+            '<div style="width: 10%;font-size: 20px;text-align:center;border-bottom: 1px solid #000; border-left: 1px solid #000; border-top: 1px solid #000;">' + items.name + '</div>' +
+            '<table>';
+          items.childs.forEach(function (item) {
+            htmlc += '<tr><td width="10%" align="center" style="font-size: 18px;">' + item + '</td>';
+            data.question.forEach(function (subs) {
+              htmlc += '<td class="ti"><h5>' + subs.title + '</h5>';
+              num++;
+              subs.option.forEach(function (sub) {
+                if (subs.type == 1) {
+                  if (isFirst) {
+                    htmlc += '<div><label><input type="radio" data-num="' + sub.score + '" name="' + num + '" value="' + sub.order + '">' + sub.order + '、' + sub.contant + '</label></div>';
+                  } else {
+                    if (sub.order == chooseList[num].order[0]) {
+                      htmlc += '<div><label><input type="radio" checked data-num="' + sub.score + '" name="' + num + '" value="' + sub.order + '">' + sub.order + '、' + sub.contant + '</label></div>';
+                    } else {
+                      htmlc += '<div><label><input type="radio" data-num="' + sub.score + '" name="' + num + '" value="' + sub.order + '">' + sub.order + '、' + sub.contant + '</label></div>';
+                    }
+                  }
+                } else {
+                  if (isFirst) {
+                    htmlc += '<div><label><input type="checkbox" data-num="' + sub.score + '" name="' + num + '" value="' + sub.order + '">' + sub.order + '、' + sub.contant + '</label></div>';
+                  } else {
+                    if (chooseList[num].order.length > 0) {
+                      var theFlag = false;
+                      chooseList[num].order.forEach(function (ele) {
+                        if (sub.order == ele) {
+                          theFlag = true;
+                        }
+                      })
+                      if (theFlag) {
+                        htmlc += '<div><label><input type="checkbox" checked data-num="' + sub.score + '" name="' + num + '" value="' + sub.order + '">' + sub.order + '、' + sub.contant + '</label></div>';
+                      } else {
+                        htmlc += '<div><label><input type="checkbox" data-num="' + sub.score + '" name="' + num + '" value="' + sub.order + '">' + sub.order + '、' + sub.contant + '</label></div>';
+                      }
+                    } else {
+                      htmlc += '<div><label><input type="checkbox" data-num="' + sub.score + '" name="' + num + '" value="' + sub.order + '">' + sub.order + '、' + sub.contant + '</label></div>';
+                    }
+                  }
+                }
+              });
+              htmlc += '</td>';
+            });
+            htmlc += '</tr>';
+          });
+          htmlc += '</table></div>';
+        });
+        htmlc += '</div>';
+      });
+      $('.main').html(htmlc);
+    }
+  </script>
+  <script>
+    $(function () {
+      $('#yanfa h3 span').html(data.project[0].childs[0].childs.length + data.project[0].childs[1].childs.length)
+      $('#shengcan h3 span').html(data.project[1].childs[0].childs.length + data.project[1].childs[1].childs.length)
+      $('#wuliu h3 span').html(data.project[2].childs[0].childs.length + data.project[2].childs[1].childs.length)
+      $('#fuwu h3 span').html(data.project[3].childs[0].childs.length + data.project[3].childs[1].childs.length)
+      $('#xiaoshou h3 span').html(data.project[4].childs[0].childs.length + data.project[4].childs[1].childs.length)
+      var layer = '';
+      layui.use('layer', function () {
+        layer = layui.layer;
+      });
+      var parameter = {};
+      $('.toSee').on('click', function () {
+        $('.form-box').hide();
+        $('.charts-box').show();
+        initByData();
+        // layer.msg('请确认是否已经提交，以避免数据丢失！！', {
+        //   time: 20000, //20s后自动关闭
+        //   btn: ['确认', '取消'],
+        //   btn1: function () {
+        //     layer.closeAll();
+        //     if (isFirst) {
+        //       layer.msg("请先提交数据！");
+        //     } else {
+        //       $('.form-box').hide();
+        //       $('.charts-box').show();
+        //       initByData();
+        //     }
+        //   },
+        //   btn2: function () {
+        //     layer.closeAll();
+        //   }
+        // });
+      });
+      $('.toBack').on('click', function () {
+        window.location.reload();
+      });
+      $('.submit').on('click', function () {
+        var name = '';
+        $('.yuAll').each(function () {
+          name = $(this).find('h3 span').text();
+          $(this).find('tr').each(function () {
+            $(this).find('.ti').each(function () {
+              var type = $(this).find('input').attr("type") === 'radio' ? 1 : 2;
+              var numKey = $(this).find('input').attr("name")
+              parameter[numKey] = {
+                name: name,
+                title: $(this).find('h5').text(),
+                order: [],
+                type: type,
+                score: 0
+              }
+              if (type == 1) {
+                if ($(this).find('input:radio[name="' + numKey + '"]:checked').length > 0) {
+                  parameter[numKey].order.push($(this).find('input:radio[name="' + numKey + '"]:checked').val());
+                  parameter[numKey].score = ($(this).find('input:radio[name="' + numKey + '"]:checked').data('num'));
+                }
+              } else {
+                $(this).find('input').each(function () {
+                  if ($(this).prop('checked')) {
+                    parameter[numKey].order.push($(this).val());
+                    parameter[numKey].score += ($(this).data('num'));
+                  }
+                });
+              }
+            });
+          })
+        });
+        if (isFirst) {
+          addQuestionnaire(parameter);
+        } else {
+          editQuestionnaire(parameter);
+        }
+      });
+    });
+    function initByData() {
+      for (val in chooseList) {
+        switch (chooseList[val].name) {
+          case '研发域':
+            allDataArr.y.push(chooseList[val])
+            break;
+          case '生产域':
+            allDataArr.s.push(chooseList[val])
+            break;
+          case '物流域':
+            allDataArr.w.push(chooseList[val])
+            break;
+          case '服务域':
+            allDataArr.f.push(chooseList[val])
+            break;
+          case '市场与销售域':
+            allDataArr.x.push(chooseList[val])
+            break;
+        }
+      }
+      initAllTable(allDataArr);
+      initShowTable(allDataArr.y, 'yanfa', 'a1', 'a2', '研发域');
+      initShowTable(allDataArr.s, 'shengcan', 'b1', 'b2', '生产域');
+      initShowTable(allDataArr.w, 'wuliu', 'c1', 'c2', '物流域');
+      initShowTable(allDataArr.f, 'fuwu', 'd1', 'd2', '服务域');
+      initShowTable(allDataArr.x, 'xiaoshou', 'e1', 'e2', '市场与销售域');
+    }
+    function initShowTable(data, id, chart1, chart2, name) {
+      var shujvType = ['A', 'B', 'C', 'D'];
+      var tableHtml = '';
+      var chartData = []
+      shujvType.forEach(function (item) {
+        var shujv = [0, 0, 0, 0, 0];
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].order[0] == item && data[i].type == 1) {
+            switch (data[i].title) {
+              case '数据产生':
+                shujv[0]++;
+                break;
+              case '数据描述':
+                shujv[1]++;
+                break;
+              case '集成方式':
+                shujv[2]++;
+                break;
+              case '应用深度':
+                shujv[3]++;
+                break;
+              case '更新方式':
+                shujv[4]++;
+                break;
+            }
+          }
+        }
+        chartData.push(shujv);
+        tableHtml += '<div><span>' + shujv[0] + '</span><span>' + shujv[1] + '</span><span>' + shujv[2] + '</span><span>' + shujv[3] + '</span><span>' + shujv[4] + '</span></div>'
+      });
+      $('#' + id + ' .table-num').html(tableHtml);
+      initBar1(chart1, chartData, name);
+      initBar2(chart2, data, name);
+    }
+    // 添加问卷调
+    function addQuestionnaire(body) {
+      var data = {
+        userId: sessionStorage.getItem("id"),
+        // name: sessionStorage.getItem("name"),
+        type: '3',
+        result: JSON.stringify(body)
+      }
+      request.method = 'POST';
+      request.url = request.UrlPublic + 'webadmin/questionnaires/insert';
+      request.data = JSON.stringify(data);
+      request.redata = function (res) {
+        if (res.code === 1) {
+          layer.msg("提交成功");
+          setTimeout(function () {
+            window.location.reload();
+          }, 1000);
+        }
+      };
+      request.run();
+    }
+    // 修改问卷
+    function editQuestionnaire(body) {
+      var data = {
+        id: theId,
+        result: JSON.stringify(body)
+      }
+      request.method = 'PUT';
+      request.url = request.UrlPublic + 'webadmin/questionnaires/update';
+      request.data = JSON.stringify(data);
+      request.redata = function (res) {
+        if (res.code === 1) {
+          layer.msg("修改成功");
+          setTimeout(function () {
+            window.location.reload();
+          }, 1000);
+        }
+      };
+      request.run();
+    }
+    function initBar1(id, data, name) {
+      var Chart = echarts.init(document.getElementById(id));
+      var option = {
+        title: {
+          text: name + '数据统计'
+        },
+        color: ['#003366', '#006699', '#4cabce', '#e5323e'],
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          }
+        },
+        legend: {
+          right: 0,
+          top: 0,
+          data: ['A', 'B', 'C', 'D']
+        },
+        xAxis: [
+          {
+            type: 'category',
+            axisTick: { show: false },
+            data: ['数据产生', '数据描述', '集成方式', '应用深度', '更新方式']
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value'
+          }
+        ],
+        stack: '总量',
+        barMaxWidth: 20,
+        series: [{
+          name: 'A',
+          type: 'bar',
+          barGap: 0,
+          data: data[0]
+        },
+        {
+          name: 'B',
+          type: 'bar',
+          data: data[1]
+        },
+        {
+          name: 'C',
+          type: 'bar',
+          data: data[2]
+        },
+        {
+          name: 'D',
+          type: 'bar',
+          data: data[3]
+        }]
+      };
+      Chart.setOption(option, true);
+    }
+    function initBar2(id, data, name) {
+      var theData = [0, 0, 0, 0, 0];
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].title == '业务范围') {
+          if (data[i].order.length > 0) {
+            data[i].order.forEach(function (item) {
+              switch (item) {
+                case 'A':
+                  theData[0]++;
+                  break;
+                case 'B':
+                  theData[1]++;
+                  break;
+                case 'C':
+                  theData[2]++;
+                  break;
+                case 'D':
+                  theData[3]++;
+                  break;
+                case 'E':
+                  theData[4]++;
+                  break;
+              }
+            })
+          }
+        }
+      }
+      var Chart = echarts.init(document.getElementById(id));
+      var option = {
+        title: {
+          text: name + '数据应用范围'
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          }
+        },
+        xAxis: [
+          {
+            axisLabel: {
+              fontSize: 8
+            },
+            type: 'category',
+            axisTick: { show: false },
+            data: ['研发域', '生产域', '物流域', '服务域', '市场与销售域']
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value'
+          }
+        ],
+        barMaxWidth: 20,
+        series: [{
+          type: 'bar',
+          barGap: 0,
+          data: theData
+        }]
+      };
+      Chart.setOption(option, true);
+    }
+    function initAllTable(data) {
+      var dataNum = { 'y': 14, 's': 16, 'w': 14, 'f': 10, 'x': 12 };
+      var aaa = {
+        'y': [],
+        's': [],
+        'w': [],
+        'f': [],
+        'x': [],
+      };
+      for (index in data) {
+        var sum = 0;
+        var choose = 0;
+        var shujvcansheng = 0;
+        var gengxinfangshi = 0;
+        var shujvmiaoshu = 0;
+        var yingyongshendu = 0;
+        var jichengfangshi = 0;
+        var yewufanwei = 0;
+        data[index].forEach(function (item) {
+          sum++;
+          if (item.order.length > 0) {
+            choose++;
+          }
+          if (item.title == '数据产生') {
+            shujvcansheng += item.score;
+          }
+          if (item.title == '更新方式') {
+            gengxinfangshi += item.score;
+          }
+          if (item.title == '数据描述') {
+            shujvmiaoshu += item.score;
+          }
+          if (item.title == '应用深度') {
+            yingyongshendu += item.score;
+          }
+          if (item.title == '集成方式') {
+            jichengfangshi += item.score;
+          }
+          if (item.title == '业务范围') {
+            yewufanwei += item.score;
+          }
+        });
+        var qqq = choose == 0 ? 0 : ((choose / sum) * 20).toFixed(0);
+        aaa[index].push(qqq);
+        var www = (shujvcansheng + gengxinfangshi) == 0 ? 0 : (((shujvcansheng + gengxinfangshi) / (5 * dataNum[index])) * 20).toFixed(0);
+        aaa[index].push(www);
+        var eee = (shujvmiaoshu + yingyongshendu) == 0 ? 0 : (((shujvmiaoshu + yingyongshendu) / (4 * dataNum[index])) * 30).toFixed(0);
+        aaa[index].push(eee);
+        var rrr = (jichengfangshi + yewufanwei) == 0 ? 0 : (((jichengfangshi + yewufanwei) / (7 * dataNum[index])) * 30).toFixed(0);
+        aaa[index].push(rrr);
+      }
+      var allDataHtml = '';
+      for (obj in aaa) {
+        allDataHtml += '<div><span>' + aaa[obj][0] + '</span><span>' + aaa[obj][1] + '</span><span>' + aaa[obj][2] + '</span><span>' + aaa[obj][3] + '</span></div>';
+      };
+      $('.assess-num').html(allDataHtml);
+      initRadar(aaa);
+    }
+    function initRadar(data) {
+      var Chart = echarts.init(document.getElementById('allShow'));
+      var option = {
+        title: {
+          text: '数据应用水平'
+        },
+        tooltip: {},
+        legend: {
+          orient: 'vertical',
+          right: 0,
+          top: 20,
+          data: ['研发域', '生产域', '物流域', '服务域', '市场与销售域']
+        },
+        radar: {
+          name: {
+            textStyle: {
+              color: '#fff',
+              backgroundColor: '#999',
+              borderRadius: 3,
+              padding: [3, 5]
+            }
+          },
+          indicator: [
+            { name: '完整性(20分)', max: 20 },
+            { name: '准确度(20分)', max: 20 },
+            { name: '可应用性(30分)', max: 30 },
+            { name: '集成度(30分)', max: 30 }
+          ]
+        },
+        series: [{
+          name: '预算 vs 开销',
+          type: 'radar',
+          data: [
+            {
+              value: data.y,
+              name: '研发域'
+            },
+            {
+              value: data.s,
+              name: '生产域'
+            },
+            {
+              value: data.w,
+              name: '物流域'
+            },
+            {
+              value: data.f,
+              name: '服务域'
+            },
+            {
+              value: data.x,
+              name: '市场与销售域'
+            }
+          ]
+        }]
+      };
+      Chart.setOption(option, true);
+    }
+  </script>
+</body>
+
+</html>

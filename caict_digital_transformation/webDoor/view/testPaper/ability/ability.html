@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="applicable-device" content="pc">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes" name="viewport">
+    <title>中国信通院</title>
+    <link rel="stylesheet" href="../../../public/common/css/libs/style.css">
+    <link rel="stylesheet" href="../../../libs/css/testPaper/ability.css">
+    <link rel="stylesheet" href="../../../plugin/layui/css/layui.css">
+    <script type="text/javascript" src="../../../plugin/layui/layui.all.js"></script>
+    <script type="text/javascript" src="../../../plugin/jQuery/jQuery.min.js"></script>
+    <script src="../../../public/common/js/libs/request.js"></script>
+</head>
+
+<body>
+    <section>
+        <div class="section_content">
+            <div class="option_description">
+                <ul class="option_description_list">
+                    <li><strong>计算机化：</strong>不同的信息技术在公司内部被孤立地使用</li>
+                    <li><strong>连通性：</strong>信息技术的孤立部署被连接的组件所取代</li>
+                    <li><strong>可见性：</strong>从开始到结束都能捕获大量的感知数据，构建企业的数字映射</li>
+                    <li><strong>透明化：</strong>应用工程知识对采集到的数据进行分析，通过根本原因分析产生知识</li>
+                    <li><strong>预测性：</strong>能够模拟不同的未来情景，并确定最有可能的情景</li>
+                    <li><strong>自适应：</strong>自动化行动和自动化决策</li>
+                </ul>
+            </div>
+            <div id="template_content"></div>
+        </div>
+        <div class="btn_footer">
+            <span id="submit_btn" onclick="submit()">提交</span>
+            <span id="submit_btn_1">查看结果</span>
+        </div>
+    </section>
+    <script src="./ability.js"></script>
+    <script>
+        let request = new Call_Request();
+        // 渲染模板
+        function TemplateHtml(list) {
+            $.each(list, function (index, item) {
+                let strHtml = '<ul class="option_modle_item"><li class="option_modle_title"><h3 style="width: 100px;">能力维度</h3><h3 style="width: 100px;">指导原则</h3><h3 style="width: 300px;">必要能力</h3><div><h3>计算机化</h3><h3>连通性</h3><h3>可见性</h3><h3>透明化</h3><h3>预测性</h3><h3>自适应</h3></div></li></ul>';
+                $('#template_content').append('<div class="option_modle"><h2>' + item.name_title + '</h2>' + strHtml + '</div>');
+                $.each(item.name_list, function (indexs, items) {
+                    let htmlTitle = '';
+                    $.each(items.option_list, function (ind, ite) {
+                        let itemTitle = '';
+                        $.each(ite.item_option, function (i, k) {
+                            let htmlLi = '';
+                            $.each(k.select_options, function (n, key) {
+                                htmlLi += '<li><input type="radio"' + (k.checked == key ? "checked " : "") + ' name="' + k.radio + '"'
+                                    + ' value="' + key + '" name_id="' +
+                                    item.name_id + '" option_name_id="' +
+                                    items.option_name_id + '" name_item_id="' +
+                                    ite.name_item_id + '" index="' + i + '"></li>';
+                            })
+                            itemTitle += '<div class="modle_con_two"><h6>' + k.item_title + '</h6><ul class="modle_con_title">' + htmlLi + '</ul></div>';
+                        })
+                        htmlTitle += '<div class="modle_con_one"><h5>' + ite.name_item + '</h5><div class="modle_con_one_item">' + itemTitle + '</div></div>';
+                    })
+                    $($('.option_modle_item')[index]).append('<li class="option_modle_con"><h4>' + items.option_name + '</h4><div class="modle_two_title">' + htmlTitle + '</div></li>');
+
+                })
+            })
+        }
+        // 选中事件
+        let submitData = null;
+        function selectFun(list) {
+            submitData = list;
+            $("input:radio").change(function () {
+                let id_1 = $(this).attr('name_id');
+                let id_2 = $(this).attr('option_name_id');
+                let id_3 = $(this).attr('name_item_id');
+                let index_id = $(this).attr('index');
+                let val = $(this).val();
+                $.each(submitData, function (index, item) {
+                    if (item.name_id === id_1) {
+                        $.each(item.name_list, function (indexs, items) {
+                            if (items.option_name_id === id_2) {
+                                $.each(items.option_list, function (ind, key) {
+                                    if (key.name_item_id === id_3) {
+                                        $.each(key.item_option, function (i, k) {
+                                            if (i == index_id) {
+                                                k.checked = val;
+                                            }
+                                        })
+                                    }
+                                })
+                            }
+                        })
+                    }
+                })
+            })
+        }
+        // 获取问卷调列表
+        function leftNavFun() {
+            request.method = 'get';
+            request.url = request.UrlPublic + 'web/questionnaires/findAll';
+            request.data = {
+                userId: sessionStorage.getItem("id"),
+                name: sessionStorage.getItem("name"),
+                type: '4',
+            };
+            request.redata = function (res) {
+                if (res.code === 1) {
+                    if (res.data.content.length > 0) {
+                        detailsQuestionnaire({ id: res.data.content[0].id });
+                    } else {
+                        TemplateHtml(data);
+                        selectFun(data);
+                    }
+                }
+            };
+            request.run();
+        }
+        // TemplateHtml(data);
+        // selectFun(data);
+        leftNavFun()
+        // 添加问卷调
+        function addQuestionnaire(body) {
+            request.method = 'POST';
+            request.url = request.UrlPublic + 'web/questionnaires/insert';
+            request.data = JSON.stringify(body);
+            request.redata = function (res) {
+                if (res.code === 1) {
+                    layer.msg("提交成功");
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                }
+            };
+            request.run();
+        }
+        // 获取问卷调详情
+        function detailsQuestionnaire(body) {
+            request.method = 'get';
+            request.url = request.UrlPublic + 'web/questionnaires/find';
+            request.data = body;
+            request.redata = function (res) {
+                if (res.code === 1) {
+                    if (res.data.result) {
+                        $('#submit_btn_1').attr("data_id", res.data.id);
+                        TemplateHtml(JSON.parse(res.data.result));
+                        selectFun(JSON.parse(res.data.result));
+                    } else {
+                        TemplateHtml(data);
+                        selectFun(data);
+                    }
+                }
+            };
+            request.run();
+        }
+        // 修改问卷
+        function editQuestionnaire(body) {
+            request.method = 'put';
+            request.url = request.UrlPublic + 'web/questionnaires/update';
+            request.data = body;
+            request.redata = function (res) {
+                if (res.code === 1) {
+                    layer.msg("修改成功");
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                }
+            };
+            request.run();
+        }
+        // 提交
+        function submit() {
+            // addQuestionnaire({
+            //     userId: sessionStorage.getItem("id"),
+            //     name: sessionStorage.getItem("name"),
+            //     type: '4',
+            //     result: JSON.stringify(submitData)
+            // });
+            let id = $('#submit_btn_1').attr("data_id");
+            if (!id) {
+                addQuestionnaire({
+                    userId: sessionStorage.getItem("id"),
+                    name: sessionStorage.getItem("name"),
+                    type: '4',
+                    result: JSON.stringify(submitData)
+                });
+            } else {
+                editQuestionnaire(JSON.stringify({
+                    id: id,
+                    result: JSON.stringify(submitData)
+                }))
+            }
+        }
+        var layer = '';
+        layui.use('layer', function () {
+            layer = layui.layer;
+        });
+        var parameter = {};
+        $('#submit_btn_1').on('click', function () {
+            layer.msg('请确认是否已经提交，以避免数据丢失！！', {
+                time: 20000, //20s后自动关闭
+                btn: ['确认', '取消'],
+                btn1: function () {
+                    layer.closeAll();
+                    window.location.href = './TotalScore.html';
+                    // if (isFirst) {
+                    //     layer.msg("请先提交数据！");
+                    // } else {
+                    //     // $('.form-box').hide();
+                    //     // $('.charts-box').show();
+                    //     // initByData();
+                    // }
+                },
+                btn2: function () {
+                    layer.closeAll();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

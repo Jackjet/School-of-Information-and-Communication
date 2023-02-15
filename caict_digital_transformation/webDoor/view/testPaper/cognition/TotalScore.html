@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="applicable-device" content="pc">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes" name="viewport">
+    <title>中国信通院</title>
+    <link rel="stylesheet" href="../../../public/common/css/libs/style.css">
+    <script type="text/javascript" src="../../../plugin/jQuery/jQuery.min.js"></script>
+    <script src="../../../public/common/js/libs/request.js"></script>
+    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+    <style>
+        .one_num_title {
+            max-width: 1000px;
+            border: 1px solid #ccc;
+            margin: 20px;
+        }
+
+        .num_title_item {
+            line-height: 30px;
+            display: flex;
+        }
+
+        .num_title_item h3 {
+            font-weight: bold;
+            font-size: 15px;
+            width: 100px;
+            padding-left: 15px;
+            border-top: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .num_title_item h4 {
+            flex: 1;
+            font-size: 15px;
+            text-align: center;
+            border-left: 1px solid #ccc;
+        }
+
+        .fraction_num {
+            flex: 1;
+            display: flex;
+            border-top: 1px solid #ccc;
+        }
+
+        .fraction_num li {
+            flex: 1;
+            border-left: 1px solid #ccc;
+            padding: 0 15px;
+            text-align: center;
+        }
+
+        .btn_footer {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .btn_footer span {
+            color: #fff;
+            background: #0546AE;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div class="num_context">
+            <ul class="one_num_title">
+                <li class="num_title_item">
+                    <h3 style="border:none;">评价项目</h3>
+                    <h4>总体成熟度</h4>
+                </li>
+                <li class="num_title_item">
+                    <h3>维度划分</h3>
+                    <ul id="fraction_title" class="fraction_num"></ul>
+                </li>
+                <li class="num_title_item">
+                    <h3>得分</h3>
+                    <ul id="fraction_n" class="fraction_num"></ul>
+                </li>
+            </ul>
+        </div>
+        <div id="echarts" style="margin-left:100px;width: 600px;height: 400px;"></div>
+    </section>
+    <div class="btn_footer">
+        <span onclick="returnFun()">返 回</span>
+    </div>
+    <!-- <script src="./cognition.js"></script> -->
+    <script>
+        function returnFun() {
+            window.location.href = './cognition.html'
+        }
+        let request = new Call_Request();
+        // 获取问卷调列表
+        leftNavFun();
+        // dataHtmlFun(data)
+        function leftNavFun() {
+            request.method = 'get';
+            request.url = request.UrlPublic + 'web/questionnaires/findAll';
+            request.data = {
+                userId: sessionStorage.getItem("id"),
+                name: sessionStorage.getItem("name"),
+                type: '2',
+            };
+            request.redata = function (res) {
+                if (res.code === 1) {
+                    dataHtmlFun(JSON.parse(res.data.content[0].result))
+                }
+            };
+            request.run();
+        }
+        // 渲染模板
+        function dataHtmlFun(list) {
+            let arr = [];
+            let arrVal = []
+            $.each(list, function (index, item) {
+                if (index === 0) {
+                    arr.push({ name: item.classification, max: 5 })
+                } else {
+                    arr.push({ name: item.classification, max: 5, axisLabel: { show: false } })
+                }
+                $('#fraction_title').append('<li>' + item.classification + '</li>')
+                $('.num_context').append('<ul class="one_num_title"><li class="num_title_item"><h3 style="border:none;">评价项目</h3>' +
+                    '<h4>' + item.classification + '</h4>' +
+                    '</li><li class="num_title_item"><h3>维度划分</h3>' +
+                    '<ul id="fraction_0' + index + '" class="fraction_num"></ul>' +
+                    '</li><li class="num_title_item"><h3>得分</h3>' +
+                    '<ul id="fraction_1' + index + '" class="fraction_num"></ul>' +
+                    '</li></ul>');
+                let n = 0;
+                $.each(item.list, function (indexs, items) {
+                    let zonNum = 0;
+                    if (items.options) {
+                        $.each(items.options, function (i, k) {
+                            zonNum += Number(k.realization[0].fraction);
+                        })
+                        n += zonNum;
+                    } else {
+                        $.each(items.options_2, function (i, k) {
+                            let nn = 0;
+                            $.each(k.options, function (ind, key) {
+                                nn += Number(key.realization[0].fraction);
+                            })
+                            zonNum += (nn / items.options_2.length);
+                        })
+                        n += zonNum;
+                    }
+                    $('#fraction_0' + index).append('<li>' + items.title + '</li>');
+                    $('#fraction_1' + index).append('<li>' + zonNum.toFixed(2) + '</li>');
+                })
+                arrVal.push((n / item.list.length).toFixed(2));
+                $('#fraction_n').append('<li>' + (n / item.list.length).toFixed(2) + '</li>');
+            })
+            echartsFun(arr, arrVal);
+        }
+
+        function echartsFun(list, arrVal) {
+            var myChart = echarts.init(document.getElementById('echarts'));
+            var option = {
+                radar: {
+                    // shape: 'circle',
+                    name: {
+                        textStyle: {
+                            color: '#000',
+                        }
+                    },
+                    indicator: list,
+                    // radius: '55%',
+                    splitArea: {
+                        show: false,
+                        areaStyle: {
+                            color: 'rgba(255,0,0,0)', // 图表背景的颜色
+                        },
+                    },
+                    axisLine: {
+                        show: false,
+                    },
+                    axisLabel: { show: true, textStyle: { fontSize: 12, color: '#999' } }
+                },
+                series: [{
+                    type: 'radar',
+                    data: [
+                        {
+                            value: arrVal,
+
+                            itemStyle: {
+                                normal: {
+                                    color: 'red',
+                                    lineStyle: {
+                                        color: 'red',
+                                    },
+                                },
+                            },
+                        }
+                    ]
+                }]
+            };
+            myChart.setOption(option);
+        }
+    </script>
+</body>
+
+</html>

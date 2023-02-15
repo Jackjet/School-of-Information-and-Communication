@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="applicable-device" content="pc">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes" name="viewport">
+    <title>中国信通院</title>
+    <link rel="stylesheet" href="../common/style.css">
+    <script type="text/javascript" src="../common/jQuery/jQuery.min.js"></script>
+    <script src="../common/request.js"></script>
+    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+    <style>
+        .ul li {
+            list-style: none;
+        }
+
+        .content_context {
+            margin: 20px;
+            display: flex;
+            box-sizing: border-box;
+        }
+
+        .option_name {
+            /* width: 200px; */
+            border: 1px solid #ccc;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .option_name li {
+            border-top: 1px solid #ccc;
+            line-height: 30px;
+            padding-left: 15px;
+            box-sizing: border-box;
+        }
+
+        .name_title_content {
+            /* flex: 1; */
+        }
+
+        .title_title {
+            border-top: 1px solid #ccc;
+            display: flex;
+        }
+
+        .title_title h3 {
+            flex: 1;
+            text-align: center;
+            line-height: 30px;
+            border-right: 1px solid #ccc;
+        }
+
+        .name_title ul {
+            border-top: 1px solid #ccc;
+            display: flex;
+        }
+
+        .name_title ul li {
+            flex: 1;
+            display: flex;
+        }
+
+        .name_title ul li span {
+            flex: 1;
+            text-align: center;
+            border-right: 1px solid #ccc;
+            line-height: 30px;
+        }
+
+        .answer_item {
+            border-bottom: 1px solid #ccc;
+        }
+
+        .answer_item li {
+            border-top: 1px solid #ccc;
+            display: flex;
+        }
+
+        .answer_item li span {
+            flex: 1;
+            text-align: center;
+            border-right: 1px solid #ccc;
+            line-height: 30px;
+        }
+
+        .echarts {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .btn_footer {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .btn_footer span {
+            color: #fff;
+            background: #0546AE;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div class="content_context">
+            <ul class="option_name">
+                <li>研发域</li>
+                <li>生产域</li>
+                <li>供应链域</li>
+                <li>服务域</li>
+                <li>市场与销售域</li>
+                <li>汇总统计（累加求平均）</li>
+            </ul>
+            <div class="name_title_content">
+                <div class="name_title">
+                    <div class="title_title">
+                        <h3>资源</h3>
+                        <h3>信息系统</h3>
+                        <h3>组织</h3>
+                        <h3>文化</h3>
+                    </div>
+                    <ul>
+                        <li><span>数字能力</span><span>结构化通信</span></li>
+                        <li><span>自学习信息处理</span><span>信息系统集成</span></li>
+                        <li><span>高效内部组织</span><span>内外部动态协作</span></li>
+                        <li><span>愿意改变</span><span>社会协作</span></li>
+                    </ul>
+                </div>
+                <ul class="answer_item"></ul>
+            </div>
+        </div>
+        <div class="echarts">
+            <div id="echarts_0" style="margin:30px;width: 500px;height: 400px;"></div>
+            <div id="echarts_1" style="margin:30px;width: 500px;height: 400px;"></div>
+            <div id="echarts_2" style="margin:30px;width: 500px;height: 400px;"></div>
+            <div id="echarts_3" style="margin:30px;width: 500px;height: 400px;"></div>
+            <div id="echarts_4" style="margin:30px;width: 500px;height: 400px;"></div>
+            <div id="echarts_5" style="margin:30px;width: 500px;height: 400px;"></div>
+        </div>
+    </section>
+    <div class="btn_footer">
+        <span onclick="returnFun()">返 回</span>
+    </div>
+    <script src="./ability.js"></script>
+    <script>
+        function returnFun() {
+            window.location.href = './ability.html'
+        }
+        let request = new Call_Request();
+        // 获取问卷调列表
+        leftNavFun();
+        function leftNavFun() {
+            request.method = 'get';
+            request.url = request.UrlPublic + 'webadmin/questionnaires/findAll';
+            request.data = {
+                userId: sessionStorage.getItem("id"),
+                // name: sessionStorage.getItem("name"),
+                type: '4',
+            };
+            request.redata = function (res) {
+                if (res.code === 1) {
+                    if (res.data.content.length > 0) {
+                        templateHtml(JSON.parse(res.data.content[0].result))
+                    } else {
+                        templateHtml(data);
+                    }
+                }
+            };
+            request.run();
+        }
+        // 模板渲染
+        function templateHtml(list) {
+            let numSpan = ''; let arr = [];
+            let titleArr = ['研发域能力指数', '生产域能力指数', '供应链域能力指数', '服务域能力指数', '市场与销售域能力指数'];
+            $.each(list, function (index, item) {
+                let spanHtml = ''; let numArr = [];
+                $.each(item.name_list, function (indexs, items) {
+                    $.each(items.option_list, function (i, k) {
+                        let numss = 0;
+                        $.each(k.item_option, function (ind, key) {
+                            numss += Number(key.checked);
+                        })
+                        numArr.push((numss / k.item_option.length).toFixed(2));
+                        spanHtml += '<span>' + (numss / k.item_option.length).toFixed(2) + '</span>';
+                    })
+                })
+                echartsFun(numArr, 'echarts_' + index, titleArr[index]);
+                arr.push(numArr);
+                $('.answer_item').append('<li>' + spanHtml + '</li>');
+            })
+            // 计算平均数
+            let spanHtmlNum = ''; let numberArr = [];
+            for (i = 0; i < 8; i++) {
+                let number = 0;
+                $.each(arr, function (index, item) {
+                    number += Number(item[i]);
+                })
+                numberArr.push((number / 5));
+                spanHtmlNum += '<span>' + (number / 5) + '</span>';
+            }
+            $('.answer_item').append('<li>' + spanHtmlNum + '</li>');
+            echartsFun(numberArr, 'echarts_5', '哈电电机公司汇总统计能力指数');
+        }
+
+        function echartsFun(arrVal, dom, title) {
+            var myChart = echarts.init(document.getElementById(dom));
+            var option = {
+                title: {
+                    text: title
+                },
+                radar: {
+                    // shape: 'circle',
+                    name: {
+                        textStyle: {
+                            color: '#000',
+                        }
+                    },
+                    indicator: [
+                        { name: '数字能力', max: 6 },
+                        { name: '结构化通信', max: 6, axisLabel: { show: false } },
+                        { name: '自学习信息处理', max: 6, axisLabel: { show: false } },
+                        { name: '信息系统集成', max: 6, axisLabel: { show: false } },
+                        { name: '高效内部组织', max: 6, axisLabel: { show: false } },
+                        { name: '内外部动态协作', max: 6, axisLabel: { show: false } },
+                        { name: '愿意改变', max: 6, axisLabel: { show: false } },
+                        { name: '社会协作', max: 6, axisLabel: { show: false } }
+                    ],
+                    // radius: '55%',
+                    splitNumber: 6,
+                    splitArea: {
+                        show: false,
+                        areaStyle: {
+                            color: 'rgba(255,0,0,0)', // 图表背景的颜色
+                        },
+                    },
+                    axisLine: {
+                        show: false,
+                    },
+                    axisLabel: { show: true, textStyle: { fontSize: 12, color: '#999' } }
+                },
+                series: [{
+                    type: 'radar',
+                    data: [
+                        {
+                            value: arrVal,
+                            itemStyle: {
+                                normal: {
+                                    color: 'red',
+                                    lineStyle: {
+                                        color: 'red',
+                                    },
+                                },
+                            },
+                        }
+                    ]
+                }]
+            };
+            myChart.setOption(option);
+        }
+    </script>
+</body>
+
+</html>

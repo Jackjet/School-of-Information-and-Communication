@@ -1,0 +1,55 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.4.RELEASE' //目前统一2.0.4版本
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'd1.project'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url 'http://code.z012.com:8081/repository/d1-java/' }//我们的私有maven库
+}
+
+
+dependencies {
+    compile project(":permission")
+    compile('d1.framework:webapi:2.2.4')//基础封装库，必须依赖,最新版本号参考http://code.z012.com:8888/java-packages/d1.framework.webapi
+    runtime('org.postgresql:postgresql:42.2.10')
+    compile('net.dcrun.component:file.server:1.0.4')
+    compile ('net.dcrun.component:file.util:1.0.3')
+    compile('net.dcrun.component:http:1.1.4')
+
+    compile('org.mongodb:mongo-java-driver:3.4.2')
+//    // https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl
+//    compile group: 'javax.servlet.jsp.jstl', name: 'jstl', version: '1.2'
+    dependencies { compile files('libs/jstl-1.2.jar')}
+// https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl-api
+    compile('javax.servlet.jsp.jstl:jstl-api:1.2'){
+        exclude group: 'javax.servlet' ,module: 'servlet-api'
+    }
+
+    // https://mvnrepository.com/artifact/org.glassfish.web/jstl-impl
+    compile('org.glassfish.web:jstl-impl:1.2'){
+        exclude group: 'javax.servlet' ,module: 'servlet-api'
+    }
+//    compile('com.sun.jersey:jersey-core:1.9'){
+//        exclude module: 'javax.ws.rs'
+//    }
+    compile 'org.quartz-scheduler:quartz:2.3.0'
+    //单点登录
+    compile('mysql:mysql-connector-java:5.1.47')
+}
